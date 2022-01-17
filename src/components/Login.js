@@ -1,6 +1,7 @@
 import React from "react";
 import './Login.css';
 import Header from "./Header";
+import { Link } from "react-router-dom";
 
 const Login = () => {
     return (
@@ -18,6 +19,7 @@ const Login = () => {
                             <input 
                                 type='email' 
                                 placeholder="Email"
+                                required
                             />
                         </div>
 
@@ -26,11 +28,12 @@ const Login = () => {
                             <input 
                                 type='text' 
                                 placeholder="Password"
+                                required
                             />
                         </div>
 
                         <div className="login-page__actions">
-                            <a href="#register">Don't have an account?</a>
+                            <Link to="/register">Don't have an account?</Link>
                             <button type="submit">
                                 Login
                             </button>

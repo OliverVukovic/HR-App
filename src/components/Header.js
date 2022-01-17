@@ -1,6 +1,7 @@
 import React from "react";
 import './Header.css';
 import logo from "../assets/quantox-logo.png"
+import { Link } from "react-router-dom";
 
 const Header = () => {
     return (
@@ -10,9 +11,9 @@ const Header = () => {
                 <img src={logo} alt="logo"/>
             </div>
             <div className="page-links">
-                <a href="#page1">Page One</a>
-                <a href="#page2">Page Two</a>
-                <a href="#page3">Page Three</a>
+                <Link to="/page1">Page One</Link>
+                <Link to="/page2">Page Two</Link>
+                <Link to="/page3">Page Three</Link>
             </div>
         </header>
     );
