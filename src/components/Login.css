@@ -44,6 +44,7 @@ form {
 .radio-btn {
     display: flex;
     gap: 50px;
+    padding-top: 10px;
 }
 .role {
     display: flex;
@@ -102,4 +103,7 @@ button {
 .title-email-pass{
     font-size: 18px;
     padding-bottom: 8px;
+}
+.user-admin{
+    font-size: 18px;
 }

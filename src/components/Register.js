@@ -45,9 +45,6 @@ const Register = () => {
     const handlePassword = (event) => {
         setPassword(event.target.value)
     }
-
-    
-
     return (
         <div className="login-form">
             <Header />
@@ -59,7 +56,7 @@ const Register = () => {
 
                     <form>
                         <div className="login-page">
-                            <label>Username</label>
+                            <label className="title-email-pass">Username</label>
                             <input 
                                 type='text' 
                                 placeholder="Username"
@@ -102,23 +99,27 @@ const Register = () => {
                                     <input 
                                         type="radio" 
                                         checked="cheked"
+                                        value="user"
+                                        name="role"
                                         // onChange={}
                                     />
-                                    <label>User</label>
+                                    <label className="user-admin">User</label>
                                 </div>
                                 <div className="role">
                                     <input 
                                         type="radio"
+                                        value="admin"
+                                        name="role"
                                         // onChange={}
                                     />
-                                    <label>Admin</label>
+                                    <label className="user-admin">Admin</label>
                                 </div>
                                 
                             </div>
                         </div>
 
                         <div className="login-page__actions">
-                            <Link to="/">Already have an account?</Link>
+                            <Link className="acc-text" to="/">Already have an account?</Link>
                             <button type="submit"
                                     onClick={onRegister}
                             >
