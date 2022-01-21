@@ -68,7 +68,7 @@ const Register = () => {
                         </div>
 
                         <div className="login-page">
-                            <label>Email</label>
+                            <label className="title-email-pass">Email</label>
                             <input 
                                 type='email' 
                                 placeholder="Email"
@@ -78,7 +78,7 @@ const Register = () => {
                         </div>
 
                         <div className="login-page">
-                            <label>Password</label>
+                            <label className="title-email-pass">Password</label>
                             <input 
                                 type='text' 
                                 placeholder="Password"
@@ -88,7 +88,7 @@ const Register = () => {
                         </div>
 
                         <div className="login-page">
-                            <label>Profile Photo</label>
+                            <label className="inp-check-photo">Profile Photo</label>
                             <input className="choose-file"
                                 // placeholder={this.props.placeholderText}="Upload file"
                                 type="file"
@@ -96,7 +96,7 @@ const Register = () => {
                         </div>
 
                         <div className="login-page">
-                            <p>Select your role:</p>
+                            <p className="select-role">Select your role:</p>
                             <div className="radio-btn">
                                 <div className="role">
                                     <input 

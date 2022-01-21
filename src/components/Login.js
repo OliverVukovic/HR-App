@@ -70,7 +70,7 @@ const Login = (props) => {
 
                     <form onSubmit={submitHandler}>
                         <div className="login-page">
-                            <label>Email</label>
+                            <label className="title-email-pass">Email</label>
                             <input 
                                 type='email' 
                                 placeholder="Email"
@@ -81,7 +81,7 @@ const Login = (props) => {
                         </div>
 
                         <div className="login-page">
-                            <label>Password</label>
+                            <label className="title-email-pass">Password</label>
                             <input 
                                 type='text' 
                                 placeholder="Password"
@@ -92,8 +92,8 @@ const Login = (props) => {
                         </div>
 
                         <div className="login-page__actions">
-                            <Link to="/register">Don't have an account?</Link>
-                            <button type="submit" disabled={!formIsValid}>
+                            <Link className="acc-text" to="/register">Don't have an account?</Link>
+                            <button type="submit">
                                 Login
                             </button>
                         </div>

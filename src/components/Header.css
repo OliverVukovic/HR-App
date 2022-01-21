@@ -25,3 +25,45 @@ a {
 .q-logo {
     margin: 5px;
 }
+.logo-text {
+    color: green;
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: -2px;
+}
+.page-link{
+    border: 1px solid green;
+    padding: 10px 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+
+}
+.page-link:hover{
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+} 
+/* .logout{
+    background-color: black;
+    color: white;
+} */
+.page-links-header{
+    display: flex;
+    justify-content: space-around;
+    max-width: 250px;
+    width: 100%;
+    
+}
+.link-header{
+    padding: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    border: 3px solid green;
+    border-radius: 10px;
+}
+.link-header:hover{
+    background-color: green;
+    color: white;
+    border: 3px solid white;
+}

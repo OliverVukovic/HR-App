@@ -33,7 +33,8 @@ function App() {
         <Routes>
           <Route exact path="/" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          {/* <Route exact path="/main" element={<Main />} /> */}
+          <Route path="/home" element={<Home />} />
+          <Route path="/company-info" element={<CompanyInfo />} />
         </Routes>
       </div>
      </Provider>
