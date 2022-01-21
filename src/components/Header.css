@@ -58,12 +58,12 @@ a {
 .link-header{
     padding: 10px;
     font-size: 20px;
-    font-weight: bold;
-    border: 3px solid green;
+    /* font-weight: bold; */
+    border: 1px solid green;
     border-radius: 10px;
 }
 .link-header:hover{
     background-color: green;
     color: white;
-    border: 3px solid white;
+    border: 1px solid white;
 }
