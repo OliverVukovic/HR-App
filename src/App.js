@@ -5,6 +5,8 @@ import Register from "./components/Register";
 import './App.css';
 import { Provider } from "react-redux";
 import store from "./redux/store/Store";
+import CompanyInfo from './components/CompanyInfo';
+import Home from './components/Home';
 
 function App() {
 
