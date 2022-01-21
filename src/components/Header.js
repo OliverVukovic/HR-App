@@ -11,9 +11,8 @@ const Header = () => {
                 <img src={logo} alt="logo"/>
             </div>
             <div className="page-links">
-                <Link to="/page1">Page One</Link>
-                <Link to="/page2">Page Two</Link>
-                <Link to="/page3">Page Three</Link>
+                <Link to="/">Login</Link>
+                <Link to="/register">Register</Link>
             </div>
         </header>
     );
