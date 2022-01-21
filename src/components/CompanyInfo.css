@@ -1,0 +1,23 @@
+.company-title{
+    color: white;
+    padding-bottom: 30px;
+}
+.company-name{
+    color: white;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    font-size: 14px;
+}
+.div-but{ 
+    padding-top: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+.container-company-info{
+    display: flex;
+    flex-direction: column;
+    max-width: 400px;
+    width: 400px;
+    justify-content: center;
+}

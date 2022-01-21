@@ -85,6 +85,21 @@ button {
     display: flex;
     gap: 32px;
 }
-
-
-
+.acc-text{
+    font-size: 22px;
+    padding-top: 7px;
+}
+.select-role{
+    font-size: 20px;
+}
+.inp-check{
+    font-size: 18px;
+}
+.inp-check-photo{
+    font-size: 20px;
+    padding-bottom: 10px;
+}
+.title-email-pass{
+    font-size: 18px;
+    padding-bottom: 8px;
+}

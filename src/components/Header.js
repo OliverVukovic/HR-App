@@ -3,17 +3,18 @@ import './Header.css';
 import logo from "../assets/quantox-logo.png"
 import { Link } from "react-router-dom";
 
+
 const Header = () => {
+    
     return (
         <header>
             <div className="q-logo">
                 {/* Logo */}
                 <img src={logo} alt="logo"/>
             </div>
-            <div className="page-links">
-                <Link to="/page1">Page One</Link>
-                <Link to="/page2">Page Two</Link>
-                <Link to="/page3">Page Three</Link>
+            <div className="page-links-header">
+                <Link className="link-header" to="/">Login</Link>
+                <Link className="link-header" to="/register">Register</Link>
             </div>
         </header>
     );
