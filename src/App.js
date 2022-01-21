@@ -1,14 +1,34 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Routes, Route } from 'react-router-dom';
 import Login from "./components/Login";
 import Register from "./components/Register";
 import './App.css';
-import CompanyInfo from "./components/CompanyInfo";
-import Home from "./components/Home";
-
+import { Provider } from "react-redux";
+import store from "./redux/store/Store";
 
 function App() {
-  return (   
+
+  // const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // useEffect(() => {
+  //   const storedUserLoggedInInfo = localStorage.getItem('isLoggedIn');
+  //   if  (storedUserLoggedInInfo === 'LOGGED_IN') {
+  //     setIsLoggedIn(true);
+  //   }
+  // }, []);
+
+  // const loginHandler = (email, password) => {
+  //   localStorage.setItem('isLoggedIn', 'LOGGED_IN');
+  //   setIsLoggedIn(true);
+  // };
+
+  // const logoutHandler = () => {
+  //   localStorage.removeItem('isLoggedIn');
+  //   setIsLoggedIn(false);
+  // };
+
+  return (
+    <Provider store={store}>
       <div className="App">
         <Routes>
           <Route exact path="/" element={<Login />} />
@@ -17,6 +37,7 @@ function App() {
           <Route path="/company-info" element={<CompanyInfo />} />
         </Routes>
       </div>
+     </Provider>
   );
 }
 

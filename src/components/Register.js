@@ -1,9 +1,53 @@
-import React from "react";
+import React, { useState } from "react";
 import './Login.css';
 import Header from "./Header";
 import { Link } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { registerUser } from "../redux/action/RegisterUser";
+import store from "../redux/store/Store";
+import * as actionCreators from "../redux/action/ActionCreators";
+
+
+
 
 const Register = () => {
+
+    const [ userName, setUserName ] = useState("");
+    const [ email, setEmail ] = useState("");
+    const [ password, setPassword] = useState("");
+    
+    const dispatch = useDispatch();
+    // console.log(dispatch)
+
+    const onRegister = (event) => {
+        event.preventDefault()
+        dispatch(actionCreators.registerUser({
+           userName,
+            email,
+            password
+        }));
+
+        
+        // console.log(email)
+        // console.log(password)
+        // console.log(userName)
+    }
+
+    const handleUsername = (event) => {
+        // console.log(event.target.value);
+        setUserName(event.target.value)
+    }
+
+    const handleEmail = (event) => {
+        setEmail(event.target.value)
+    }
+
+    const handlePassword = (event) => {
+        setPassword(event.target.value)
+    }
+
+    
+
     return (
         <div className="login-form">
             <Header />
@@ -15,10 +59,11 @@ const Register = () => {
 
                     <form>
                         <div className="login-page">
-                            <label className="title-email-pass">Username</label>
+                            <label>Username</label>
                             <input 
                                 type='text' 
                                 placeholder="Username"
+                                onChange={handleUsername}
                             />
                         </div>
 
@@ -28,6 +73,7 @@ const Register = () => {
                                 type='email' 
                                 placeholder="Email"
                                 required
+                                onChange={handleEmail}
                             />
                         </div>
 
@@ -37,6 +83,7 @@ const Register = () => {
                                 type='text' 
                                 placeholder="Password"
                                 required
+                                onChange={handlePassword}
                             />
                         </div>
 
@@ -54,21 +101,27 @@ const Register = () => {
                                 <div className="role">
                                     <input 
                                         type="radio" 
-                                        checked="cheked" value="user" name="user"/>
-                                    <label className="inp-check" >User</label>
+                                        checked="cheked"
+                                        // onChange={}
+                                    />
+                                    <label>User</label>
                                 </div>
                                 <div className="role">
                                     <input 
-                                        type="radio" value="admin" name="user"/>
-                                    <label className="inp-check" >Admin</label>
+                                        type="radio"
+                                        // onChange={}
+                                    />
+                                    <label>Admin</label>
                                 </div>
                                 
                             </div>
                         </div>
 
                         <div className="login-page__actions">
-                            <Link className="acc-text" to="/">Already have an account?</Link>
-                            <button type="submit">
+                            <Link to="/">Already have an account?</Link>
+                            <button type="submit"
+                                    onClick={onRegister}
+                            >
                                 Register
                             </button>
                         </div>
