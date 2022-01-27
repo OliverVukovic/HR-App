@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import './Login.css';
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { registerUser } from "../redux/action/RegisterUser";
-import store from "../redux/store/Store";
 import * as actionCreators from "../redux/action/ActionCreators";
 
 
@@ -12,19 +10,33 @@ import * as actionCreators from "../redux/action/ActionCreators";
 
 const Register = () => {
 
-    const [ userName, setUserName ] = useState("");
-    const [ email, setEmail ] = useState("");
-    const [ password, setPassword] = useState("");
+    const [ username, setUsername ] = useState('');
+    const [ email, setEmail ] = useState('');
+    const [ password, setPassword] = useState('');
+    const [ photo, setPhoto ] = useState('');
+    const [ role, setRole ] = useState();
+
+    // const [ data, setData ] = useState({
+    //     username: '',
+    //     email: '',
+    //     password: '',
+    //     photo: '', 
+    //     role: ''
+    // }) 
     
     const dispatch = useDispatch();
     // console.log(dispatch)
+    // const navigate = useNavigate();
+    
 
     const onRegister = (event) => {
         event.preventDefault()
         dispatch(actionCreators.registerUser({
-           userName,
+            username,
             email,
-            password
+            password,
+            photo,
+            role
         }));
 
         
@@ -34,8 +46,7 @@ const Register = () => {
     }
 
     const handleUsername = (event) => {
-        // console.log(event.target.value);
-        setUserName(event.target.value)
+        setUsername(event.target.value)
     }
 
     const handleEmail = (event) => {
@@ -46,6 +57,13 @@ const Register = () => {
         setPassword(event.target.value)
     }
 
+    const handlePhoto = (event) => {
+        setPhoto(event.target.value)
+    }
+
+    const handleRole = (event) => {
+        setRole(event.target.value)
+    }
     
 
     return (
@@ -63,6 +81,7 @@ const Register = () => {
                             <input 
                                 type='text' 
                                 placeholder="Username"
+                                value={username}
                                 onChange={handleUsername}
                             />
                         </div>
@@ -73,6 +92,7 @@ const Register = () => {
                                 type='email' 
                                 placeholder="Email"
                                 required
+                                value={email}
                                 onChange={handleEmail}
                             />
                         </div>
@@ -83,6 +103,7 @@ const Register = () => {
                                 type='text' 
                                 placeholder="Password"
                                 required
+                                value={password}
                                 onChange={handlePassword}
                             />
                         </div>
@@ -92,6 +113,9 @@ const Register = () => {
                             <input className="choose-file"
                                 // placeholder={this.props.placeholderText}="Upload file"
                                 type="file"
+                                accept="image/*"
+                                // value={photo}
+                                onClick={handlePhoto}
                             />
                         </div>
 
@@ -101,15 +125,17 @@ const Register = () => {
                                 <div className="role">
                                     <input 
                                         type="radio" 
-                                        checked="cheked"
-                                        // onChange={}
+                                        // checked="cheked"
+                                        name="role"
+                                        onClick={handleRole}
                                     />
                                     <label>User</label>
                                 </div>
                                 <div className="role">
                                     <input 
                                         type="radio"
-                                        // onChange={}
+                                        name="role"
+                                        onClick={handleRole}
                                     />
                                     <label>Admin</label>
                                 </div>
@@ -119,11 +145,13 @@ const Register = () => {
 
                         <div className="login-page__actions">
                             <Link to="/">Already have an account?</Link>
+                            
                             <button type="submit"
                                     onClick={onRegister}
                             >
                                 Register
                             </button>
+
                         </div>
                     </form>
                 </section>

@@ -39,7 +39,7 @@ function App() {
           <Route path="/company-info" element={<CompanyInfo />} />
         </Routes>
       </div>
-     </Provider>
+    </Provider>
   );
 }
 
