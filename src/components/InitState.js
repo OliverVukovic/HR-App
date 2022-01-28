@@ -1,6 +1,15 @@
 const initState = {
     loading: false,
-    user: {},
+    user: {
+        username: '',
+        email: '',
+        password: '',
+        role: '',
+        company: '',
+        profilePhoto: '',
+        id: '',
+        isAutenticated: false
+    },
     error: {}
 }
 

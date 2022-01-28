@@ -1,14 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import './Login.css';
 import Header from "./Header";
 import { Link, useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
 
 
 
 
 const Register = () => {
+
+    // const newUser = useSelector((state) => 
+    //     state.newUser)
 
     const [ username, setUsername ] = useState('');
     const [ email, setEmail ] = useState('');
@@ -26,7 +29,7 @@ const Register = () => {
     
     const dispatch = useDispatch();
     // console.log(dispatch)
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
     
 
     const onRegister = (event) => {
@@ -38,12 +41,18 @@ const Register = () => {
             photo,
             role
         }));
+//   if 200 redirect to home... else error
+        navigate("/home")
+        username('');
+        email('');
+        password('');
+    };
 
-        
-        // console.log(email)
-        // console.log(password)
-        // console.log(userName)
-    }
+    useEffect(()=>{
+        console.log(username, email, password)
+        })
+
+
 
     const handleUsername = (event) => {
         setUsername(event.target.value)
@@ -64,7 +73,8 @@ const Register = () => {
     const handleRole = (event) => {
         setRole(event.target.value)
     }
-    
+
+
 
     return (
         <div className="login-form">
@@ -100,7 +110,7 @@ const Register = () => {
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
                             <input 
-                                type='text' 
+                                type='password' 
                                 placeholder="Password"
                                 required
                                 value={password}

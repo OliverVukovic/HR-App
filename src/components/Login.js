@@ -12,9 +12,6 @@ const Login = () => {
 
 
 
-
-
-    // const [prolaz] =useState(true);
     const [enteredEmail, setEnteredEmail] = useState('');
     // const [emailIsValid, setEmailIsValid] = useState();
     const [enteredPassword, setEnteredPassword] = useState('');
@@ -117,7 +114,7 @@ const Login = () => {
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
                             <input 
-                                type='text' 
+                                type='password' 
                                 placeholder="Password"
                                 // required
                                 value={enteredPassword}

@@ -1,18 +1,31 @@
 import axios from "axios";
 
+
+axios.interceptors.request.use(
+	(config) => {
+		const token = localStorage.getItem("token");
+		if (token) {
+			config.headers.Authorization = `Bearer ${token}`; 
+		}
+		return config;
+	},
+	(error) => {
+		console.log(error);
+	}
+);
+
+
 export const login = async(payload) => {
     console.log(payload)
     try {
-        const response = await axios(
-            {
+        const response = await axios({
                 method: "POST",
                 url: "https://strapi-internship-hr-app.onrender.com/api/auth/local",
                 data: {
                     "identifier": payload.email,
                     "password": payload.password
                 }
-            }
-        )
+            });
         return response.data
 
     } catch(error) {
@@ -23,17 +36,19 @@ export const login = async(payload) => {
 export const register = async(payload) => {
     console.log(payload)
     try {
-        const response = await axios(
-            {
+        const response = await axios({
                 method: "POST",
                 url: "https://strapi-internship-hr-app.onrender.com/api/auth/local/register",
                 data: {
                     "username": payload.username,
-                    "identifier": payload.email,
+                    "email": payload.email,
                     "password": payload.password,
                 }
-            }
-        )
+            })
+              if (response.data.jwt) {
+                const token = response.data.jwt
+                localStorage.setItem("token", token) 
+              }
         return response.data
 
     } catch(error) {
@@ -68,11 +83,9 @@ export const createNewProfile = async(payload) => {
                 method: "POST",
                 url: "https://strapi-internship-hr-app.onrender.com/api/profiles",
                 data: {
-                    "username": payload.username,
-                    "identifier": payload.email,
-                    "password": payload.password,
-                    "profilePhoto": '',
-                    "company": payload.id 
+                    "name": "",
+                    "company": '',
+                    "profilePhoto": ''
                 }
             }
         )
