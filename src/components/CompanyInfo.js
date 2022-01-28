@@ -12,7 +12,7 @@ function CompanyInfo() {
         <p className="company-name">Company Logo</p>
         <input type="text" />
         <div className="div-but">
-        <button className="but-save">Save</button>
+          <button className="but-save">Save</button>
         </div>
     </div>
   )
