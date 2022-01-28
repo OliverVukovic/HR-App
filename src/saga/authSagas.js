@@ -1,31 +1,33 @@
-import reactDom from "react-dom";
-import { takeEvery, call } from "redux-saga/effects";
+import { takeEvery, call, put } from "redux-saga/effects";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
-import * as authApi from "../services/api/auth";
-import { useNavigate } from "react-router-dom";
+import * as authApi from "../services/api/authApi";
+
 
 
 export function* register(action) {
-    // let navigate = useNavigate()
     const {
         username,
         email,
         password,
-        photo,
-        role
     } = action.payload 
         try {
             const response = yield call(
-                authApi.register,
-                {
+                authApi.register, {
                     username,
                     email,
                     password
-                }
-            ) 
+                });
+
+                console.log(action)
+                
+                let token = response.jwt != null ? response.jwt : null;
+                console.log(response)
             // pokrenuti loading... (koristiti PUT)
             // call ka backendu gde se salju podaci (call , )
             // sacuvati token i userId u localStorage (ako je bezuspesno, error)
+
+
+
             // kreirati company i uploadovati img (ukoliko podaci postoje)
             // ako imamo i usera i company i img onda se kreira profil (yield call)
             // prekinuti loading... (koristiti PUT)
@@ -45,16 +47,13 @@ export function* login(action) {
     } = action.payload
     try {
         const response = yield call(
-            authApi.login,
-            {
+            authApi.login, {
                 email, 
                 password
             }
         ) 
         let token = response.jwt != null ? response.jwt : null;
-        console.log(response.user.id)
-        console.log(token)
-        // navigate('/home')
+        console.log(response)
         
         
     } catch(error) {
@@ -69,8 +68,7 @@ export function* uploadPhoto(action) {
     } = action.image
     try {
         const response = yield call(
-            authApi.uploadPhoto,
-            {
+            authApi.uploadPhoto, {
                 
             }
         ) 

@@ -9,5 +9,11 @@ export const FETCH_REQUEST = "FETCH_REQUEST";
 export const FETCH_SUCCESS = "FETCH_SUCCESS";
 
 export const UPLOAD_PHOTO = "UPLOAD_PHOTO";
+export const UPDATE_PHOTO = "UPDATE_PHOTO";
 
 export const CREATE_PROFILE = "CREATE_PROFILE";
+
+export const ADD_USER = "ADD_USER";
+export const UPDATE_USER = "UPDATE_USER";
+
+

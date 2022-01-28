@@ -17,7 +17,7 @@ function reducer(state = initState, action) {
         // case action.CREATE_FAILURE:
         //     return { ...state register.errors };
 
-                
+        
             default: 
             return state;
     }
