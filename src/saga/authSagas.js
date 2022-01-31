@@ -1,3 +1,4 @@
+import { Navigate, useNavigate } from "react-router-dom";
 import { takeEvery, call, put } from "redux-saga/effects";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
 import * as authApi from "../services/api/authApi";
@@ -5,6 +6,7 @@ import * as authApi from "../services/api/authApi";
 
 
 export function* register(action) {
+    
     const {
         username,
         email,
@@ -21,11 +23,17 @@ export function* register(action) {
                 console.log(action)
                 
                 let token = response.jwt != null ? response.jwt : null;
-                console.log(response)
+            console.log(response)
             // pokrenuti loading... (koristiti PUT)
             // call ka backendu gde se salju podaci (call , )
             // sacuvati token i userId u localStorage (ako je bezuspesno, error)
-
+            
+            
+            // yield put (alert.setAlertAction({
+            //     text: 'User logged in!',
+            //     color: 'green'
+            // }))
+            
 
 
             // kreirati company i uploadovati img (ukoliko podaci postoje)
@@ -35,6 +43,12 @@ export function* register(action) {
     /*         throw 'There is an error I want to make' */
         } catch(error) {
             // console.log(error)
+           
+           
+            // yield put(alert.setAlertAction({
+            //     text: error.msg,
+            //     color:'red'
+            // }))
         }
 };
 
@@ -52,14 +66,21 @@ export function* login(action) {
                 password
             }
         ) 
-        let token = response.jwt != null ? response.jwt : null;
+            let token = response.jwt != null ? response.jwt : null;
         console.log(response)
-        
-        
-    } catch(error) {
-        console.log(error)
-    }
-} 
+            if (token) {
+                yield put({
+                    type: ActionsTypes.LOGIN_USER_SUCCESS, 
+                    payload: response.user
+            })
+        }} catch(error) {
+        // console.log(error)
+                yield put({
+                    type: ActionsTypes.LOGIN_USER_FAILURE,
+                    payload: {message: "Check Your email and password!"}
+                })
+    }}
+
 
 export function* uploadPhoto(action) {
     // console.log(action)

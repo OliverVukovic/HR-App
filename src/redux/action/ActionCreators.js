@@ -1,81 +1,152 @@
 import * as ActionTypes from "./ActionsTypes"
 
+
+// REGISTER
 export const registerUser = (user) => {
-    console.log(user)
-        // api.user.register(data)
-        // .then(user => {
-        //     localStorage.bookwormJWT = user.token;
-        //     dispatch(loginUser());
-        // });
+    // console.log(user)
     return {
         type: ActionTypes.REGISTER_USER,
         payload: user
     }
 }
+export const registerUserSuccess = (user) => {
+    return {
+        type: ActionTypes.REGISTER_USER_SUCCESS,
+        payload: user
+    }
+}
+export const registerUserFailure = (user) => {
+    return {
+        type: ActionTypes.REGISTER_USER_FAILURE,
+        payload: user
+    }
+}
 
+
+// LOGIN
 export const loginUser = (payload) => {
     return {
         type: ActionTypes.LOGIN_USER,
         payload 
     }
 }
+export const loginUserSuccess = (payload) => {
+    return {
+        type: ActionTypes.LOGIN_USER_SUCCESS,
+        payload 
+    }
+}
+export const loginUserFailure = (payload) => {
+    return {
+        type: ActionTypes.LOGIN_USER_FAILURE,
+        payload 
+    }
+}
 
+
+// LOGOUT
 export const logoutUser = () => {
     return {
         type: ActionTypes.LOGOUT_USER,
     }
 }
-
-// 
-
-
-// export const login = (credential) => dispatch => {
-//     localStorage.bookwormJWT = credential.token;
-//     setAuth(credential.token)
-//     dispatch(loginUser(credential))
-// }
-
-// export const logout = () => dispatch => {
-//     localStorage.removeItem("bookwormJWT");
-//     setAuth();
-//     dispatch(loginUser());
-// }
-
-
-// export const confirm = (token) => dispatch => 
-//     api.user.confirm(token)
-//     .then(user => {
-//         localStorage.bookwormJWT = user.token;
-//         dispatch(loginUser);
-// });
-
-// export const resetPassRequest = ({email}) => () =>
-//     api.user.resetPassRequest(email);
-
-// export const validateToken = (token) =>
-//     api.user.validateToken(token);
-
-// export const ressetPassword = (data) => () =>
-//     api.user.ressetPassword(data);
+export const logoutUserSuccess = () => {
+    return {
+        type: ActionTypes.LOGOUT_USER_SUCCESS,
+    }
+}
+export const logoutUserFailure = () => {
+    return {
+        type: ActionTypes.LOGOUT_USER_FAILURE,
+    }
+}
 
 
 
-export const createRequest = (user) => ({
-    type: ActionTypes.CREATE_REQUEST,
-    user
-});
 
-export const createFailure = (errors) => ({
-    type: ActionTypes.CREATE_FAILURE,
-    payload: {},
-    errors
-});
+// CREATE PROFILE
+export const createProfile = (payload) => {
+    return {
+        type: ActionTypes.CREATE_PROFILE,
+        payload
+    }
+}
+export const createProfileSuccess = (payload) => {
+    return {
+        type: ActionTypes.CREATE_PROFILE_SUCCESS,
+        payload
+    }
+}
+export const createProfileFailure = (payload) => {
+    return {
+        type: ActionTypes.CREATE_PROFILE_FAILURE,
+        payload
+    }
+}
 
-export const fetchRequest = () => ({
-    type: ActionTypes.FETCH_REQUEST
-});
 
-export const fetchSuccess = (user) => ({
-    type: ActionTypes.FETCH_SUCCESS,
-    user
-});
+
+
+// CREATE COMPANY
+export const createCompany = (payload) => {
+    return {
+        type: ActionTypes.CREATE_COMPANY,
+        payload
+    }
+}
+export const createCompanySuccess = (payload) => {
+    return {
+        type: ActionTypes.CREATE_COMPANY_SUCCESS,
+        payload
+    }
+}
+export const createCompanyFailure = (payload) => {
+    return {
+        type: ActionTypes.CREATE_COMPANY_FAILURE,
+        payload
+    }
+}
+
+
+// FETCH COMPANY
+export const fetchCompany = () => {
+    return {
+        type: ActionTypes.FETCH_COMPANY,
+    }
+}
+export const fetchCompanySuccess = (payload) => {
+    return {
+        type: ActionTypes.FETCH_COMPANY_SUCCESS,
+        payload
+    }
+}
+export const fetchCompanyFailure = (payload) => {
+    return {
+        type: ActionTypes.FETCH_COMPANY_FAILURE,
+        payload
+    }
+}
+
+
+
+// PHOTO
+export const uploadPhoto = (payload) => {
+    return {
+        type: ActionTypes.UPLOAD_PHOTO,
+        payload
+    }
+}
+export const uploadPhotoSuccess = (payload) => {
+    return {
+        type: ActionTypes.UPLOAD_PHOTO_SUCCESS,
+        payload
+    }
+}
+export const uploadPhotoFailure = (payload) => {
+    return {
+        type: ActionTypes.UPLOAD_PHOTO_SUCCESS,
+        payload
+    }
+}
+
+

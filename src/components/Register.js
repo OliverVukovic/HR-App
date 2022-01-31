@@ -30,6 +30,8 @@ const Register = () => {
     const dispatch = useDispatch();
     // console.log(dispatch)
     const navigate = useNavigate();
+
+    // const statusCode = props.state.registerReducer.response === undefined ? 0 : props.state.registerReducer.response.status;
     
 
     const onRegister = (event) => {
@@ -41,6 +43,7 @@ const Register = () => {
             photo,
             role
         }));
+        // if (statusCode === 200)
 //   if 200 redirect to home... else error
         navigate("/home")
         username('');
@@ -87,7 +90,7 @@ const Register = () => {
 
                     <form>
                         <div className="login-page">
-                            <label>Username</label>
+                            <label className="title-email-pass">Username</label>
                             <input 
                                 type='text' 
                                 placeholder="Username"
@@ -139,7 +142,7 @@ const Register = () => {
                                         name="role"
                                         onClick={handleRole}
                                     />
-                                    <label>User</label>
+                                    <label className="admin-user">User</label>
                                 </div>
                                 <div className="role">
                                     <input 
@@ -147,15 +150,16 @@ const Register = () => {
                                         name="role"
                                         onClick={handleRole}
                                     />
-                                    <label>Admin</label>
+                                    <label className="admin-user">Admin</label>
                                 </div>
                                 
                             </div>
                         </div>
 
-                        <div className="login-page__actions">
-                            <Link to="/">Already have an account?</Link>
-                            
+                        <div className="login-page__actions">  
+                            <Link className="acc-text" to="/">
+                                Already have an account?
+                            </Link>
                             <button type="submit"
                                     onClick={onRegister}
                             >

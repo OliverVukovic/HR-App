@@ -84,7 +84,7 @@ export const createNewProfile = async(payload) => {
                 url: "https://strapi-internship-hr-app.onrender.com/api/profiles",
                 data: {
                     "name": "",
-                    "company": '',
+                    // "company": '',
                     "profilePhoto": ''
                 }
             }

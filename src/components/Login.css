@@ -90,16 +90,29 @@ button {
     padding-top: 7px;
 }
 .select-role{
-    font-size: 20px;
+    font-size: 18px;
 }
 .inp-check{
     font-size: 18px;
 }
 .inp-check-photo{
-    font-size: 20px;
+    font-size: 18px;
     padding-bottom: 10px;
 }
 .title-email-pass{
     font-size: 18px;
     padding-bottom: 8px;
+}
+
+.admin-user {
+    font-size: 15px;
+}
+
+.error-message{
+    color: red;
+    font-size: 20px;
+    border: 1px solid red;
+    padding: 10px;
+    border-radius: 5px;
+    margin-top: 20px;
 }
