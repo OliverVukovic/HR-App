@@ -1,4 +1,5 @@
 import axios from "axios";
+// import * from "../../redux/action/ActionCreators";
 
 
 axios.interceptors.request.use(
@@ -55,6 +56,34 @@ export const register = async(payload) => {
         console.log(error)
     }
 }
+
+
+
+export const logout = async(payload) => {
+    try {
+        const response = await axios({
+                method: "POST",
+                url: "https://strapi-internship-hr-app.onrender.com/api/auth/local/home",
+                data: {
+                    // "username": payload.username,
+                    // "email": payload.email,
+                    // "password": payload.password,
+                }
+            })
+              if (response.data.jwt) {
+                const token = response.data.jwt
+                localStorage.removeItem("token", token) 
+              }
+        return response.data
+
+    } catch(error) {
+        console.log(error)
+    }
+    
+}
+
+
+
 
 export const uploadPhoto = async(image) => {
     console.log(image)

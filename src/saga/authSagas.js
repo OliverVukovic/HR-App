@@ -82,6 +82,18 @@ export function* login(action) {
     }}
 
 
+
+
+// export function* logout() {
+	
+//     console.log('Uradi Logout!');
+//         localStorage.removeItem('token');
+//         // redirect
+// }
+
+
+
+
 export function* uploadPhoto(action) {
     // console.log(action)
     const {
