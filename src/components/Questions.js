@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { Link } from 'react-router-dom';
 import HeaderLog from './HeaderLog';
 import LeftBar from './LeftBar';
 import './Questions.css'
@@ -9,7 +10,7 @@ function Questions() {
         {title: 'Drugo pitanje' , body: 'Da li si jeo govna kad si bio mali?' , id: 2},
         {title: 'Trece pitanje' , body: 'Da li si jeo govna kad si bio mali?' , id: 3}
     ])
-    console.log(questions[0].title)
+    
   return (
       <div>
       <HeaderLog />
@@ -19,7 +20,10 @@ function Questions() {
                 <div className="questions-right-side">
                     <div className="title-btn">
                         <h2 className="questions-title-big">Questions</h2>
-                        <button className="add-questions"> + Add new questions</button>
+                        <Link  to="/addquestions">
+                            <button className="add-questions"> + Add new questions</button>
+                        </Link>
+                        {/* <button className="add-questions"> + Add new questions</button> */}
                     </div>
                     {questions.map((quest) => (
                         <div className="questions-place">
