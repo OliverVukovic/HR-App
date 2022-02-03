@@ -1,14 +1,44 @@
-import initState from "../../components/InitState";
+import initState from "./InitState";
 import * as actions from "../action/ActionsTypes";
 
 function reducer(state = initState, action) {
     switch (action.type) {
-        case actions.REGISTER_USER :
+
+        case actions.REGISTER_USER:
             return state;
-        case actions.LOGIN_USER :
+        case actions.REGISTER_USER_SUCCESS:
+            return {...state, user: action.payload}
+        case actions.REGISTER_USER_FAILURE:
+            return {...state, error: action.payload}
+
+
+        case actions.LOGIN_USER:
             return state
-            // return Object.assign({} , state, {display: 1})
-        default : 
+        case actions.LOGIN_USER_SUCCESS:
+            return {...state, user: action.payload}
+        case actions.LOGIN_USER_FAILURE:
+            return {...state, error: action.payload}
+            
+        
+        case actions.LOGOUT_USER:
+            console.log(action.type)
+            const initUser = {
+                username: '',
+                email: '',
+                password: '',
+                role: '',
+                company: '',
+                profilePhoto: '',
+                id: '',
+                isAutenticated: false
+            }
+            return { ...state, user: initUser} ;
+            case actions.LOGOUT_USER_SUCCESS:
+                return {...state, user: action.payload}
+            case actions.LOGOUT_USER_FAILURE:
+                return {...state, error: action.payload}
+        
+            default: 
             return state;
     }
 }

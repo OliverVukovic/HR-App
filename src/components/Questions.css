@@ -1,0 +1,48 @@
+.questions-container{
+    color: white;
+    display: flex;
+    gap: 50px;
+}
+.questions-right-side {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.questions-place {
+    border: 1px solid green;
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+}
+.questions-title-big{
+    padding-bottom: 20px;
+}
+.questions-place-left{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.questions-place-right{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.btn{
+    border: none;
+}
+.title-btn{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+.add-questions{
+    width: 20%;
+    font-family: 'Comic Neue', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    height: 100%;
+}

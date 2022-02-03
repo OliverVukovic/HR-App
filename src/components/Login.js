@@ -1,15 +1,28 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
 import Header from "./Header";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import * as actionCreators from "../redux/action/ActionCreators";
+import { useSelector } from "react-redux";
 
-const Login = (props) => {
+const Login = () => {
 
+
+    // const [error, setError] = useState('');
+
+
+    const user = useSelector((state) => state.user);
+    const error = useSelector((state) => state.error);
     const [enteredEmail, setEnteredEmail] = useState('');
-    const [emailIsValid, setEmailIsValid] = useState();
+    // const [emailIsValid, setEmailIsValid] = useState();
     const [enteredPassword, setEnteredPassword] = useState('');
-    const [passwordIsValid, setPasswordIsValid] = useState();
+    // const [passwordIsValid, setPasswordIsValid] = useState();
     const [formIsValid, setFormIsValid] = useState(false);
+
+    const dispatch = useDispatch();
+    
+    const navigate = useNavigate(true);
 
     useEffect(() => {
         setFormIsValid(
@@ -17,6 +30,16 @@ const Login = (props) => {
         );
     }, [enteredEmail, enteredPassword]);
 
+    useEffect(() => {
+        // console.log(user)
+        if (user && user.id) {
+            console.log(user)
+            // console.log(user)
+            navigate('/home');
+            setEnteredEmail('');
+            setEnteredPassword('');
+        }
+    }, [user]);
 
     const emailChangeHandler = (event) => {
         setEnteredEmail(event.target.value);
@@ -34,30 +57,22 @@ const Login = (props) => {
         );
     };
 
-    const validateEmailHandler = () => {
-        setEmailIsValid(enteredEmail.includes('@'));
-    };
-
-    const validatePasswordHandler = () => {
-        setPasswordIsValid(enteredPassword.trim().length > 6);
-    };
-
-    // const submitHandler = (event) => {
-    //     event.preventDefault();
-    //     props.onLogin(enteredEmail, enteredPassword);
-    // };
-
-
     const submitHandler = (event) => {
+        // console.log(event.password)
         event.preventDefault();
         if (enteredEmail.trim().length === 0 || enteredPassword.trim().length === 0) {
+            
             return;
         }
+            dispatch(actionCreators.loginUser({
+                email: enteredEmail,
+                password: enteredPassword
+            }))
+            const token = localStorage.getItem("token");
 
-        console.log(enteredEmail, enteredPassword);
-        setEnteredEmail('');
-        setEnteredPassword('');
     };
+
+    
 
     return (
         <div className="login-form">
@@ -83,9 +98,9 @@ const Login = (props) => {
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
                             <input 
-                                type='text' 
+                                type="password"
                                 placeholder="Password"
-                                required
+                                // required
                                 value={enteredPassword}
                                 onChange={passwordChangeHandler}
                             />
@@ -93,11 +108,15 @@ const Login = (props) => {
 
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
-                            <button type="submit">
+                            <button type="submit"
+                                    // onClick={onLogin}
+                            >
                                 Login
                             </button>
                         </div>
+                        {error.message && <div className="error-message">{error.message}</div>}
                     </form>
+                
                 </section>
             </main>
         </div>

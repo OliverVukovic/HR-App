@@ -5,15 +5,22 @@ import './CompanyInfo.css';
 
 function CompanyInfo() {
   return (
+    
     <div className="container-company-info">
-        <h2 className="company-title">Company Info</h2>
-        <p className="company-name">Company Name</p>
-        <input type="text" />
-        <p className="company-name">Company Logo</p>
-        <input type="text" />
-        <div className="div-but">
-        <button className="but-save">Save</button>
-        </div>
+      <HeaderLog />
+      <div className="company-container">
+          <LeftBar />
+          <div className="compani-right">
+              <h2 className="company-title">Company Info</h2>
+              <p className="company-name">Company Name</p>
+              <input type="text" />
+              <p className="company-name">Company Logo</p>
+              <input type="text" />
+              <div className="div-but">
+                <button className="but-save">Save</button>
+              </div>
+          </div>  
+      </div>
     </div>
   )
 }

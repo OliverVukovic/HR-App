@@ -58,12 +58,41 @@ a {
 .link-header{
     padding: 10px;
     font-size: 20px;
-    /* font-weight: bold; */
-    border: 1px solid green;
+    font-weight: bold;
+    border: 3px solid green;
     border-radius: 10px;
 }
 .link-header:hover{
     background-color: green;
     color: white;
-    border: 1px solid white;
+    border: 3px solid white;
 }
+/* .log-out {
+    border: 1px solid green;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    color: green;
+    background-color: white;
+} */
+.page-link-btn{
+    border: 1px solid green;
+    background-color: white;
+    color: green;
+    padding: 20px 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 50px;
+    width: 110px;
+    font-family: 'Comic Neue', sans-serif;
+}
+.page-link-btn:hover{
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+} 

@@ -14,10 +14,20 @@
     display: flex;
     justify-content: end;
 }
-.container-company-info{
+/* .container-company-info{
     display: flex;
     flex-direction: column;
     max-width: 400px;
     width: 400px;
     justify-content: center;
+} */
+.company-container{
+    display: flex;
+    gap: 40px;
+    
+}
+.compani-right{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
 }
