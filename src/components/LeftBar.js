@@ -3,10 +3,9 @@ import './Leftbar.css';
 import { Link } from "react-router-dom";
 
 
-
 function LeftBar() {
+
   return (
-    
     <div>
         <div className="container-leftbar">
             <h2 className="lb-title">Menu</h2>
@@ -14,7 +13,7 @@ function LeftBar() {
                 <Link to="/team" className="lb-links">Team</Link>
                 <Link to="/questions" className="lb-links">Questions</Link>
                 <Link to="/company-info" className="lb-links">Company Info</Link>
-                <Link to="/profile" className="lb-links">My Profile</Link>
+                <Link to="/home" className="lb-links">My Profile</Link>
         </div>
     </div>
   )

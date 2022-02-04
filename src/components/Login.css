@@ -18,7 +18,7 @@ section {
     justify-content: center;
 }
 
-form {
+.form {
     display: flex;
     flex-direction: column;
     gap: 23px;
@@ -38,7 +38,9 @@ form {
 
 .choose-file {
     display: flex;
+    justify-content: flex-end;
     padding: 4px;
+    color: black;
 }
 
 .radio-btn {
@@ -72,7 +74,7 @@ label {
     color: white;
 }
 
-button {
+.button {
     width: 85px;
     height: 29px;
     cursor: pointer;
@@ -116,3 +118,4 @@ button {
     border-radius: 5px;
     margin-top: 20px;
 }
+

@@ -1,0 +1,92 @@
+.container-my-profile {
+    display: flex;
+    justify-content: center;
+    /* width: 1200px; */
+    width: 100%;
+    height: 100vh; 
+
+}
+.my-profile{
+    width: 80%;
+    margin-top: 20px;
+}
+.title-my-profile{
+    color: white;
+    padding: 20px 10px 20px 0px;
+    /* font-size: 30px; */
+}
+.container-left-right{
+    display: flex;
+    width: 100%;
+    gap: 20px;    
+}
+.header-title{
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.left{
+    display: flex;
+    border: 1px solid green;
+    
+    width: 50%;
+    flex-direction: column;
+}
+.header-left{
+    color: white;
+    padding: 20px 30px;
+    border-bottom: 1px solid green;
+    background-color: green;
+}
+.left-main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 30px;
+}
+.but-div{
+    display: flex;
+    justify-content: end;
+    padding-top: 20px;
+}
+
+.right{
+    display: flex;
+    border: 1px solid green;
+    /* width: 100%; */
+    width: 50%;
+    flex-direction: column;
+}
+.header-right{
+    color: white;
+    padding: 20px 30px;
+    border-bottom: 1px solid green;
+    background-color: green;
+}
+.right-main{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 10px 30px;
+}
+.p-name-profile{
+    color: white;
+    font-size: 16px;
+    padding-bottom: 6px;
+    padding-top: 20px;
+    padding-bottom: 10px;
+}
+.email{
+    color: white;
+}
+.save-btn{
+    color: white;
+    font-family: 'Comic Neue', sans-serif;
+    font-size: 15px;
+    border: none;
+}
+.choose-file {
+    display: flex;
+    padding: 4px;
+    background-color: white;
+}

@@ -1,32 +1,3 @@
-// import React from 'react'
-// import logo from "../assets/quantox-logo.png"
-// import './Header.css';
-// import { Link } from "react-router-dom";
-
-// function HeaderLog() {
-//     return (
-//         <header>
-//             <div className="q-logo">
-//                 <img src={logo} alt="logo"/>
-//             </div>
-//             <div className="page-links">
-//                 <Link className="page-link home" to="/home">Home</Link>
-//                 <Link className="page-link company" to="/company">Company</Link>
-//                 {/* <Link className="" to="/">Logout</Link> */}
-//                 <button className="page-link logout" onClick={logOut}>
-//                     Logout
-//                     </button>
-//             </div>
-//         </header>
-//     );
-// }
-
-// export default HeaderLog
-
-
-
-
-
 import React from 'react'
 import logo from "../assets/quantox-logo.png"
 import './Header.css';
@@ -40,21 +11,20 @@ function HeaderLog() {
     const navigate = useNavigate();
 
     const logOut = () => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem("token")
         localStorage.removeItem("token")
         dispatch(actionCreators.logoutUser())
         navigate("/")
-
     }
+
     return (
         <header>
             <div className="q-logo">
                 <img src={logo} alt="logo"/>
             </div>
             <div className="page-links">
-            
                 <Link className="page-link home" to="/home">Home</Link>
-                <Link className="page-link company" to="/company">Company</Link>
+                <Link className="page-link company" to="/company-info">Company</Link>
                 <button className="page-link-btn" onClick={logOut}>
                     Logout
                 </button>

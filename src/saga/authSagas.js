@@ -1,18 +1,23 @@
-import { Navigate, useNavigate } from "react-router-dom";
+// import { Navigate, useNavigate } from "react-router-dom";
 import { takeEvery, call, put } from "redux-saga/effects";
+// import { uploadPhotoFailure, uploadPhotoSuccess } from "../redux/action/ActionCreators";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
 import * as authApi from "../services/api/authApi";
 
 
 
 export function* register(action) {
+
     
     const {
         username,
         email,
         password,
+        photo,
+        role
     } = action.payload 
         try {
+            // console.log(photo)
             const response = yield call(
                 authApi.register, {
                     username,
@@ -23,32 +28,32 @@ export function* register(action) {
                 console.log(action)
                 
                 let token = response.jwt != null ? response.jwt : null;
-            console.log(response)
-            // pokrenuti loading... (koristiti PUT)
-            // call ka backendu gde se salju podaci (call , )
-            // sacuvati token i userId u localStorage (ako je bezuspesno, error)
-            
-            
-            // yield put (alert.setAlertAction({
-            //     text: 'User logged in!',
-            //     color: 'green'
-            // }))
-            
-
-
-            // kreirati company i uploadovati img (ukoliko podaci postoje)
-            // ako imamo i usera i company i img onda se kreira profil (yield call)
-            // prekinuti loading... (koristiti PUT)
-            // redirekcija korisnika (uz pomoc react routera)
-    /*         throw 'There is an error I want to make' */
+                // console.log(response)
+                if (token) 
+                {
+                    yield put({type: ActionsTypes.REGISTER_USER_SUCCESS, payload: response.user})
+                    let photoId = null;
+                    if (photo != null) {
+                        const img = yield call(authApi.uploadPhoto, photo);
+                        // console.log(img)
+                        photoId = img.payload[0].id;
+                        // console.log(photoId)
+                    }
+                }
+                                                                                                            
+                                                                                                        // pokrenuti loading... (koristiti PUT)
+                                                                                                        // call ka backendu gde se salju podaci (call , )
+                                                                                                        // sacuvati token i userId u localStorage (ako je bezuspesno, error)
+                                                                                                        // kreirati company i uploadovati img (ukoliko podaci postoje)
+                                                                                                        // ako imamo i usera i company i img onda se kreira profil (yield call)
+                                                                                                        // prekinuti loading... (koristiti PUT)
+                                                                                                        // redirekcija korisnika (uz pomoc react routera)
+                                                                                                        /* throw 'There is an error I want to make' */
         } catch(error) {
-            // console.log(error)
-           
-           
-            // yield put(alert.setAlertAction({
-            //     text: error.msg,
-            //     color:'red'
-            // }))
+            // yield put({
+            //     type: ActionsTypes.REGISTER_USER_FAILURE,
+            //     payload: {message: "Check Your data!"}
+            // })
         }
 };
 
@@ -92,24 +97,35 @@ export function* login(action) {
 // }
 
 
+// export function* uploadPhoto(payload) {     ---------------  zakomentarisi
+//     // console.log(action)
+    
+//     try {
+//         const photo = payload;
+//         const response = yield call(
+//             authApi.uploadPhoto, 
+//             photo
+//         ) 
+//         console.log(response)
+//         if (response) {
+//             const {
+//                 id,
+//                 ...payloadData
+//             } = response.data[0]
+//             const payload = {
+//                 id: id,
+//                 attributes: payloadData
+//             }
+//             yield put(uploadPhotoSuccess(payload))
+//         } else {
+//             yield put(uploadPhotoFailure("Upload Failed!"))
+//         }
+//     } catch(error) {
+//         console.log(error)
+//         yield put(uploadPhotoFailure(error.message))
+//     }
+// } 
 
-
-export function* uploadPhoto(action) {
-    // console.log(action)
-    const {
-        
-    } = action.image
-    try {
-        const response = yield call(
-            authApi.uploadPhoto, {
-                
-            }
-        ) 
-        console.log(response)
-    } catch(error) {
-        console.log(error)
-    }
-} 
 
 
 export default function* root() {
@@ -123,10 +139,10 @@ export default function* root() {
         login
     );
 
-    yield takeEvery(
-        ActionsTypes.UPLOAD_PHOTO,
-        uploadPhoto
-    );
+    // yield takeEvery(
+    //     ActionsTypes.UPLOAD_PHOTO,
+    //     uploadPhoto
+    // );
 
 }
 

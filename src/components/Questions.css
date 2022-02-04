@@ -1,0 +1,63 @@
+.questions-container{
+    color: white;
+    display: flex;
+    gap: 50px;
+}
+.questions-right-side {
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+.questions-place {
+    border: 3px solid green;
+    border-radius: 7px;
+    padding: 20px;
+    width: 80%;
+    display: flex;
+    justify-content: space-between;
+    background-color: white;
+    color: black;
+}
+.questions-title-big{
+    padding-bottom: 20px;
+}
+.questions-place-left{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.questions-place-right{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+}
+.btn{
+    border: none;
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    min-width: 75px;
+    font-family: 'Comic Neue', sans-serif;
+    font-weight: bold;
+}
+.title-btn{
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+.add-questions{
+    width: 100%;
+    border: none;
+    padding: 15px;
+    font-family: 'Comic Neue', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    height: 100%;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}

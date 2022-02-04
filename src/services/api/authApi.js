@@ -1,5 +1,4 @@
 import axios from "axios";
-// import * from "../../redux/action/ActionCreators";
 
 
 axios.interceptors.request.use(
@@ -16,6 +15,7 @@ axios.interceptors.request.use(
 );
 
 
+// LOGIN
 export const login = async(payload) => {
     console.log(payload)
     try {
@@ -34,6 +34,7 @@ export const login = async(payload) => {
     }
 }
 
+// REGISTER
 export const register = async(payload) => {
     console.log(payload)
     try {
@@ -59,44 +60,65 @@ export const register = async(payload) => {
 
 
 
-export const logout = async(payload) => {
-    try {
-        const response = await axios({
-                method: "POST",
-                url: "https://strapi-internship-hr-app.onrender.com/api/auth/local/home",
-                data: {
-                    // "username": payload.username,
-                    // "email": payload.email,
-                    // "password": payload.password,
-                }
-            })
-              if (response.data.jwt) {
-                const token = response.data.jwt
-                localStorage.removeItem("token", token) 
-              }
-        return response.data
+// export const logout = async(payload) => {
+//     try {
+//         const response = await axios({
+//                 method: "POST",
+//                 url: "https://strapi-internship-hr-app.onrender.com/api/auth/local/home",
+//                 data: {
+//                     // "username": payload.username,
+//                     // "email": payload.email,
+//                     // "password": payload.password,
+//                 }
+//             })
+//               if (response.data.jwt) {
+//                 const token = response.data.jwt
+//                 localStorage.removeItem("token", token) 
+//               }
+//         return response.data
 
-    } catch(error) {
-        console.log(error)
-    }
+//     } catch(error) {
+//         console.log(error)
+//     }
     
-}
+// }
 
 
 
 
-export const uploadPhoto = async(image) => {
+export const uploadPhoto = async (image) => {
     console.log(image)
     try {
-        const response = await axios(
-            {
+        // const response = await axios(
+        //     {
+        //         method: "POST",
+        //         url: "https://strapi-internship-hr-app.onrender.com/api/upload",
+        //         data: {
+        //             "profilePhoto": image,
+        //         },
+        //         headers: {
+        //             const response = await axios.post(`${process.env.REACT_APP_BASEURL}/api/upload`, image, {
+        //                 headers: {
+        //                     "Content-Type": "multipart/form-data",
+        //                 },
+        //             });
+        //         } 
+                
+        //     }
+        // )
+        const response = await axios({
                 method: "POST",
                 url: "https://strapi-internship-hr-app.onrender.com/api/upload",
-                data: {
-                    "profilePhoto": image.id
-                }
+                data: image,
+                headers: {
+                    "Content-Type": "multipart/form-data"
             }
-        )
+        })
+        // .post("https://strapi-internship-hr-app.onrender.com/api/upload", image, {
+        //     headers: {
+        //         "Content-Type": "multipart/form-data",
+        //     },
+        // });
         return response.data
 
     } catch(error) {

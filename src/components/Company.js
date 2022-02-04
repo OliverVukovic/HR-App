@@ -1,22 +1,22 @@
 import React from 'react';
-import MyProfile from './MyProfile';
+import CompanyInfo from './CompanyInfo';
 import LeftBar from './LeftBar';
 import './Home.css';
 import HeaderLog from './HeaderLog';
+// import { Link } from "react-router-dom";
 
-function Home() {
-  
+function Company() {
   return (
     <div>
       <HeaderLog />
         <div className="container-home">
           <LeftBar />
           <div className="company-info"> 
-          <MyProfile />
+          <CompanyInfo />
           </div>
         </div>
     </div>
   )
 }
 
-export default Home
+export default Company

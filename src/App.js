@@ -7,6 +7,8 @@ import { Provider } from "react-redux";
 import store from "./redux/store/Store";
 import CompanyInfo from './components/CompanyInfo';
 import Home from './components/Home';
+import Questions from './components/Questions';
+import AddNewQuestions from './components/AddNewQuestions';
 
 function App() {
 
@@ -37,6 +39,8 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/home" element={<Home />} />
           <Route path="/company-info" element={<CompanyInfo />} />
+          <Route path="/questions" element={<Questions />} />
+          <Route path="/addquestions" element={<AddNewQuestions />} />
         </Routes>
       </div>
     </Provider>

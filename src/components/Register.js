@@ -7,53 +7,44 @@ import * as actionCreators from "../redux/action/ActionCreators";
 
 
 
-
 const Register = () => {
 
-    // const newUser = useSelector((state) => 
-    //     state.newUser)
+    // const newUser = useSelector((state) => state.newUser);
+    // const error = useSelector((state) => state.error); 
+    // const [ newFile, setNewFile ] = useState("Choose File")
 
     const [ username, setUsername ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword] = useState('');
-    const [ photo, setPhoto ] = useState('');
-    const [ role, setRole ] = useState();
+    const [ photo, setPhoto ] = useState(null);
+    const [ role, setRole ] = useState("company_user");
 
-    // const [ data, setData ] = useState({
-    //     username: '',
-    //     email: '',
-    //     password: '',
-    //     photo: '', 
-    //     role: ''
-    // }) 
-    
+    const [formIsValid, setFormIsValid] = useState(false);
+    const [errorMessage, setErrorMessage] = useState(true);
+   
     const dispatch = useDispatch();
-    // console.log(dispatch)
     const navigate = useNavigate();
 
     // const statusCode = props.state.registerReducer.response === undefined ? 0 : props.state.registerReducer.response.status;
+
     
-
-    const onRegister = (event) => {
-        event.preventDefault()
-        dispatch(actionCreators.registerUser({
-            username,
-            email,
-            password,
-            photo,
-            role
-        }));
-        // if (statusCode === 200)
-//   if 200 redirect to home... else error
-        navigate("/home")
-        username('');
-        email('');
-        password('');
-    };
-
     useEffect(()=>{
+        setFormIsValid(
+            username.trim().length > 3
+            && email.includes('@') 
+            && password.trim().length > 5
+        );
         console.log(username, email, password)
-        })
+        }, [ username, email, password ]);
+
+    // useEffect(() => {
+    //     if (newUser && newUser.id) {
+    //         navigate('/home');
+    //         setUsername('');
+    //         setEmail('');
+    //         setPassword('')
+    //     }
+    // }, [newUser]);
 
 
 
@@ -69,13 +60,49 @@ const Register = () => {
         setPassword(event.target.value)
     }
 
-    const handlePhoto = (event) => {
-        setPhoto(event.target.value)
-    }
+    
+    
+    const [badFormat, setBadFormat] = useState(false);
 
-    const handleRole = (event) => {
-        setRole(event.target.value)
+        // const [loading, setLoading] = useState(false);
+    const handlePhoto = (event) => {
+        const uploadPhoto = event.target.files[0];
+        console.log(uploadPhoto);
+
+        const photoType = [ "image/jpeg", "image/png", "image/gif" ];
+        if (!photoType.some((type) =>
+        uploadPhoto.type === type)
+        && uploadPhoto !== null) {
+            return setBadFormat(true);
+        }
+        setBadFormat(false);
+
+        const photoData = new FormData();
+        photoData.append("files", uploadPhoto);
+        setPhoto(photoData)
     }
+   
+    const onRegister = (event) => {
+        event.preventDefault()
+        if (username.trim().length === 0 || !email.includes('@') || password.trim().length < 5) {
+            console.log("Greska prilikom registrovanja")
+            return errorMessage;
+        } else {
+        dispatch(actionCreators.registerUser({
+            username,
+            email,
+            password,
+            photo,
+            role
+        }));
+        // if (statusCode === 200)
+        //   if 200 redirect to home... else error    
+        navigate("/home")
+        setUsername('');
+        setEmail('');
+        setPassword('');
+        }
+    };
 
 
 
@@ -88,7 +115,7 @@ const Register = () => {
                         uTeam - Register
                     </h2>
 
-                    <form>
+                    <form className="form">
                         <div className="login-page">
                             <label className="title-email-pass">Username</label>
                             <input 
@@ -124,11 +151,11 @@ const Register = () => {
                         <div className="login-page">
                             <label className="inp-check-photo">Profile Photo</label>
                             <input className="choose-file"
-                                // placeholder={this.props.placeholderText}="Upload file"
                                 type="file"
-                                accept="image/*"
-                                // value={photo}
-                                onClick={handlePhoto}
+                                name="file"
+                                // accept="image/*"
+                                placeholder="Upload photo"
+                                onChange={event => handlePhoto(event)}
                             />
                         </div>
 
@@ -138,21 +165,21 @@ const Register = () => {
                                 <div className="role">
                                     <input 
                                         type="radio" 
-                                        // checked="cheked"
+                                        value={"company_user"}
                                         name="role"
-                                        onClick={handleRole}
+                                        onChange={(event) => setRole(event.target.value)}
                                     />
                                     <label className="admin-user">User</label>
                                 </div>
                                 <div className="role">
                                     <input 
                                         type="radio"
+                                        value={"company_admin"}
                                         name="role"
-                                        onClick={handleRole}
+                                        onChange={(event) => setRole(event.target.value)}
                                     />
                                     <label className="admin-user">Admin</label>
                                 </div>
-                                
                             </div>
                         </div>
 
@@ -160,13 +187,20 @@ const Register = () => {
                             <Link className="acc-text" to="/">
                                 Already have an account?
                             </Link>
-                            <button type="submit"
+                            <button className="button" type="submit"
                                     onClick={onRegister}
                             >
                                 Register
                             </button>
 
                         </div>
+                        {!errorMessage && <div className="error-message">Check Your Data!</div>}
+
+                        {/* {loading ? (
+                            <h3>Loading...</h3>
+                        ) : (
+                            <img src="{image}"/>
+                        )} */}
                     </form>
                 </section>
             </main>

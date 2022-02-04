@@ -1,0 +1,59 @@
+.title-add-new {
+    color: white;
+}
+.create{
+    margin-top: 50px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.questions-add{
+    display: flex;
+    gap: 50px;
+}
+.section-options{
+    width: 50%;
+    height: 40px;
+}
+.form-add-new {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    width: 25rem;
+    max-width: 370px;
+    font-size: 12px;
+    font-weight: 400;
+    line-height: 14px;
+    letter-spacing: 0.04em;
+    margin-top: 59px;
+}
+.title-questions-text{
+    font-size: 18px;
+    color: white;
+}
+.section-options{
+    color: green;
+    font-size: 20px;
+    font-weight: bold;
+    font-family: 'Comic Neue', sans-serif;
+    border: 3px solid green;
+}
+.input-add-text{
+    border: 3px solid green;
+    width: 100%;
+}
+.btn-save-add-new{
+    font-family: 'Comic Neue', sans-serif;
+    font-size: 18px;
+    border: none;
+    width: 85px;
+    height: 29px;
+    cursor: pointer;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+}
+.btn-save-right{
+    display: flex;
+    justify-content: end;
+}
