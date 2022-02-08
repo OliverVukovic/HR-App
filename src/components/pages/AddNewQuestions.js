@@ -42,7 +42,7 @@ function AddNewQuestions() {
                           <option value='Image'>Image</option>
                         </select>
                         <div className="btn-save-right">
-                        <button className="btn-save-add-new">Save</button>
+                        <button className="btn-save-add-new button">Save</button>
                         </div>
                   </form>
                 </div>

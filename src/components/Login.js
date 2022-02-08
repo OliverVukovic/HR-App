@@ -8,16 +8,10 @@ import { useSelector } from "react-redux";
 
 const Login = () => {
     const [isPending, setIsPending] = useState(true);
-
-    // const [error, setError] = useState('');
-
-
     const user = useSelector((state) => state.user);
     const error = useSelector((state) => state.error);
     const [enteredEmail, setEnteredEmail] = useState('');
-    // const [emailIsValid, setEmailIsValid] = useState();
     const [enteredPassword, setEnteredPassword] = useState('');
-    // const [passwordIsValid, setPasswordIsValid] = useState();
     const [formIsValid, setFormIsValid] = useState(false);
 
     const dispatch = useDispatch();
@@ -31,10 +25,8 @@ const Login = () => {
     }, [enteredEmail, enteredPassword]);
 
     useEffect(() => {
-        // console.log(user)
         if (user && user.id) {
             console.log(user)
-            // console.log(user)
             navigate('/home');
             setEnteredEmail('');
             setEnteredPassword('');
@@ -56,12 +48,9 @@ const Login = () => {
             enteredEmail.includes('@') && event.target.value.trim().length > 6
         );
     };
-
     const submitHandler = (event) => {
-        // console.log(event.password)
         event.preventDefault();
         if (enteredEmail.trim().length === 0 || enteredPassword.trim().length === 0) {
-            
             return;
         }
             dispatch(actionCreators.loginUser({
@@ -69,9 +58,7 @@ const Login = () => {
                 password: enteredPassword
             }))
             const token = localStorage.getItem("token");
-
     };
-
     return (
         <div className="login-form">
             <Header />
@@ -80,7 +67,6 @@ const Login = () => {
                     <h2>
                         uTeam - Login
                     </h2>
-
                     <form onSubmit={submitHandler}>
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
@@ -92,7 +78,6 @@ const Login = () => {
                                 onChange={emailChangeHandler}
                             />
                         </div>
-
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
                             <input 
@@ -103,20 +88,14 @@ const Login = () => {
                                 onChange={passwordChangeHandler}
                             />
                         </div>
-
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
-                            <button className="button" type="submit"
-                                    
-                            >
+                            <button className="button" type="submit">
                                 Login
                             </button>
                         </div>
-                        
                         {error.message && <div className="error-message">{error.message}</div>}
-                        
                     </form>
-                
                 </section>
             </main>
         </div>
