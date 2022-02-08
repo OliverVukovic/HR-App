@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
-import Header from "./Header";
+import Header from "./layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
@@ -106,7 +106,7 @@ const Login = () => {
 
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
-                            <button type="submit"
+                            <button className="button" type="submit"
                                     
                             >
                                 Login

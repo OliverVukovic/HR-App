@@ -1,9 +1,9 @@
 import React from 'react'
-import logo from "../assets/quantox-logo.png"
+import logo from "../../assets/quantox-logo.png"
 import './Header.css';
 import { Link, useNavigate} from "react-router-dom";
 import { useDispatch } from 'react-redux';
-import * as actionCreators from "../redux/action/ActionCreators";
+import * as actionCreators from "../../redux/action/ActionCreators";
 
 function HeaderLog() {
    

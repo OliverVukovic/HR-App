@@ -24,7 +24,7 @@ function MyProfile() {
                         </p>
                         <input className="choose-file" type="file"  placeholder="chose-folder"/>
                         <div className="but-div">
-                            <button className="save-btn">Save</button>
+                            <button className="button">Save</button>
                         </div>    
                     </div>
                 </div>
@@ -48,7 +48,7 @@ function MyProfile() {
                         </p>
                         <input className="input-name" type="password"  placeholder="Enter new password"/>
                         <div className="but-div">
-                            <button className="save-btn">Save</button>
+                            <button className="button">Save</button>
                         </div>
                     </div>
                 </div>

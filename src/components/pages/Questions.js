@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom';
-import HeaderLog from './HeaderLog';
-import LeftBar from './LeftBar';
-import './Questions.css'
+import HeaderLog from '../layout/HeaderLog';
+import LeftBar from '../layout/LeftBar';
+import '../pages/Questions.css'
 
 function Questions() {
     const [questions , setQuestions] = useState ([
@@ -21,7 +21,7 @@ function Questions() {
                     <div className="title-btn">
                         <h2 className="questions-title-big">Questions</h2>
                         <Link  to="/addquestions">
-                            <button className="add-questions"> + Add new questions</button>
+                            <button className="add-questions button"> + Add new questions</button>
                         </Link>
                         {/* <button className="add-questions"> + Add new questions</button> */}
                     </div>
@@ -32,8 +32,8 @@ function Questions() {
                                 <p className="questions-p">{quest.body}</p>   
                             </div>
                             <div className="questions-place-right">
-                                <button className="btn-edit btn">Edit</button>
-                                <button className="btn-delete btn">Delete</button>
+                                <button className="btn-edit btn button">Edit</button>
+                                <button className="btn-delete btn button">Delete</button>
                             </div>
 
                         </div>

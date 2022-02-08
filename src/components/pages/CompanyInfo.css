@@ -1,0 +1,83 @@
+.company-title{
+    color: white;
+    padding-bottom: 30px;
+}
+.company-name{
+    color: white;
+    padding-bottom: 5px;
+    padding-top: 10px;
+    font-size: 14px;
+}
+.div-but{ 
+    padding-top: 20px;
+    margin-top: 10px;
+    display: flex;
+    justify-content: end;
+}
+
+.company-container{
+    display: flex;
+    gap: 40px;
+    
+}
+.compani-right{
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+.container-company-info{
+    padding-top: 70px;
+    width: 25%;
+}
+.left-bar-companyinfo{
+    display: flex;
+    width: 100%;
+    gap: 50px;
+}
+.choose-file{
+    width: 100%;
+}
+
+/* /  PENDING  / */
+
+.pending-box {
+    display: flex;
+    flex-direction: column;
+    width: 250px;
+    height: 300px;
+    border: 2px solid green;
+    background-color: white;
+    gap: 20px;
+    padding: 15px;
+}
+
+.pending-img {
+    display: flex;
+    justify-content: center;
+    border: 1px solid blue;
+    padding: 45px;
+}
+
+.pending-middle {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    align-content: center;
+}
+
+.pending-btn {
+    background-color: green;
+    color: white;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.pending-buttons {
+    display: flex;
+    justify-content: space-between;
+}
+
+.team-box {
+    display: flex;
+    gap: 20px;
+}

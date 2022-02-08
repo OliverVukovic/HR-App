@@ -1,9 +1,11 @@
 .container-home{
     display: flex;
+    width: 100%;
     
 }
 .company-info{
     padding: 30px 70px;
+    width: 100%;
 }
 .home{
     flex: 1;

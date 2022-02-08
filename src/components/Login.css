@@ -72,13 +72,15 @@ label {
     color: white;
 }
 
-button {
+.button {
     width: 85px;
     height: 29px;
     cursor: pointer;
     border-radius: 5px;
     background-color: green;
     color: white;
+    border: none;
+    font-family: 'Comic Neue', sans-serif;
 }
 
 .page-links {
@@ -117,4 +119,31 @@ button {
 .error-message{
     color: red;
     font-size: 20px;
+}
+
+.company-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.button-company {
+    padding: 10px;
+    background-color: green;
+    color: white;
+    border-radius: 8px;
+    border: none;
+}
+.company-modal {
+    display: flex;
+    flex-direction: column;
+    padding: 13px 20px;
+    font-size: 18px;
+    margin-top: 20px;
+    border: 2px solid white;
+    border-radius: 10px;
+    gap: 8px;
+}
+.button-modal {
+    align-self: flex-end;
+    
 }

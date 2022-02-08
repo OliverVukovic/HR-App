@@ -1,9 +1,9 @@
 import React from 'react';
 // import CompanyInfo from './CompanyInfo';
-import LeftBar from './LeftBar';
-import './Home.css';
-import HeaderLog from './HeaderLog';
-import MyProfile from './MyProfile';
+import LeftBar from '../layout/LeftBar';
+import '../pages/Home.css';
+import HeaderLog from '../layout/HeaderLog';
+import MyProfile from '../pages/MyProfile';
 
 function Home() {
   return (

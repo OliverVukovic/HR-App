@@ -10,7 +10,7 @@ function LeftBar() {
     <div>
         <div className="container-leftbar">
             <h2 className="lb-title">Menu</h2>
-                <Link to="/pending" className="lb-links">Pending for approval</Link>
+                <Link to="/pending-for-approval" className="lb-links">Pending for approval</Link>
                 <Link to="/team" className="lb-links">Team</Link>
                 <Link to="/questions" className="lb-links">Questions</Link>
                 <Link to="/company-info" className="lb-links">Company Info</Link>
