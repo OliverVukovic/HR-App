@@ -9,6 +9,8 @@ import CompanyInfo from './components/CompanyInfo';
 import Home from './components/Home';
 import Questions from './components/Questions';
 import AddNewQuestions from './components/AddNewQuestions';
+import Pending from './components/Pending';
+import Team from './components/Team';
 
 
 
@@ -43,6 +45,8 @@ function App() {
           <Route path="/company-info" element={<CompanyInfo />} />
           <Route path="/questions" element={<Questions />} />
           <Route path="/addquestions" element={<AddNewQuestions />} />
+          <Route path="/pending" element={<Pending />} />
+          <Route path="/team" element={<Team />} />
         </Routes>
       </div>
     </Provider>

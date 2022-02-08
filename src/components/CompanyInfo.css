@@ -33,6 +33,7 @@
 }
 .container-company-info{
     padding-top: 50px;
+    width: 40%;
 }
 .left-bar-companyinfo{
     display: flex;

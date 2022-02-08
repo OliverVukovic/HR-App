@@ -7,7 +7,7 @@ import * as actionCreators from "../redux/action/ActionCreators";
 import { useSelector } from "react-redux";
 
 const Login = () => {
-
+    const [isPending, setIsPending] = useState(true);
 
     // const [error, setError] = useState('');
 
@@ -72,8 +72,6 @@ const Login = () => {
 
     };
 
-    
-
     return (
         <div className="login-form">
             <Header />
@@ -109,11 +107,12 @@ const Login = () => {
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
                             <button type="submit"
-                                    // onClick={onLogin}
+                                    
                             >
                                 Login
                             </button>
                         </div>
+                        
                         {error.message && <div className="error-message">{error.message}</div>}
                         
                     </form>

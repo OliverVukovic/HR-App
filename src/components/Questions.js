@@ -26,8 +26,8 @@ function Questions() {
                         {/* <button className="add-questions"> + Add new questions</button> */}
                     </div>
                     {questions.map((quest) => (
-                        <div className="questions-place">
-                            <div className="questions-place-left" key={quest.id}>
+                        <div className="questions-place" key={quest.id}>
+                            <div className="questions-place-left">
                                 <h3 className="questions-title">{quest.title}</h3>
                                 <p className="questions-p">{quest.body}</p>   
                             </div>
