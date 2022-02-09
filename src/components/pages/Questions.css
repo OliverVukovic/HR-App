@@ -9,6 +9,7 @@
     display: flex;
     flex-direction: column;
     gap: 30px;
+    position: relative;
 }
 .questions-place {
     border: 3px solid green;
@@ -60,4 +61,30 @@
     background-color: green;
     color: white;
     border-radius: 5px;
+}
+
+
+.questions-place-start {
+    display: flex;
+    align-items: center;
+}
+.sa {
+    font-size: 18px;
+}
+
+
+.questions-place-start {
+    display: flex;
+    gap: 10px;
+}
+
+.spinner-questions {
+    position: absolute;
+    top: 25%;  
+    left: 30%; 
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.9);;
+    border-radius: 10px;
+    padding: 100px 100px;
+    padding-top: 0px;
 }

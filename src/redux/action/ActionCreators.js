@@ -86,6 +86,26 @@ export const createProfileFailure = (payload) => {
 
 
 
+export const fetchProfileRequest = (id = null) => {
+    console.log("Usao sam u AKCIJU!!!");
+    console.log(id)
+	return {
+		id,
+		type: ActionTypes.FETCH_PROFILE_REQUEST,
+	};
+};
+
+export const fetchProfileResponse = (user) => {
+    console.log(user)
+    console.log("Izlazim iz AKCIJE!")
+	return {
+		type: ActionTypes.FETCH_PROFILE_RESPONSE,
+		payload: user,
+	};
+};
+
+
+
 
 // CREATE COMPANY
 export const createCompany = (payload) => {

@@ -1,6 +1,6 @@
 import React from 'react'
-import HeaderLog from './HeaderLog'
-import LeftBar from './LeftBar'
+import HeaderLog from '../layout/HeaderLog';
+import LeftBar from '../layout/LeftBar'
 import './CompanyInfo.css';
 
 function CompanyInfo() {

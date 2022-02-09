@@ -60,6 +60,15 @@ function reducer(state = initState, action) {
                 // error: payload,
             }   
 
+
+
+        case actions.FETCH_PROFILE_RESPONSE:
+            console.log("RESPONSE radi!");
+			return { 
+                ...state, 
+                ...action.payload 
+            };
+
         
         default: 
         return state;

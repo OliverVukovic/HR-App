@@ -1,5 +1,6 @@
 // import { Navigate, useNavigate } from "react-router-dom";
-import { takeEvery, call, put } from "redux-saga/effects";
+import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
+import { fetchProfileResponse } from "../redux/action/ActionCreators";
 // import { uploadPhotoFailure, uploadPhotoSuccess } from "../redux/action/ActionCreators";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
 import * as authApi from "../services/api/authApi";
@@ -29,6 +30,8 @@ export function* register(action) {
                 
                 let token = response.jwt != null ? response.jwt : null;
                 // console.log(response)
+// ovde staviti localStorage(id)
+
                 if (token) 
                 {
                     yield put({type: ActionsTypes.REGISTER_USER_SUCCESS, payload: response.user})
@@ -73,6 +76,8 @@ export function* login(action) {
         ) 
             let token = response.jwt != null ? response.jwt : null;
         console.log(response)
+            let id = response.user.id;
+            localStorage.setItem("id", id);
             if (token) {
                 yield put({
                     type: ActionsTypes.LOGIN_USER_SUCCESS, 
@@ -86,6 +91,24 @@ export function* login(action) {
                 })
     }}
 
+
+
+
+
+    export function* fetchProfileSaga(object) {
+        try {
+            console.log("Usao sam u SAGU i prosledio id");
+            console.log(object);
+            const response = yield call(
+                authApi.fetchProfile, 
+                Number(object.id)
+            )
+            console.log(response)
+            yield put(fetchProfileResponse(response));
+        } catch (error) {
+            return error
+        }
+    }
 
 
 
@@ -143,6 +166,9 @@ export default function* root() {
     //     ActionsTypes.UPLOAD_PHOTO,
     //     uploadPhoto
     // );
-
+    yield takeLatest(
+        ActionsTypes.FETCH_PROFILE_REQUEST,
+        fetchProfileSaga
+    )
 }
 

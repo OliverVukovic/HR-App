@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
-import Header from "./Header";
+import Header from "./layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
 import { useSelector } from "react-redux";
 
 
-const Login = () => {
+const Login = ({onLoginUpdate}) => {
 
     const user = useSelector((state) => state.user);
     const error = useSelector((state) => state.error); 
@@ -90,7 +90,11 @@ const Login = () => {
 
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
-                            <button className="button" type="submit"
+                            <button className="button" type="submit" 
+                            // onClick={() => {
+                            //     onLoginUpdate(true);
+                            //     navigate('/home');
+                            // }}
                             >
                                 Login
                             </button>

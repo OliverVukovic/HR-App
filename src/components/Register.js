@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
-import Header from "./Header";
+import Header from "./layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
@@ -34,7 +34,7 @@ const Register = () => {
             && email.includes('@') 
             && password.trim().length > 5
         );
-        console.log(username, email, password)
+        // console.log(username, email, password)
         }, [ username, email, password ]);
 
     // useEffect(() => {
@@ -59,6 +59,25 @@ const Register = () => {
     const handlePassword = (event) => {
         setPassword(event.target.value)
     }
+
+    const handleRole = (event) => {
+        setRole(event.target.value)
+    }
+
+
+
+
+
+
+    const [ company, setCompany] = useState('');
+    const [ modal, setModal] = useState(false);
+    // const  [ id, setId ] = useState('');
+
+    // const handleComp = (event) => {
+    //     event.preventDefault();
+    // }
+
+
 
     
     
@@ -93,17 +112,17 @@ const Register = () => {
             email,
             password,
             photo,
+            company,
             role
         }));
         // if (statusCode === 200)
-        //   if 200 redirect to home... else error    
+
         navigate("/home")
         setUsername('');
         setEmail('');
         setPassword('');
         }
     };
-
 
 
     return (
@@ -148,8 +167,10 @@ const Register = () => {
                             />
                         </div>
 
+{/* PHOTO */}
+
                         <div className="login-page">
-                            <label className="inp-check-photo">Profile Photo</label>
+                            <label className="title-email-pass">Profile Photo</label>
                             <input className="choose-file"
                                 type="file"
                                 name="file"
@@ -159,6 +180,56 @@ const Register = () => {
                             />
                         </div>
 
+
+{/* COMPANY */}
+
+                        <div className="login-page">
+                            <label className="title-email-pass">Company</label>
+
+                            <div className="company-flex">
+
+                                <select 
+                                    className="section-options"
+                                    value={company}
+                                    onChange={(event) => 
+                                    setCompany(event.target.value)}
+                                >
+                                    <option value='Company 1'>Company 1</option>
+                                    <option value='Company 2'>Company 2</option>
+                                    <option value='Company 3'>Company 3</option>
+                                </select>
+
+                                <button className="button-company" 
+                                onClick={() => setModal(true)}
+                                >
+                                    Add company
+                                </button>
+
+                            </div>
+
+                            <div className="company-modal" style={{display : modal ? "flex" : "none"}}>
+                                <label>Add new company name</label>
+                                <input 
+                                type="text"
+                                placeholder="Enter company name"
+
+                                />
+                                
+                                <label>Add slug</label>
+                                <input 
+                                type="text"
+                                placeholder="Enter slug"
+                                
+                                />
+                                <button className="button button-modal" 
+                                onClick={() => setModal(false)}>Confirm</button>
+                            </div>
+
+                        </div>
+
+
+
+
                         <div className="login-page">
                             <p className="select-role">Select your role:</p>
                             <div className="radio-btn">
@@ -167,7 +238,7 @@ const Register = () => {
                                         type="radio" 
                                         value={"company_user"}
                                         name="role"
-                                        onChange={(event) => setRole(event.target.value)}
+                                        onChange={handleRole}
                                     />
                                     <label className="admin-user">User</label>
                                 </div>
@@ -176,7 +247,7 @@ const Register = () => {
                                         type="radio"
                                         value={"company_admin"}
                                         name="role"
-                                        onChange={(event) => setRole(event.target.value)}
+                                        onChange={handleRole}
                                     />
                                     <label className="admin-user">Admin</label>
                                 </div>
@@ -187,7 +258,8 @@ const Register = () => {
                             <Link className="acc-text" to="/">
                                 Already have an account?
                             </Link>
-                            <button className="button" type="submit"
+                            <button className="button" 
+                                    type="submit"
                                     onClick={onRegister}
                             >
                                 Register

@@ -4,7 +4,10 @@ import axios from "axios";
 axios.interceptors.request.use(
 	(config) => {
 		const token = localStorage.getItem("token");
+        console.log(token)
+    
 		if (token) {
+            console.log("usao u sansu!")
 			config.headers.Authorization = `Bearer ${token}`; 
 		}
 		return config;
@@ -146,3 +149,23 @@ export const createNewProfile = async(payload) => {
         console.log(error)
     }
 }
+
+
+export const fetchProfile = async (id) => {
+    try {
+        const response = await axios(
+            {
+                method: 'GET',
+                url: "https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=489&populate=user"
+                // url: "https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*"
+            }
+        )
+
+
+        // .get(`https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=489&populate=user`);
+        console.log(response);
+        return response;
+    } catch (error) {
+        return error;
+    }
+};

@@ -11,10 +11,6 @@
     display: flex;
     gap: 50px;
 }
-.section-options{
-    width: 50%;
-    height: 40px;
-}
 .form-add-new {
     display: flex;
     flex-direction: column;
@@ -32,11 +28,12 @@
     color: white;
 }
 .section-options{
-    color: green;
-    font-size: 20px;
+    font-size: 18px;
     font-weight: bold;
     font-family: 'Comic Neue', sans-serif;
-    border: 3px solid green;
+    border: 2px solid green;
+    width: 60%;
+    height: 40px;
 }
 .input-add-text{
     border: 3px solid green;
