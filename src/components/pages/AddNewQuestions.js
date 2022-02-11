@@ -6,20 +6,14 @@ import './AddNewQuestions.css';
 function AddNewQuestions() {
   const [ title , setTitle] = useState('');
   const [ body , setBody] = useState('');
-  // const [ author , setAuthor] = useState('mario')
-  // const [isPending, setIsPending] = useState(false)
-
   const handleSubmit = (e) => {
     e.preventDefault();
   }
   return (
     <div>
-      
       <HeaderLog />
             <div className="questions-add">
                 <LeftBar />
-                
-                
                 <div className="create">
                   <h2 className="title-add-new">Add new Questions</h2>
                   <form className="form-add-new" onSubmit={handleSubmit}>

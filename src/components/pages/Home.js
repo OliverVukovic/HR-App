@@ -1,5 +1,4 @@
 import React from 'react';
-// import CompanyInfo from './CompanyInfo';
 import LeftBar from '../layout/LeftBar';
 import '../pages/Home.css';
 import HeaderLog from '../layout/HeaderLog';

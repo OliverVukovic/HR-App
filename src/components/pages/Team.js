@@ -14,15 +14,40 @@ function Team() {
         <LeftBar />
         <div className="container-company-info">
             <h2 className="company-title">Team</h2> 
-
             <div className='team-box'>
             <div className='pending-box'>
+    <div className='pending-img'>
+        <img src={logo} alt="logo"/>
+    </div>
+    <div className='pending-middle'>
+        <div className='pending-data'>
+            <div className='pending-name'>
+                Mike Smith
+            </div>
+            <div className='pending-date'>
+                05/02/2022
+            </div>
+        </div>
+        <button className='pending-btn'>
+            Pending
+        </button>
+    </div>
 
-<div className='pending-img'>
+    <div className='pending-buttons'>
+        <button className='pending-btn'>
+            Details
+        </button>
+        <button className='pending-btn'>
+            Delete
+        </button>
+    </div>
+    </div>
+    <div className='pending-box'>
+    <div className='pending-img'>
     <img src={logo} alt="logo"/>
-</div>
+    </div>
 
-<div className='pending-middle'>
+    <div className='pending-middle'>
     <div className='pending-data'>
         <div className='pending-name'>
             Mike Smith
@@ -34,87 +59,56 @@ function Team() {
     <button className='pending-btn'>
         Pending
     </button>
-</div>
+    </div>
 
-<div className='pending-buttons'>
+    <div className='pending-buttons'>
     <button className='pending-btn'>
         Details
     </button>
     <button className='pending-btn'>
         Delete
     </button>
-</div>
-
-</div>
-
-<div className='pending-box'>
-
-<div className='pending-img'>
-<img src={logo} alt="logo"/>
-</div>
-
-<div className='pending-middle'>
-<div className='pending-data'>
-    <div className='pending-name'>
-        Mike Smith
     </div>
-    <div className='pending-date'>
-        05/02/2022
+
     </div>
-</div>
-<button className='pending-btn'>
-    Pending
-</button>
-</div>
 
-<div className='pending-buttons'>
-<button className='pending-btn'>
-    Details
-</button>
-<button className='pending-btn'>
-    Delete
-</button>
-</div>
+    <div className='pending-box'>
 
-</div>
-
-<div className='pending-box'>
-
-<div className='pending-img'>
-<img src={logo} alt="logo"/>
-</div>
-
-<div className='pending-middle'>
-<div className='pending-data'>
-    <div className='pending-name'>
-        Mike Smith
+    <div className='pending-img'>
+    <img src={logo} alt="logo"/>
     </div>
-    <div className='pending-date'>
-        05/02/2022
-    </div>
-</div>
-<button className='pending-btn'>
-    Pending
-</button>
-</div>
 
-<div className='pending-buttons'>
-<button className='pending-btn'>
-    Details
-</button>
-<button className='pending-btn'>
-    Delete
-</button>
-</div>
-
-</div>
-            </div>
-            
-
+    <div className='pending-middle'>
+    <div className='pending-data'>
+        <div className='pending-name'>
+            Mike Smith
+        </div>
+        <div className='pending-date'>
+            05/02/2022
         </div>
     </div>
-  </div>
-  )
-}
+    <button className='pending-btn'>
+        Pending
+    </button>
+    </div>
+
+    <div className='pending-buttons'>
+    <button className='pending-btn'>
+        Details
+    </button>
+    <button className='pending-btn'>
+        Delete
+    </button>
+    </div>
+
+    </div>
+                </div>
+                
+
+            </div>
+        </div>
+    </div>
+    )
+    }
 
 export default Team

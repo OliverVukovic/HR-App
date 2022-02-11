@@ -1,38 +1,29 @@
-import axios from 'axios';
-import React, { useEffect, useState} from 'react'
-import { Link, useNavigate } from 'react-router-dom';
-import HeaderLog from '../layout/HeaderLog';
-import LeftBar from '../layout/LeftBar';
-import '../pages/Questions.css'
-import  {Spinner} from '../Spiner';
+import { useQuery } from "react-query";
+import axios from "axios";
+import {Link} from 'react-router-dom'
+import HeaderLog from "../layout/HeaderLog";
+import LeftBar from "../layout/LeftBar";
+import { Spinner } from "../Spiner";
 
-
-function Questions() {
-    
-    let i = 1;
-    const [posts, setPosts] = useState([])
-    const [spiner, setSpiner] = useState(false)
-    useEffect(() => {
-        axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*')
-        .then(res => {
-            setPosts(res.data)
-        })
-        .catch(err => {
-            console.log(err)
-        })
-    }, [posts])
-    const handleClick = (id) => {
-        setSpiner(true)
-        axios.delete(`https://strapi-internship-hr-app.onrender.com/api/questions/${id}` , {
-            data: {...posts}
-    
-        }).then((res) => {
-            setSpiner(false)
-        })
+const fetchPostman = () => {
+    return axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*')
+}
+let i= 1;
+export const QuestionsTest = () => {
+    const {isLoading , data:questions, error } = useQuery('username ', fetchPostman)
+    if(isLoading) {
+        return <Spinner></Spinner>
     }
-  return (
-      <div>
-      <HeaderLog />
+    if(error){
+        return <div className="error-message">
+            <div className="error-place">
+        <h2>Doslo je do greske prilikom ucitavanja podatka</h2>
+            </div>
+        </div>
+    }
+    return (
+        <div>
+            <HeaderLog />
             <div className="questions-container">
                 <LeftBar />
                 <div className="questions-right-side">
@@ -42,9 +33,7 @@ function Questions() {
                             <button className="add-questions button"> + Add new questions</button>
                         </Link>    
                     </div>
-                    {spiner && <div className='spinner-questions'><Spinner /></div>}
-                    {posts.data?.map((quest) => (
-
+                    {questions?.data.data.map((quest) => (
                         <div className="questions-place" key={quest.id}>
                             <div className="questions-place-left">
                                 <div className="questions-place-start">
@@ -57,15 +46,13 @@ function Questions() {
                             </div>
                             <div className="questions-place-right">
                                 <button className="btn-edit btn button">Edit</button>
-                                <button className="btn-delete btn button" onClick={()=>handleClick(quest.id)}>Delete</button>
+                                <button className="btn-delete btn button">Delete</button>
                             </div>
-
                         </div>
                     ))}
-                </div>  
+                </div> 
+           
             </div>
-    </div>
-  )
+        </div>
+    )
 }
-
-export default Questions

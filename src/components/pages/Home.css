@@ -1,7 +1,6 @@
 .container-home{
     display: flex;
-    width: 100%;
-    
+    width: 100%;   
 }
 .company-info{
     padding: 30px 70px;

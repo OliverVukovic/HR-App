@@ -20,18 +20,15 @@ function HeaderLog() {
     return (
         <header>
             <div className="q-logo">
-                {/* Logo */}
                 <img src={logo} alt="logo"/>
             </div>
             <div className="page-links">
             
                 <Link className="page-link home" to="/home">Home</Link>
                 <Link className="page-link company" to="/company-info">Company</Link>
-                {/* <Link className="page-link logout" to="/"> */}
                     <button className="page-link-btn" onClick={logOut}>
                     Logout
                     </button>
-                    {/* </Link> */}
             </div>
         </header>
     );

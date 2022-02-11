@@ -86,6 +86,21 @@ export const createProfileFailure = (payload) => {
 
 
 
+export const fetchProfileRequest = (id = null) => {
+	return {
+		id,
+		type: ActionTypes.FETCH_PROFILE_REQUEST,
+	};
+};
+export const fetchProfileResponse = (user) => {
+	return {
+		type: ActionTypes.FETCH_PROFILE_RESPONSE,
+		payload: user,
+	};
+};
+
+
+
 
 // CREATE COMPANY
 export const createCompany = (payload) => {
