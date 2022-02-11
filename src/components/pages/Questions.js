@@ -87,7 +87,7 @@ function Questions() {
 
     const [posts, setPosts] = useState([])
     const navigate = useNavigate()
-    const [spiner, setSpiner] = useState(false)
+    const [loader, setLoader] = useState(false)
     
     useEffect(() => {
         axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*')
@@ -100,11 +100,11 @@ function Questions() {
     }, [posts])
 
     const handleClick = (id) => {
-        setSpiner(true)
+        setLoader(true)
         axios.delete(`https://strapi-internship-hr-app.onrender.com/api/questions/${id}` , {
             data: {...posts} 
         }).then((res) => {
-            setSpiner(false)
+            setLoader(false)
         })
     }
     
@@ -122,7 +122,9 @@ function Questions() {
                         </Link>
                     </div>
 
-                    {spiner && <div className='spinner-questions'><Loader /></div>}
+                    {loader && <div className='spinner-questions'>
+                        <Loader />
+                    </div>}
                     {posts.data?.map((quest) => (
 
                         <div className="questions-place" key={quest.id}>

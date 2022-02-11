@@ -27,8 +27,6 @@ function MyProfile() {
     
 
 
-
-
 // UPLOAD PHOTO
     const [ photo, setPhoto ] = useState(null);
     const [ badFormat, setBadFormat ] = useState(false);
@@ -53,29 +51,13 @@ const handlePhoto = (event) => {
 
 const onRegister = (event) => {
     event.preventDefault()
-    // if (username.trim().length === 0 || !email.includes('@') || password.trim().length < 5) {
-    //     console.log("Greska prilikom registrovanja")
-    //     return errorMessage;
-    // } else {
-    // dispatch(actionCreators.registerUser({
-    //     username,
-    //     email,
-    //     password,
-    //     photo,
-    //     company,
-    //     role
-    // }));
     setPhoto(photo)
     }
 
 
-
-
-
-
   return (
     
-    <div className="container-my-profile">
+    <div className="header-leftbar-right">
        <div className="my-profile">
             <h2 className="title-my-profile">My Profile</h2>
 
@@ -85,6 +67,8 @@ const onRegister = (event) => {
                     <div className="header-left">
                         <p className="header-title">Basic Info</p>
                     </div>
+
+{/* NAME */}
                     <div className="left-main">
                         <p className="p-name-profile">
                             Name
@@ -93,22 +77,26 @@ const onRegister = (event) => {
                             type="text" 
                             placeholder="Name"
                             value={user !== undefined ? user.name : ""} 
-                            onChange={(e) => setUser({ ...user, name: e.target.value })}
+                            onChange={(e) => setUser({ 
+                                ...user, 
+                                name: e.target.value })}
                         />
 
+{/* PHOTO */}
                         <p className="p-name-profile">
                             Profile Photo
                         </p>
                         <input className="choose-file" 
                             type="file" 
                             placeholder="Upload photo"
+                            // value={user?.profilePhoto.data.attributes.name}   ---- ZASTO NECE !?
                             onChange={event => handlePhoto(event)}
                         />
-                        { user?.profilePhoto?.data === null || user?.profilePhoto?.data === undefined ? 
+                         {user?.profilePhoto?.data === null || user?.profilePhoto?.data === undefined ? 
                          <p>Korisnik nema sliku</p> : 
                          <img src={user?.profilePhoto.data.attributes.url} 
                             alt={user?.profilePhoto.data.attributes.name} 
-                            className="import-img" 
+                            className="user-img" 
                             width={200} /> } 
 
                         <div className="but-div">
@@ -124,25 +112,34 @@ const onRegister = (event) => {
                     <div className="header-right">
                         <p className="header-title">Security</p>
                     </div>
+
+{/* EMAIL */}
                     <div className="right-main">
                         <p className="p-name-profile">
                             Email:
                         </p>
                         <p className="email">
-                            {/* {user.user?.data?.attributes.email} */}
-                        {user !== undefined ? "true" : "false"}
+                            {user.user?.data?.attributes.email}
+                        {/* {user !== undefined ? "true" : "false"} */}
                         </p>
+
+{/* PASSWORD */}
                         <p className="p-name-profile">
                             Curent Password
                         </p>
-                        <input className="input-name" type="password"  placeholder="Curent password"/>
+                        <input className="input-name" 
+                                type="password"  
+                                placeholder="Curent password"
+                                // value={user.user?.data?.attributes.password} ------ ZASTO NECE !?
+                                value={user !== undefined ? "true" : "false"}
+                        />
                         <p className="p-name-profile">
                             New Password
                         </p>
                         <input className="input-name" type="password"  placeholder="Enter new password"/>
                         <div className="but-div">
                             <button className="button"
-                                type="submit"
+                                // type="submit"
                                 onClick={onRegister}
                             >
                                 Save

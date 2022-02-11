@@ -50,6 +50,12 @@
     background-color: green;
     color: white;
 }
+.btn-save-add-new:hover {
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+}
+
 .btn-save-right{
     display: flex;
     justify-content: end;

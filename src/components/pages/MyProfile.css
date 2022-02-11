@@ -1,19 +1,19 @@
 .container-my-profile {
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    /* width: 1200px; */
     width: 100%;
-    height: 100vh; 
-
+    height: 100%; 
 }
 .my-profile{
+    /* display: flex; */
+    /* flex-direction: column; */
     width: 80%;
-    margin-top: 20px;
+    /* justify-content: center; */
 }
 .title-my-profile{
     color: white;
-    padding: 20px 10px 20px 0px;
-    /* font-size: 30px; */
+    padding: 0px 10px 20px 0px;
 }
 .container-left-right{
     display: flex;
@@ -28,15 +28,17 @@
 .left{
     display: flex;
     border: 1px solid green;
-    
     width: 50%;
     flex-direction: column;
+    border-radius: 8px;
 }
 .header-left{
     color: white;
     padding: 20px 30px;
     border-bottom: 1px solid green;
     background-color: green;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 .left-main{
     display: flex;
@@ -53,15 +55,17 @@
 .right{
     display: flex;
     border: 1px solid green;
-    /* width: 100%; */
     width: 50%;
     flex-direction: column;
+    border-radius: 8px;
 }
 .header-right{
     color: white;
     padding: 20px 30px;
     border-bottom: 1px solid green;
     background-color: green;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
 }
 .right-main{
     display: flex;
@@ -91,11 +95,11 @@
     background-color: white;
 }
 
-.import-img {
+.user-img {
     display: flex;
     align-self: center;
     border: 1px solid green;
-    border-radius: 5px;
+    border-radius: 10px;
     padding: 5px;
     margin-top: 10px;
 }

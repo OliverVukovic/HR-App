@@ -156,8 +156,8 @@ export const fetchProfile = async (id) => {
         const response = await axios(
             {
                 method: 'GET',
-                url: "https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=489&populate=user"
-                // url: "https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*"
+                // url: "https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=430&populate=*"
+                url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*`
             }
         )
 

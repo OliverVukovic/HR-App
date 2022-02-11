@@ -1,12 +1,32 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import HeaderLog from '../layout/HeaderLog';
 import LeftBar from '../layout/LeftBar'
 import './CompanyInfo.css';
-import pancev from "../../assets/pancev.png";
+// import { formatDate } from "../helpers/Date";
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProfileRequest } from '../../redux/action/ActionCreators';
+
 
 
 
 function Pending() {
+
+
+
+    const id = localStorage.getItem("id"); 
+    const object = useSelector((state) => state.data?.data[0]?.attributes); //copy iz MyProfile
+    const [user, setUser] = useState(object);
+
+    const dispatch = useDispatch();
+    useEffect(() => {
+        setTimeout(() => 
+    dispatch(fetchProfileRequest(id)), 1000 )}, [dispatch,id]);
+
+    useEffect(() => {
+		setUser(object);
+	}, [setUser, object]);
+
+
 
   return (
   <div className="header-leftbar-right">
@@ -19,16 +39,24 @@ function Pending() {
             <div className='pending-box'>
 
                 <div className='pending-img'>
-                    <img className='img-size' src={pancev} alt="pancev"/>
+                    {/* <img className='img-size' src={pancev} alt="pancev"/> */}
+                    { user?.profilePhoto?.data === null || user?.profilePhoto?.data === undefined ? 
+                    <p>Korisnik nema sliku</p> : 
+                    <img src={user?.profilePhoto.data.attributes.url} 
+                      alt={user?.profilePhoto.data.attributes.name} 
+                      className="import-pending-photo" 
+                      width={200} /> }
                 </div>
 
                 <div className='pending-middle'>
                     <div className='pending-data'>
                         <div className='pending-name'>
-                            Darko Pancev
+                            {/* Darko Pancev */}
+                            {user !== undefined ? user.name : ""}
                         </div>
                         <div className='pending-date'>
-                            07/09/1965
+                            {/* 07/09/1965 */}
+                            <formatDate />
                         </div>
                     </div>
                     <button className='pending-btn'>

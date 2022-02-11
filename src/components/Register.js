@@ -4,6 +4,7 @@ import Header from "./layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
+import axios from "axios";
 
 
 
@@ -28,7 +29,7 @@ const Register = () => {
     // const statusCode = props.state.registerReducer.response === undefined ? 0 : props.state.registerReducer.response.status;
 
     
-    useEffect(()=>{
+    useEffect(()=> {
         setFormIsValid(
             username.trim().length > 3
             && email.includes('@') 
@@ -67,20 +68,49 @@ const Register = () => {
 
 
 
+    const [ company, setCompany] = useState(null);
+
+    useEffect(() => {
+        axios.get(
+            "https://strapi-internship-hr-app.onrender.com/api/companies"
+        ).then((response) => {
+           setCompany(response.data.data)
+        })
+    }, []);
 
 
-    const [ company, setCompany] = useState('');
+
     const [ modal, setModal] = useState(false);
     // const  [ id, setId ] = useState('');
 
-    // const handleComp = (event) => {
-    //     event.preventDefault();
+
+    // const [ enteredCompanyName, setEnteredCompanyName ] = useState('');
+    // const [ enteredSlug, setEnteredSlug ] = useState('');
+
+    // const companyChangeHandler = (event) => {
+    //     setEnteredCompanyName(event.target.value);
+    // }
+    // const slugChangeHandler = (event) => {
+    //     setEnteredSlug(event.target.value);
     // }
 
+    // const handleCompany = (event) => {
+    //     event.preventDefault();
+    
+    //     const companyData = {
+    //         company: enteredCompanyName,
+    //         slug: enteredSlug
+    //     }
+    //     props.onSaveCompanyData(companyData)
+    //     setEnteredCompanyName('');
+    //     setEnteredSlug('');
+    // }
+    
 
 
-    
-    
+
+
+        
     const [badFormat, setBadFormat] = useState(false);
 
         // const [loading, setLoading] = useState(false);
@@ -114,13 +144,14 @@ const Register = () => {
             photo,
             company,
             role
-        }));
-        // if (statusCode === 200)
+        }))
+        // const token = localStorage.getItem("token");
 
-        navigate("/home")
+        navigate("/home");
         setUsername('');
         setEmail('');
         setPassword('');
+        setCompany('')
         }
     };
 
@@ -134,6 +165,7 @@ const Register = () => {
                         uTeam - Register
                     </h2>
 
+{/* USERNAME */}
                     <form className="form">
                         <div className="login-page">
                             <label className="title-email-pass">Username</label>
@@ -145,6 +177,7 @@ const Register = () => {
                             />
                         </div>
 
+{/* EMAIL */}
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
                             <input 
@@ -156,6 +189,7 @@ const Register = () => {
                             />
                         </div>
 
+{/* PASSWORD */}
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
                             <input 
@@ -168,7 +202,6 @@ const Register = () => {
                         </div>
 
 {/* PHOTO */}
-
                         <div className="login-page">
                             <label className="title-email-pass">Profile Photo</label>
                             <input className="choose-file"
@@ -182,7 +215,6 @@ const Register = () => {
 
 
 {/* COMPANY */}
-
                         <div className="login-page">
                             <label className="title-email-pass">Company</label>
 
@@ -190,13 +222,17 @@ const Register = () => {
 
                                 <select 
                                     className="section-options"
-                                    value={company}
+                                    value="test"
                                     onChange={(event) => 
                                     setCompany(event.target.value)}
                                 >
-                                    <option value='Company 1'>Company 1</option>
-                                    <option value='Company 2'>Company 2</option>
-                                    <option value='Company 3'>Company 3</option>
+                                    {company && 
+                                      company?.map(company => {
+                                        return (
+                                        <option key={company.id}>
+                                            {company.attributes.name}
+                                        </option>
+                                    )})}
                                 </select>
 
                                 <button className="button-company" 
@@ -212,24 +248,30 @@ const Register = () => {
                                 <input 
                                 type="text"
                                 placeholder="Enter company name"
-
+                                // value={enteredCompanyName}
+                                // onChange={companyChangeHandler}
                                 />
                                 
                                 <label>Add slug</label>
                                 <input 
                                 type="text"
                                 placeholder="Enter slug"
-                                
+                                // value={enteredSlug}
+                                // onChange={slugChangeHandler}
                                 />
                                 <button className="button button-modal" 
-                                onClick={() => setModal(false)}>Confirm</button>
+                                // type="submit"
+                                onClick={() => setModal(false)}
+                                >
+                                    Confirm
+                                </button>
                             </div>
 
                         </div>
 
 
 
-
+{/* ROLE */}
                         <div className="login-page">
                             <p className="select-role">Select your role:</p>
                             <div className="radio-btn">
@@ -280,4 +322,4 @@ const Register = () => {
     );
 }
 
-export default Register; 
+export default Register

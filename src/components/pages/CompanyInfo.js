@@ -6,6 +6,7 @@ import './CompanyInfo.css';
 function CompanyInfo() {
 
   return (
+    
     <div className="header-leftbar-right">
       <HeaderLog /> 
       <div className="left-bar-companyinfo">
