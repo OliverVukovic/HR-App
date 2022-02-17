@@ -69,6 +69,13 @@ function reducer(state = initState, action) {
                 ...action.payload 
             };
 
+        case action.CREATE_PROFILE:
+            console.log('REDUCER CREATE PROFILESSSS')
+            return {
+                ...state,
+                ...action.payload
+            }
+
         
         default: 
         return state;

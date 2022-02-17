@@ -9,12 +9,12 @@ import * as authApi from "../services/api/authApi";
 
 export function* register(action) {
 
-    
     const {
         username,
         email,
         password,
         photo,
+        company,
         role
     } = action.payload 
         try {
@@ -32,17 +32,50 @@ export function* register(action) {
                 // console.log(response)
 // ovde staviti localStorage(id)
 
-                if (token) 
-                {
-                    yield put({type: ActionsTypes.REGISTER_USER_SUCCESS, payload: response.user})
+                console.log("Ovo je pro if(TOKEN)")
+                // if (token) 
+                // {
+                    console.log("Usao sam u token");
+                    yield put(
+                        {
+                            type: ActionsTypes.REGISTER_USER_SUCCESS, 
+                            payload: response.user
+                        }
+                    )
+
+                    // if (isNaN(company)) {
+                    //     const slug = company.toLowerCase().replaceAll(" ", "-");
+                    //     const companyResponse = yield call(authApi.createNewCompany, {name: company, slug: slug})
+                    //     console.log(companyResponse);
+                    //     if (companyResponse.status >= 400) {
+                    //         throw companyResponse;
+                    //     }                        
+                    //     yield put({ type: ActionsTypes.CREATE_COMPANY, payload: companyResponse });
+                    // }
+
+                    
                     let photoId = null;
                     if (photo != null) {
                         const img = yield call(authApi.uploadPhoto, photo);
                         // console.log(img)
                         photoId = img.payload[0].id;
+                        console.log("U photo ifu sam aaaaa")
                         // console.log(photoId)
                     }
-                }
+                    console.log("AAAAAAAAAAAAAAAAAAAAAAAAAS")
+                    console.log(response.user)
+                    yield call(authApi.createProfile, { 
+                        name: username,
+                        user: response.user.id,
+                        userRole: role,
+                        company: Number(company),
+                        profilePhoto: photoId,
+                    })
+                   
+                
+                
+                
+                    // }
                                                                                                             
                                                                                                         // pokrenuti loading... (koristiti PUT)
                                                                                                         // call ka backendu gde se salju podaci (call , )
@@ -90,9 +123,6 @@ export function* login(action) {
                     payload: {message: "Check Your email and password!"}
                 })
     }}
-
-
-
 
 
     export function* fetchProfileSaga(object) {
@@ -152,7 +182,7 @@ export function* login(action) {
 
 
 export default function* root() {
-    yield takeEvery(
+    yield takeLatest(
         ActionsTypes.REGISTER_USER,
         register
     );

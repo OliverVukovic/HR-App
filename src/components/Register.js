@@ -14,11 +14,14 @@ const Register = () => {
     // const error = useSelector((state) => state.error); 
     // const [ newFile, setNewFile ] = useState("Choose File")
 
-    const [ username, setUsername ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword] = useState('');
+    const [ username, setUsername ] = useState('Oliver');
+    const [ email, setEmail ] = useState('oliver02@yahoo.com');
+    const [ password, setPassword] = useState('qwe123');
     const [ photo, setPhoto ] = useState(null);
     const [ role, setRole ] = useState("company_user");
+    const [ company, setCompany ] = useState(null);
+    // console.log("Ovde smo uneli novu kompaniju");
+    // console.log(company);
 
     const [formIsValid, setFormIsValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState(true);
@@ -68,19 +71,30 @@ const Register = () => {
 
 
 
-    const [ company, setCompany] = useState(null);
+    const [ companies, setCompanies ] = useState(null);
 
     useEffect(() => {
         axios.get(
             "https://strapi-internship-hr-app.onrender.com/api/companies"
         ).then((response) => {
-           setCompany(response.data.data)
+            console.log("sta nam kaze ova kompanija u RESPONSE?", response)
+           setCompanies(response.data.data)
         })
-    }, []);
+    }, [setCompanies]);
+
+console.log('proba ispod koda...', companies)
+
+
 
 
 
     const [ modal, setModal] = useState(false);
+
+    const probaFunkcija = (ev, isOpen) => {
+        console.log(ev);
+        ev.preventDefault();
+        setModal(isOpen)
+    }
     // const  [ id, setId ] = useState('');
 
 
@@ -166,7 +180,7 @@ const Register = () => {
                     </h2>
 
 {/* USERNAME */}
-                    <form className="form">
+                    <form className="form" method="POST">
                         <div className="login-page">
                             <label className="title-email-pass">Username</label>
                             <input 
@@ -222,21 +236,25 @@ const Register = () => {
 
                                 <select 
                                     className="section-options"
-                                    value="test"
                                     onChange={(event) => 
                                     setCompany(event.target.value)}
                                 >
-                                    {company && 
-                                      company?.map(company => {
-                                        return (
-                                        <option key={company.id}>
+                                   <option className="light-txt" value="" selected disabled>
+                                        Choose company
+                                    </option>
+                                        {companies != undefined &&
+                                        companies.map(company => {
+                                            return (
+                                    <option key={company.id} value={company.id}>
                                             {company.attributes.name}
-                                        </option>
-                                    )})}
+                                    </option>
+                                            )
+                                        })
+                                        }
                                 </select>
 
                                 <button className="button-company" 
-                                onClick={() => setModal(true)}
+                                onClick={(e) => probaFunkcija(e, true)}
                                 >
                                     Add company
                                 </button>
@@ -261,7 +279,7 @@ const Register = () => {
                                 />
                                 <button className="button button-modal" 
                                 // type="submit"
-                                onClick={() => setModal(false)}
+                                onClick={(e) => probaFunkcija(e, false)}
                                 >
                                     Confirm
                                 </button>
@@ -280,7 +298,8 @@ const Register = () => {
                                         type="radio" 
                                         value={"company_user"}
                                         name="role"
-                                        onChange={handleRole}
+                                        onChange={e => handleRole(e)}
+                                        defaultChecked
                                     />
                                     <label className="admin-user">User</label>
                                 </div>
@@ -289,7 +308,7 @@ const Register = () => {
                                         type="radio"
                                         value={"company_admin"}
                                         name="role"
-                                        onChange={handleRole}
+                                        onChange={e => handleRole(e)}
                                     />
                                     <label className="admin-user">Admin</label>
                                 </div>

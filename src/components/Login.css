@@ -2,7 +2,7 @@ main {
     display: flex;
     margin: auto;
     justify-content: center;
-    padding-top: 82px;
+    padding-top: 55px;
 }
 
 section {
@@ -43,6 +43,21 @@ section {
     padding: 4px;
     color: black;
 }
+input[type=file]::file-selector-button {
+    /* border: 2px solid #6c5ce7; */
+    padding: .2em .4em;
+    border-radius: 5px;
+    background-color: green;
+    color: white;
+    font-family: 'Comic Neue', sans-serif;
+    transition: 1s;
+    cursor: pointer;
+}
+input[type=file]::file-selector-button:hover {
+    background-color: white;
+    color: green;
+    border: 2px solid green;
+}
 
 .radio-btn {
     display: flex;
@@ -56,11 +71,14 @@ section {
 }
 
 input {
-    height: 36px;
+    height: 40px;
     padding-left: 16px;
     font-size: 16px;
     cursor: pointer;
     border: 2px solid green;
+    font-family: 'Comic Neue', sans-serif;
+    border-radius: 5px;
+
 }
 input::placeholder {
     font-size: 16px;
@@ -83,6 +101,8 @@ label {
     border-radius: 5px;
     background-color: green;
     color: white;
+    font-family: 'Comic Neue', sans-serif;
+    transition: 1s;
 }
 .button:hover {
     background-color: white;
@@ -141,7 +161,15 @@ label {
     background-color: green;
     color: white;
     border-radius: 8px;
+    font-family: 'Comic Neue', sans-serif;
+    cursor: pointer;
+    transition: 1s;
 }
+.button-company:hover {
+    background-color: white;
+    color: green;
+}
+
 .company-modal {
     display: flex;
     flex-direction: column;
@@ -151,9 +179,12 @@ label {
     border: 2px solid white;
     border-radius: 10px;
     gap: 8px;
-    /* display: none; */
 }
 .button-modal {
     align-self: flex-end;
+}
+
+.light-text {
+    color: gray;
 }
 

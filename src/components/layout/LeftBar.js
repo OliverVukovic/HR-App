@@ -28,11 +28,11 @@ function LeftBar() {
     <div>
         <div className="container-leftbar">
             <h2 className="lb-title">Menu</h2>
-                <Link to="/pending-for-approval" className="lb-links">Pending for approval</Link>
-                <Link to="/team" className="lb-links">Team</Link>
-                <Link to="/questions" className="lb-links">Questions</Link>
-                <Link to="/company-info" className="lb-links">Company Info</Link>
-                <Link to="/home" className="lb-links">My Profile</Link>
+                <Link to="/pending-for-approval" className="lb-links"> &#8827; Pending for approval</Link>
+                <Link to="/team" className="lb-links"> &#8827; Team</Link>
+                <Link to="/questions" className="lb-links"> &#8827; Questions</Link>
+                <Link to="/company-info" className="lb-links"> &#8827; Company Info</Link>
+                <Link to="/home" className="lb-links"> &#8827; My Profile</Link>
 
             <div className='user-data'>
               <div className='user-photo'>

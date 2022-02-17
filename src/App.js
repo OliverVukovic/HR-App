@@ -13,6 +13,8 @@ import Pending from "./components/pages/Pending";
 import Team from "./components/pages/Team";
 import ProtectedRoute from "./components/helpers/ProtectedRoute";
 import PageNotFound from "./components/helpers/PageNotFound";
+import ApprovePage from "./components/pages/ApprovePage";
+import EditMember from "./components/pages/EditMember";
 
 function App() {
 
@@ -54,6 +56,9 @@ function App() {
           <Route path="/addquestions" element={<AddNewQuestions />} />
           <Route path="/pending-for-approval" element={<Pending />} />
           <Route path="/team" element={<Team />} />
+          <Route path="/approve" element={<ApprovePage />} />
+          <Route path="/edit" element={<EditMember />} />
+
 
           <Route path="*" element={<PageNotFound />} />
         </Routes>

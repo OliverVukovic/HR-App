@@ -53,6 +53,7 @@ a {
     height: 50px;
     width: 110px;
     font-family: 'Comic Neue', sans-serif;
+    cursor: pointer;
 }
 
 .page-link-btn:hover{

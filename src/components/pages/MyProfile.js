@@ -119,7 +119,7 @@ const onRegister = (event) => {
                             Email:
                         </p>
                         <p className="email">
-                            {user.user?.data?.attributes.email}
+                            {user?.user?.data?.attributes.email}
                         {/* {user !== undefined ? "true" : "false"} */}
                         </p>
 
@@ -130,8 +130,9 @@ const onRegister = (event) => {
                         <input className="input-name" 
                                 type="password"  
                                 placeholder="Curent password"
-                                // value={user.user?.data?.attributes.password} ------ ZASTO NECE !?
-                                value={user !== undefined ? "true" : "false"}
+                                // value={user.user?.data?.attributes.password} 
+                                // ------ ZASTO NECE !?
+                                // value={user !== undefined ? "true" : "false"}
                         />
                         <p className="p-name-profile">
                             New Password

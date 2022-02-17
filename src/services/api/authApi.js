@@ -90,8 +90,8 @@ export const register = async(payload) => {
 
 
 export const uploadPhoto = async (image) => {
-    console.log(image)
     try {
+        console.log(image)
         // const response = await axios(
         //     {
         //         method: "POST",
@@ -122,31 +122,43 @@ export const uploadPhoto = async (image) => {
         //         "Content-Type": "multipart/form-data",
         //     },
         // });
-        return response.data
+        return {payload: response.data}
 
     } catch(error) {
         console.log(error)
     }
 }
 
-export const createNewProfile = async(payload) => {
-    console.log(payload)
+
+// const response = await axios.post(`${process.env.REACT_APP_BASEURL}/api/profiles`, {
+//     data: data,
+// });
+
+
+
+export const createProfile = async (payload) => {
     try {
-        const response = await axios(
-            {
-                method: "POST",
-                url: "https://strapi-internship-hr-app.onrender.com/api/profiles",
-                data: {
-                    "name": "",
-                    // "company": '',
-                    "profilePhoto": ''
-                }
-            }
-        )
+        console.log("USLI SMO U CREATE NEW PROFILE");
+        // const response = await axios(
+        //     {
+        //         method: "POST",
+        //         url: "https://strapi-internship-hr-app.onrender.com/api/profiles",
+        //         data: {payload}
+        //         // {
+        //             // "name": "",
+        //             // "company": '',
+        //             // "profilePhoto": ''
+        //         // }
+        //     }
+        // )
+        const response = await axios.post("https://strapi-internship-hr-app.onrender.com/api/profiles", {data: payload});
+        console.log(response)
         return response.data
 
     } catch(error) {
+        console.log("ERRORRR createNewProfile")
         console.log(error)
+        return error;
     }
 }
 
@@ -169,3 +181,23 @@ export const fetchProfile = async (id) => {
         return error;
     }
 };
+
+export const createNewCompany = async (payload) => {
+    try {
+        console.log("Usao sam u createNewCompany");
+        console.log(payload);
+        const response = await axios(
+            {
+                method: 'POST',
+                url: `https://strapi-internship-hr-app.onrender.com/api/companies`,
+                data: payload
+            }
+        )
+        console.log(response);
+        return response.data;
+    }
+    catch(error) {
+        console.log(error);
+        return error;
+    }
+}

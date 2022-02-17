@@ -70,16 +70,36 @@
 }
 
 .pending-name {
-    font-size: 22px;
+    font-size: 20px;
+    font-family: 'Comic Neue', sans-serif;
 }
 
 .pending-btn {
+    background-color: grey;
+    color: white;
+    padding: 15px;
+    border-radius: 25px;
+    transition: 1s;
+    cursor: pointer;
+    font-family: 'Comic Neue', sans-serif;
+    font-weight: 700;
+}
+.pending-btn:hover {
+    background-color: white;
+    color: green;
+    border: 1px solid green;
+}
+
+.pending-d-btn {
     background-color: green;
     color: white;
     padding: 10px;
     border-radius: 8px;
+    transition: 1s;
+    cursor: pointer;
+    font-family: 'Comic Neue', sans-serif;
 }
-.pending-btn:hover {
+.pending-d-btn:hover {
     background-color: white;
     color: green;
     border: 1px solid green;
