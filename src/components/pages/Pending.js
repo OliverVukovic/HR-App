@@ -23,7 +23,8 @@ function Pending() {
     <div className="left-bar-companyinfo">
         <LeftBar />
         <div className="container-company-info">
-            <h2 className="company-title">Pending for approval</h2> 
+            <h2 className="company-title">Pending for approval</h2>
+            <div className='team-box-card'>
             <div className='pending-box'>
                 <div className='pending-img'>
                     { user?.profilePhoto?.data === null || user?.profilePhoto?.data === undefined ? 
@@ -55,6 +56,8 @@ function Pending() {
                     </button>
                 </div>
             </div>
+            </div>
+            {/* gore ovaj */}
         </div>
     </div>
   </div>

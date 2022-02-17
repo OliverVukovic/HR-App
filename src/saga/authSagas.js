@@ -72,6 +72,7 @@ export function* login(action) {
         console.log(response)
             let id = response.user.id;
             localStorage.setItem("id", id);
+            localStorage.setItem("token", response.jwt);
             if (token) {
                 yield put({
                     type: ActionsTypes.LOGIN_USER_SUCCESS, 

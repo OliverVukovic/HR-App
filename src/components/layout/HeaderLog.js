@@ -26,7 +26,7 @@ function HeaderLog() {
             
                 <Link className="page-link home" to="/home">Home</Link>
                 <Link className="page-link company" to="/company-info">Company</Link>
-                    <button className="page-link-btn" onClick={logOut}>
+                  <button className="page-link page-link-btn" onClick={logOut}>
                     Logout
                     </button>
             </div>

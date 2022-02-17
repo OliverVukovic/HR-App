@@ -107,3 +107,17 @@
     padding: 5px;
     margin-top: 10px;
 }
+
+/* Tablet */
+@media only screen and (max-width: 930px) {
+    .container-left-right {
+        display: flex;
+        flex-direction: column;
+    }
+    .left{
+        width: 100%;
+    }
+    .right{
+        width: 100%;
+    }
+}

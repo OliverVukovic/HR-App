@@ -5,12 +5,14 @@ import HeaderLog from "../layout/HeaderLog";
 import LeftBar from "../layout/LeftBar";
 import { Spinner } from "../Spiner";
 
+
 const fetchPostman = () => {
-    return axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*')
+    return axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*&pagination[pageSize]=1000')
 }
 let i= 1;
 export const QuestionsTest = () => {
-    const {isLoading , data:questions, error } = useQuery('username ', fetchPostman)
+    const {isLoading , data:questions, error } = useQuery('questions', fetchPostman
+    )
     if(isLoading) {
         return <Spinner></Spinner>
     }

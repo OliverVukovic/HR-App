@@ -15,7 +15,7 @@ import Team from "./components/pages/Team";
 // import ProtectedRoute from "./components/helpers/ProtectedRoute";
 import PageNotFound from "./components/helpers/PageNotFound";
 import { Spinner } from "./components/Spiner";
-import {QueryClientProvider, QueryClient} from 'react-query'
+import {QueryClientProvider, QueryClient,} from 'react-query'
 import { QuestionsTest } from "./components/pages/QuestionsTest";
 
 
@@ -23,7 +23,15 @@ import { QuestionsTest } from "./components/pages/QuestionsTest";
 function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const queryClient = new QueryClient()
+  const queryClient = new QueryClient(
+    {
+      defaultOptions: {
+        queries: {
+          refetchOnWindowFocus: false,
+        },
+      },
+    }
+  )
   return (
   
     <Provider store={store}>

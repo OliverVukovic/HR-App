@@ -28,6 +28,10 @@ a {
     border-radius: 10px;
     font-size: 20px;
     font-weight: bold;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 .page-link:hover{
     color: white;
@@ -64,8 +68,8 @@ a {
     justify-content: center;
     align-items: center;
     align-content: center;
-    height: 50px;
-    width: 110px;
+    /* height: 50px;
+    width: 110px; */
     font-family: 'Comic Neue', sans-serif;
 }
 .page-link-btn:hover{
@@ -73,3 +77,11 @@ a {
     background-color: green;
     border-radius: 10px;
 } 
+
+@media only screen and (max-width: 640px){
+    .page-link{
+        width: 90px;
+        padding: 7px 15px;
+        font-size: 17px;
+    }
+}

@@ -23,7 +23,7 @@ function LeftBar() {
 	}, [setUser, object]);
 
   return (
-    <div>
+    
         <div className="container-leftbar">
             <h2 className="lb-title">Menu</h2>
                 <Link to="/pending-for-approval" className="lb-links">Pending for approval</Link>
@@ -48,7 +48,7 @@ function LeftBar() {
             </div>
             </div>
         </div>
-    </div>
+    
   )
 }
 
