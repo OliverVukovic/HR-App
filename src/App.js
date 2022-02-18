@@ -25,13 +25,13 @@ function App() {
 
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const queryClient = new QueryClient(
-    {
-      defaultOptions: {
-        queries: {
-          refetchOnWindowFocus: false,
-        },
-      },
-    }
+    // {
+    //   defaultOptions: {
+    //     queries: {
+    //       // refetchOnWindowFocus: false,
+    //     },
+    //   },
+    // }Í
   )
   return (
   

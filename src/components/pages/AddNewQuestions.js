@@ -20,7 +20,7 @@ function AddNewQuestions() {
   const addQuestionsData = (quest) => {
     return axios.post('https://strapi-internship-hr-app.onrender.com/api/questions', quest)
   }
-  const {data, isLoading, isError, error} = useQuery('questions', fetchQuestions)
+  const {data, isLoading, isError, error, refetch} = useQuery('questions', fetchQuestions)
   // console.log(data);
   const lastOrder = data?.data.data[0]?.attributes.order
   // console.log(lastOrder)
@@ -34,7 +34,7 @@ function AddNewQuestions() {
           data:{
           text: questionData.text,
           type: questionData.type,
-          order: lastOrder + 1
+          order: lastOrder + 100
           }
         }
       });
@@ -44,23 +44,19 @@ function AddNewQuestions() {
         console.log(newData)
       },
       onSettled: (data) => {
-        queryClient.invalidateQueries('questions')
+        // queryClient.invalidateQueries('questions')
+        refetch()
       },
     }
   );
   const {data: questionData, mutate:quest} = useMutation(addQuestionsData)
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault()
-    navigate('/questions')
-    // console.log({text, type})
-    // const questions = {data:{text,type, }}
-    // quest(questions)
-    // console.log('dodato')
-    // navigate('/questions')
-  addQuestion.mutate({
+    await addQuestion.mutateAsync({
           text,
           type, 
-  })
+    })
+    navigate('/questions')
   }
   return (
     <div>

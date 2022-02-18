@@ -3,7 +3,6 @@ import { useQuery, useMutation, useQueryClient  } from 'react-query'
 import { useNavigate, useParams } from 'react-router'
 import { useQuestionsData } from '../../hooks/useEditData'
 import PageNotFound from '../helpers/PageNotFound'
-
 import LeftBar from '../layout/LeftBar'
 import { Spinner } from '../Spiner'
 import './EditQuestions.css'
@@ -15,7 +14,7 @@ function EditQuestions() {
   const [text, setText] = useState()
   const [type, setType] = useState('text')
   const {questionsId} = useParams()
-  const {isLoading, data, isError, error} = useQuestionsData(questionsId)
+  const {isLoading, data, isError, error, refetch} = useQuestionsData(questionsId)
 
   const queryClient = useQueryClient()
   const addQuestion = useMutation(
@@ -29,7 +28,7 @@ function EditQuestions() {
         data:{
         text: questionData.text,
         type: questionData.type,
-        // order: lastOrder + 1
+        order: 5020
         }
       }
     });
@@ -40,16 +39,18 @@ function EditQuestions() {
     },
     onSettled: (data) => {
       queryClient.invalidateQueries('questions')
+      refetch()
+      
     },
   }
 );
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
       e.preventDefault()
-      navigate('/questions')
-      addQuestion.mutate({
+      await addQuestion.mutateAsync({
         text,
         type,
-}) 
+      }) 
+      navigate('/questions')
 
 }
   if(isLoading){

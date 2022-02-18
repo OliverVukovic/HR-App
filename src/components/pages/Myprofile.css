@@ -1,5 +1,6 @@
 .header-leftbar-right {
     width: 100%;
+    margin-top: 50px;
 }
 .container-myprofile{
     display: flex;
@@ -23,7 +24,8 @@
 .container-left-right{
     display: flex;
     width: 100%;
-    gap: 20px;    
+    gap: 20px; 
+     
 }
 .header-title{
     font-size: 18px;

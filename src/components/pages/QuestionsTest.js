@@ -1,4 +1,4 @@
-import { useQuery} from "react-query";
+import { useMutation, useQuery} from "react-query";
 import axios from "axios";
 import {Link} from 'react-router-dom'
 import HeaderLog from "../layout/HeaderLog";
@@ -10,14 +10,30 @@ import PageNotFound from "../helpers/PageNotFound";
 const fetchPostman = () => {
     return axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*&pagination[pageSize]=1000')
 }
- 
+
+const deleteQuestions = async(id) => {
+    console.log('delete')
+    await axios.delete(`https://strapi-internship-hr-app.onrender.com/api/questions/${id}`)
+    
+}
+
 
 export const QuestionsTest = () => {
     let i= 1;
-    const {isLoading , data:questions, error } = useQuery('questions', fetchPostman, {
-        refetchIntervalInBackground: true,
-    }
+    const {isLoading , data:questions, error, refetch } = useQuery('questions', fetchPostman, {
+        // refetchIntervalInBackground: true,
+        refetchOnWindowFocus: true
+    })
+    const {data, isLoading:loading, mutateAsync:deletequestions} = useMutation(async (id) => { 
+        await deleteQuestions(id)},
+        {
+            onSuccess:(data) => {
+                console.log(data)
+                refetch()
+            }
+        }
     )
+    
     if(isLoading) {
         return <Spinner></Spinner>
     }
@@ -55,12 +71,11 @@ export const QuestionsTest = () => {
                                 <Link to={`/questions/${quest.id}/edit`}>
                                 <button className="btn-edit btn button">Edit</button>
                                 </Link>
-                                <button  className="btn-delete btn button">Delete</button>
+                                <button onClick={async() => await deletequestions(quest.id)} className="btn-delete btn button">Delete</button>
                             </div>
                         </div>
                     ))}
                 </div> 
-           
             </div>
         </div>
     )
