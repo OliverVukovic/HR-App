@@ -1,62 +1,74 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
-import Header from "./layout/Header";
+import Header from "../components/layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
-import axios from "axios";
 
 
 
 const Register = () => {
+
+    // const newUser = useSelector((state) => state.newUser);
+    // const error = useSelector((state) => state.error); 
+    // const [ newFile, setNewFile ] = useState("Choose File")
 
     const [ username, setUsername ] = useState('');
     const [ email, setEmail ] = useState('');
     const [ password, setPassword] = useState('');
     const [ photo, setPhoto ] = useState(null);
     const [ role, setRole ] = useState("company_user");
+
     const [formIsValid, setFormIsValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState(true);
+   
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-    useEffect(()=> {
+    // const statusCode = props.state.registerReducer.response === undefined ? 0 : props.state.registerReducer.response.status;
+
+    
+    useEffect(()=>{
         setFormIsValid(
             username.trim().length > 3
             && email.includes('@') 
             && password.trim().length > 5
         );
+        console.log(username, email, password)
         }, [ username, email, password ]);
+
+    // useEffect(() => {
+    //     if (newUser && newUser.id) {
+    //         navigate('/home');
+    //         setUsername('');
+    //         setEmail('');
+    //         setPassword('')
+    //     }
+    // }, [newUser]);
+
+
 
     const handleUsername = (event) => {
         setUsername(event.target.value)
     }
+
     const handleEmail = (event) => {
         setEmail(event.target.value)
     }
+
     const handlePassword = (event) => {
         setPassword(event.target.value)
     }
-    const handleRole = (event) => {
-        setRole(event.target.value)
-    }
 
-    const [ company, setCompany] = useState(null);
-
-    useEffect(() => {
-        axios.get(
-            "https://strapi-internship-hr-app.onrender.com/api/companies"
-        ).then((response) => {
-           setCompany(response.data.data)
-        
-        })
-    }, []);
-
-    const [ modal, setModal] = useState(false);
+    
+    
     const [badFormat, setBadFormat] = useState(false);
+
+        // const [loading, setLoading] = useState(false);
     const handlePhoto = (event) => {
         const uploadPhoto = event.target.files[0];
         console.log(uploadPhoto);
+
         const photoType = [ "image/jpeg", "image/png", "image/gif" ];
         if (!photoType.some((type) =>
         uploadPhoto.type === type)
@@ -81,16 +93,19 @@ const Register = () => {
             email,
             password,
             photo,
-            company,
             role
-        }))
-        navigate("/home");
+        }));
+        // if (statusCode === 200)
+        //   if 200 redirect to home... else error    
+        navigate("/home")
         setUsername('');
         setEmail('');
         setPassword('');
-        setCompany('')
         }
     };
+
+
+
     return (
         <div className="login-form">
             <Header />
@@ -100,7 +115,6 @@ const Register = () => {
                         uTeam - Register
                     </h2>
 
-{/* USERNAME  */}
                     <form className="form">
                         <div className="login-page">
                             <label className="title-email-pass">Username</label>
@@ -112,7 +126,6 @@ const Register = () => {
                             />
                         </div>
 
-{/* EMAIL  */}
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
                             <input 
@@ -124,7 +137,6 @@ const Register = () => {
                             />
                         </div>
 
-{/* PASSWORD  */}
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
                             <input 
@@ -136,62 +148,17 @@ const Register = () => {
                             />
                         </div>
 
-{/* PHOTO */}
                         <div className="login-page">
-                            <label className="title-email-pass">Profile Photo</label>
+                            <label className="inp-check-photo">Profile Photo</label>
                             <input className="choose-file"
                                 type="file"
                                 name="file"
+                                // accept="image/*"
                                 placeholder="Upload photo"
                                 onChange={event => handlePhoto(event)}
                             />
                         </div>
 
-
-{/* COMPANY */}
-                        <div className="login-page">
-                            <label className="title-email-pass">Company</label>
-
-                            <div className="company-flex">
-
-                                <select 
-                                    className="section-options"
-                                >
-                                  { company?.map(company => {
-                                      return (
-                                      <option value={company.id} key={company.id}>{company.attributes.name}</option>
-                                      )
-                                  })}
-                                </select>
-
-                                <button className="button-company" 
-                                onClick={() => setModal(true)}
-                                >
-                                    Add company
-                                </button>
-
-                            </div>
-                            <div className="company-modal" style={{display : modal ? "flex" : "none"}}>
-                                <label>Add new company name</label>
-                                <input 
-                                type="text"
-                                placeholder="Enter company name"
-                                />
-                                <label>Add slug</label>
-                                <input 
-                                type="text"
-                                placeholder="Enter slug"
-                                />
-                                <button className="button button-modal" 
-                                onClick={() => setModal(false)}
-                                >
-                                    Confirm
-                                </button>
-                            </div>
-
-                        </div>
-
-{/* ROLE */}
                         <div className="login-page">
                             <p className="select-role">Select your role:</p>
                             <div className="radio-btn">
@@ -200,7 +167,7 @@ const Register = () => {
                                         type="radio" 
                                         value={"company_user"}
                                         name="role"
-                                        onChange={handleRole}
+                                        onChange={(event) => setRole(event.target.value)}
                                     />
                                     <label className="admin-user">User</label>
                                 </div>
@@ -209,7 +176,7 @@ const Register = () => {
                                         type="radio"
                                         value={"company_admin"}
                                         name="role"
-                                        onChange={handleRole}
+                                        onChange={(event) => setRole(event.target.value)}
                                     />
                                     <label className="admin-user">Admin</label>
                                 </div>
@@ -220,8 +187,7 @@ const Register = () => {
                             <Link className="acc-text" to="/">
                                 Already have an account?
                             </Link>
-                            <button className="button" 
-                                    type="submit"
+                            <button className="button" type="submit"
                                     onClick={onRegister}
                             >
                                 Register
@@ -229,6 +195,12 @@ const Register = () => {
 
                         </div>
                         {!errorMessage && <div className="error-message">Check Your Data!</div>}
+
+                        {/* {loading ? (
+                            <h3>Loading...</h3>
+                        ) : (
+                            <img src="{image}"/>
+                        )} */}
                     </form>
                 </section>
             </main>
@@ -236,4 +208,4 @@ const Register = () => {
     );
 }
 
-export default Register
+export default Register; 

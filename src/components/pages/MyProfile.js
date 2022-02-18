@@ -6,10 +6,15 @@ import { fetchProfileRequest } from '../../redux/action/ActionCreators'
 
 
 function MyProfile() {
- 
+
+    // const id = useSelector(state => state.user.id);  
     const id = localStorage.getItem("id"); 
-    const object = useSelector((state) => state.data?.data[0]?.attributes);
+    const object = useSelector((state) => state.data?.data[0]?.attributes); //data?.data[0]?.attributes
     const [user, setUser] = useState(object);
+
+    // dohvata id osobe koja se loguje
+    // console.log(id);
+
     const dispatch = useDispatch();
     useEffect(() => {
         setTimeout(() => 
@@ -20,41 +25,49 @@ function MyProfile() {
 	}, [setUser, object]);
 
     
+
+
 // UPLOAD PHOTO
     const [ photo, setPhoto ] = useState(null);
     const [ badFormat, setBadFormat ] = useState(false);
+    // const [loading, setLoading] = useState(false);
+const handlePhoto = (event) => {
+    const uploadPhoto = event.target.files[0];
+    console.log(uploadPhoto);
 
-    const handlePhoto = (event) => {
-        const uploadPhoto = event.target.files[0];
-        console.log(uploadPhoto);
+    const photoType = [ "image/jpeg", "image/png", "image/gif" ];
+        if (!photoType.some((type) =>
+        uploadPhoto.type === type)
+        && uploadPhoto !== null) {
+            return setBadFormat(true);
+        }
+    setBadFormat(false);
 
-        const photoType = [ "image/jpeg", "image/png", "image/gif" ];
-            if (!photoType.some((type) =>
-            uploadPhoto.type === type)
-            && uploadPhoto !== null) {
-                return setBadFormat(true);
-            }
-        setBadFormat(false);
-
-        const photoData = new FormData();
-        photoData.append("files", uploadPhoto);
-        setPhoto(photoData)
+    const photoData = new FormData();
+    photoData.append("files", uploadPhoto);
+    setPhoto(photoData)
 }
 
-    const onRegister = (event) => {
-        event.preventDefault()
-        setPhoto(photo)
-        }
-    return (
+
+const onRegister = (event) => {
+    event.preventDefault()
+    setPhoto(photo)
+    }
+
+
+  return (
+    
     <div className="header-leftbar-right">
-        <div className="container-myprofile">
        <div className="my-profile">
             <h2 className="title-my-profile">My Profile</h2>
+
             <div className="container-left-right">
+
                 <div className="left">
                     <div className="header-left">
                         <p className="header-title">Basic Info</p>
                     </div>
+
 {/* NAME */}
                     <div className="left-main">
                         <p className="p-name-profile">
@@ -68,6 +81,7 @@ function MyProfile() {
                                 ...user, 
                                 name: e.target.value })}
                         />
+
 {/* PHOTO */}
                         <p className="p-name-profile">
                             Profile Photo
@@ -75,6 +89,7 @@ function MyProfile() {
                         <input className="choose-file" 
                             type="file" 
                             placeholder="Upload photo"
+                            // value={user?.profilePhoto.data.attributes.name}   ---- ZASTO NECE !?
                             onChange={event => handlePhoto(event)}
                         />
                          {user?.profilePhoto?.data === null || user?.profilePhoto?.data === undefined ? 
@@ -83,13 +98,16 @@ function MyProfile() {
                             alt={user?.profilePhoto.data.attributes.name} 
                             className="user-img" 
                             width={200} /> } 
+
                         <div className="but-div">
                             <button className="button">
                                 Save
                             </button>
                         </div>    
+
                     </div>
                 </div>
+
                 <div className="right">
                     <div className="header-right">
                         <p className="header-title">Security</p>
@@ -101,8 +119,10 @@ function MyProfile() {
                             Email:
                         </p>
                         <p className="email">
-                        {user !== undefined ? "true" : "false"}
+                            {user?.user?.data?.attributes.email}
+                        {/* {user !== undefined ? "true" : "false"} */}
                         </p>
+
 {/* PASSWORD */}
                         <p className="p-name-profile">
                             Curent Password
@@ -110,7 +130,9 @@ function MyProfile() {
                         <input className="input-name" 
                                 type="password"  
                                 placeholder="Curent password"
-                                value={user !== undefined ? "true" : "false"}
+                                // value={user.user?.data?.attributes.password} 
+                                // ------ ZASTO NECE !?
+                                // value={user !== undefined ? "true" : "false"}
                         />
                         <p className="p-name-profile">
                             New Password
@@ -118,6 +140,7 @@ function MyProfile() {
                         <input className="input-name" type="password"  placeholder="Enter new password"/>
                         <div className="but-div">
                             <button className="button"
+                                // type="submit"
                                 onClick={onRegister}
                             >
                                 Save
@@ -127,9 +150,9 @@ function MyProfile() {
                 </div>
             </div>
         </div>
-        </div>
     </div>
 
   )
 }
+
 export default MyProfile;

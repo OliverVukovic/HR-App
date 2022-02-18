@@ -10,7 +10,7 @@
     flex-direction: column;
     max-width: 280px;
     width: 30%;
-    height: 100vh;
+    /* height: 100vh; */
     border-right: 1px solid green;
     font-size: 22px;
     min-width: 260px;

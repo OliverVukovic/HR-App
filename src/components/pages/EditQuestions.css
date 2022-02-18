@@ -1,13 +1,18 @@
 .title-add-new {
     color: white;
 }
-.create{
+.container-edit{
     margin-top: 50px;
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 .questions-add{
+    display: flex;
+    gap: 50px;
+}
+.left-bar-companyinfo{
+    color: white;
     display: flex;
     gap: 50px;
     width: 100%;

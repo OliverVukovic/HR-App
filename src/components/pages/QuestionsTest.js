@@ -1,17 +1,22 @@
-import { useQuery } from "react-query";
+import { useQuery} from "react-query";
 import axios from "axios";
 import {Link} from 'react-router-dom'
 import HeaderLog from "../layout/HeaderLog";
 import LeftBar from "../layout/LeftBar";
 import { Spinner } from "../Spiner";
+import PageNotFound from "../helpers/PageNotFound";
 
 
 const fetchPostman = () => {
     return axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*&pagination[pageSize]=1000')
 }
-let i= 1;
+ 
+
 export const QuestionsTest = () => {
-    const {isLoading , data:questions, error } = useQuery('questions', fetchPostman
+    let i= 1;
+    const {isLoading , data:questions, error } = useQuery('questions', fetchPostman, {
+        refetchIntervalInBackground: true,
+    }
     )
     if(isLoading) {
         return <Spinner></Spinner>
@@ -19,7 +24,7 @@ export const QuestionsTest = () => {
     if(error){
         return <div className="error-message">
             <div className="error-place">
-        <h2>Doslo je do greske prilikom ucitavanja podatka</h2>
+        <Link to="*"><PageNotFound/></Link>
             </div>
         </div>
     }
@@ -47,8 +52,10 @@ export const QuestionsTest = () => {
                                 </div> 
                             </div>
                             <div className="questions-place-right">
+                                <Link to={`/questions/${quest.id}/edit`}>
                                 <button className="btn-edit btn button">Edit</button>
-                                <button className="btn-delete btn button">Delete</button>
+                                </Link>
+                                <button  className="btn-delete btn button">Delete</button>
                             </div>
                         </div>
                     ))}

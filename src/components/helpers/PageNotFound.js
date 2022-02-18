@@ -6,7 +6,7 @@ function PageNotFound() {
 
     return (
     <>
-    <Header />
+    
     <div className="not-found">Page not found!</div>
     </>
     )

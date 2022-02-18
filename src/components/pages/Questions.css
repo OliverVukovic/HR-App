@@ -2,6 +2,8 @@
     color: white;
     display: flex;
     gap: 50px;
+    width: 100%;
+    
 }
 .questions-right-side {
     margin-top: 50px;
@@ -10,6 +12,7 @@
     flex-direction: column;
     gap: 30px;
     position: relative;
+    padding-bottom: 50px;
 }
 .questions-place {
     border: 3px solid green;

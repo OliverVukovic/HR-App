@@ -17,6 +17,7 @@ import PageNotFound from "./components/helpers/PageNotFound";
 import { Spinner } from "./components/Spiner";
 import {QueryClientProvider, QueryClient,} from 'react-query'
 import { QuestionsTest } from "./components/pages/QuestionsTest";
+import EditQuestions from "./components/pages/EditQuestions";
 
 
 
@@ -38,6 +39,10 @@ function App() {
       <QueryClientProvider client={queryClient}>
       <div className="App">
         <Routes>
+
+        <Route path='questions/:questionsId/edit' element={<EditQuestions/>} />
+
+
           <Route exact path="/" element={<Login onLoginUpdate={setIsLoggedIn} />} />
           <Route path="/register" element={<Register />} />
           <Route path="/ss" element={<Spinner />} />  
