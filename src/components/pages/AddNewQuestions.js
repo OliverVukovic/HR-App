@@ -21,20 +21,17 @@ function AddNewQuestions() {
     return axios.post('https://strapi-internship-hr-app.onrender.com/api/questions', quest)
   }
   const {data, isLoading, isError, error, refetch} = useQuery('questions', fetchQuestions)
-  // console.log(data);
   const lastOrder = data?.data.data[0]?.attributes.order
-  // console.log(lastOrder)
   const addQuestion = useMutation(
     async (questionData) => {
       await axios({
-        method: 'post',
+        method: 'POST',
         url: `https://strapi-internship-hr-app.onrender.com/api/questions`,
-        
         data: {
           data:{
           text: questionData.text,
           type: questionData.type,
-          order: lastOrder + 100
+          order: lastOrder + 1
           }
         }
       });
@@ -50,14 +47,15 @@ function AddNewQuestions() {
     }
   );
   const {data: questionData, mutate:quest} = useMutation(addQuestionsData)
-  const handleSubmit = async(e) => {
-    e.preventDefault()
+  const handleSubmit = async(event) => {
+    event.preventDefault()
     await addQuestion.mutateAsync({
-          text,
-          type, 
+      text,
+      type 
     })
     navigate('/questions')
   }
+
   return (
     <div>
       <HeaderLog />
@@ -72,13 +70,13 @@ function AddNewQuestions() {
                           type="text" 
                           required
                           value={text}
-                          onChange={(e)=>setText(e.target.value)}
+                          onChange={(event)=>setText(event.target.value)}
                           />
                           <p className="title-questions-text">Questions type</p>
                         <select 
                         className="section-options"
                         value={type}
-                        onChange={(e) => setType(e.target.value)}
+                        onChange={(event) => setType(event.target.value)}
                         >
                           <option value='text'>Text</option>
                           <option value='long_text'>Long text</option>

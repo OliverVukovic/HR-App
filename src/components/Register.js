@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
-import Header from "../components/layout/Header";
+import Header from "./layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
-
+import axios from "axios";
 
 
 const Register = () => {
@@ -13,29 +13,32 @@ const Register = () => {
     // const error = useSelector((state) => state.error); 
     // const [ newFile, setNewFile ] = useState("Choose File")
 
-    const [ username, setUsername ] = useState('');
-    const [ email, setEmail ] = useState('');
-    const [ password, setPassword] = useState('');
-    const [ photo, setPhoto ] = useState(null);
-    const [ role, setRole ] = useState("company_user");
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [photo, setPhoto] = useState(null);
+    const [role, setRole] = useState("company_user");
+    const [company, setCompany] = useState(null);
+    // console.log("Ovde smo uneli novu kompaniju");
+    // console.log(company);
 
     const [formIsValid, setFormIsValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState(true);
-   
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // const statusCode = props.state.registerReducer.response === undefined ? 0 : props.state.registerReducer.response.status;
 
-    
-    useEffect(()=>{
+
+    useEffect(() => {
         setFormIsValid(
             username.trim().length > 3
-            && email.includes('@') 
+            && email.includes('@')
             && password.trim().length > 5
         );
-        console.log(username, email, password)
-        }, [ username, email, password ]);
+        // console.log(username, email, password)
+    }, [username, email, password]);
 
     // useEffect(() => {
     //     if (newUser && newUser.id) {
@@ -60,19 +63,78 @@ const Register = () => {
         setPassword(event.target.value)
     }
 
-    
-    
+    const handleRole = (event) => {
+        setRole(event.target.value)
+    }
+
+
+
+
+    const [companies, setCompanies] = useState(null);
+
+    useEffect(() => {
+        axios.get(
+            "https://strapi-internship-hr-app.onrender.com/api/companies"
+        ).then((response) => {
+            console.log("sta nam kaze ova kompanija u RESPONSE?", response)
+            setCompanies(response.data.data)
+        })
+    }, [setCompanies]);
+
+    // console.log('proba ispod koda...', companies)
+
+
+
+
+
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = (event, modalIsOpen) => {
+        // console.log(event);
+        event.preventDefault();
+        setModal(modalIsOpen)
+    }
+    // const  [ id, setId ] = useState('');
+
+
+    // const [ enteredCompanyName, setEnteredCompanyName ] = useState('');
+    // const [ enteredSlug, setEnteredSlug ] = useState('');
+
+    // const companyChangeHandler = (event) => {
+    //     setEnteredCompanyName(event.target.value);
+    // }
+    // const slugChangeHandler = (event) => {
+    //     setEnteredSlug(event.target.value);
+    // }
+
+    // const handleCompany = (event) => {
+    //     event.preventDefault();
+
+    //     const companyData = {
+    //         company: enteredCompanyName,
+    //         slug: enteredSlug
+    //     }
+    //     props.onSaveCompanyData(companyData)
+    //     setEnteredCompanyName('');
+    //     setEnteredSlug('');
+    // }
+
+
+
+
+
+
     const [badFormat, setBadFormat] = useState(false);
 
-        // const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const handlePhoto = (event) => {
         const uploadPhoto = event.target.files[0];
-        console.log(uploadPhoto);
+        // console.log(uploadPhoto);
 
-        const photoType = [ "image/jpeg", "image/png", "image/gif" ];
+        const photoType = ["image/jpeg", "image/png", "image/gif"];
         if (!photoType.some((type) =>
-        uploadPhoto.type === type)
-        && uploadPhoto !== null) {
+            uploadPhoto.type === type)
+            && uploadPhoto !== null) {
             return setBadFormat(true);
         }
         setBadFormat(false);
@@ -81,29 +143,29 @@ const Register = () => {
         photoData.append("files", uploadPhoto);
         setPhoto(photoData)
     }
-   
     const onRegister = (event) => {
         event.preventDefault()
         if (username.trim().length === 0 || !email.includes('@') || password.trim().length < 5) {
             console.log("Greska prilikom registrovanja")
             return errorMessage;
         } else {
-        dispatch(actionCreators.registerUser({
-            username,
-            email,
-            password,
-            photo,
-            role
-        }));
-        // if (statusCode === 200)
-        //   if 200 redirect to home... else error    
-        navigate("/home")
-        setUsername('');
-        setEmail('');
-        setPassword('');
+            dispatch(actionCreators.registerUser({
+                username,
+                email,
+                password,
+                photo,
+                company,
+                role
+            }))
+            // const token = localStorage.getItem("token");
+
+            navigate("/home");
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            setCompany('')
         }
     };
-
 
 
     return (
@@ -115,21 +177,23 @@ const Register = () => {
                         uTeam - Register
                     </h2>
 
-                    <form className="form">
+                    {/* USERNAME */}
+                    <form className="form" method="POST">
                         <div className="login-page">
                             <label className="title-email-pass">Username</label>
-                            <input 
-                                type='text' 
+                            <input
+                                type='text'
                                 placeholder="Username"
                                 value={username}
                                 onChange={handleUsername}
                             />
                         </div>
 
+                        {/* EMAIL */}
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
-                            <input 
-                                type='email' 
+                            <input
+                                type='email'
                                 placeholder="Email"
                                 required
                                 value={email}
@@ -137,10 +201,11 @@ const Register = () => {
                             />
                         </div>
 
+                        {/* PASSWORD */}
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
-                            <input 
-                                type='password' 
+                            <input
+                                type='password'
                                 placeholder="Password"
                                 required
                                 value={password}
@@ -148,8 +213,9 @@ const Register = () => {
                             />
                         </div>
 
+                        {/* PHOTO */}
                         <div className="login-page">
-                            <label className="inp-check-photo">Profile Photo</label>
+                            <label className="title-email-pass">Profile Photo</label>
                             <input className="choose-file"
                                 type="file"
                                 name="file"
@@ -159,36 +225,102 @@ const Register = () => {
                             />
                         </div>
 
+
+                        {/* COMPANY */}
+                        <div className="login-page">
+                            <label className="title-email-pass">Company</label>
+
+                            <div className="company-flex">
+
+                                <select
+                                    className="section-options"
+                                    onChange={(event) =>
+                                        setCompany(event.target.value)}
+                                    defaultValue=""
+                                >
+                                    <option className="light-txt" value="" disabled>
+                                        Choose company
+                                    </option>
+                                    {companies != undefined &&
+                                        companies.map(company => {
+                                            return (
+                                                <option key={company.id} value={company.id}>
+                                                    {company.attributes.name}
+                                                </option>
+                                            )
+                                        })
+                                    }
+                                </select>
+
+                                <button className="button-company"
+                                    onClick={(event) => toggleModal(event, true)}
+                                >
+                                    Add company
+                                </button>
+
+                            </div>
+
+                            <div className="company-modal" style={{ display: modal ? "flex" : "none" }}>
+                                <label>Add new company name</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter company name"
+                                // value={enteredCompanyName}
+                                // onChange={companyChangeHandler}
+                                />
+
+                                <label>Add slug</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter slug"
+                                // value={enteredSlug}
+                                // onChange={slugChangeHandler}
+                                />
+                                <button className="button button-modal"
+                                    // type="submit"
+                                    onClick={(event) => toggleModal(event, false)}
+                                >
+                                    Confirm
+                                </button>
+                            </div>
+
+                        </div>
+
+
+
+                        {/* ROLE */}
                         <div className="login-page">
                             <p className="select-role">Select your role:</p>
                             <div className="radio-btn">
                                 <div className="role">
-                                    <input 
-                                        type="radio" 
+                                    <input
+                                        type="radio"
                                         value={"company_user"}
                                         name="role"
-                                        onChange={(event) => setRole(event.target.value)}
+                                        onChange={event => handleRole(event)}
+                                        defaultChecked
                                     />
                                     <label className="admin-user">User</label>
                                 </div>
                                 <div className="role">
-                                    <input 
+                                    <input
                                         type="radio"
                                         value={"company_admin"}
                                         name="role"
-                                        onChange={(event) => setRole(event.target.value)}
+                                        onChange={event => handleRole(event)}
                                     />
                                     <label className="admin-user">Admin</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="login-page__actions">  
+                        <div className="login-page__actions">
                             <Link className="acc-text" to="/">
                                 Already have an account?
                             </Link>
-                            <button className="button" type="submit"
-                                    onClick={onRegister}
+                            <button className="button"
+                                type="submit"
+                                onClick={onRegister}
                             >
                                 Register
                             </button>
@@ -208,4 +340,4 @@ const Register = () => {
     );
 }
 
-export default Register; 
+export default Register

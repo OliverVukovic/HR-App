@@ -1,125 +1,153 @@
-.company-title{
-    color: white;
-    padding-bottom: 30px;
-    padding-left: 20px;
+.company-title {
+  color: white;
+  padding-bottom: 30px;
 }
-.company-name{
-    color: white;
-    padding-bottom: 5px;
-    padding-top: 10px;
-    font-size: 14px;
+.company-name {
+  color: white;
+  padding-bottom: 5px;
+  padding-top: 10px;
+  font-size: 14px;
 }
-.div-but{ 
-    padding-top: 20px;
-    margin-top: 10px;
-    display: flex;
-    justify-content: end;
-    
+.div-but {
+  padding-top: 20px;
+  margin-top: 10px;
+  display: flex;
+  justify-content: end;
 }
-.company-container{
-    display: flex;
-    gap: 40px;
+
+.company-container {
+  display: flex;
+  gap: 40px;
 }
-.compani-right{
-    display: flex;
-    flex-direction: column;
-    margin-top: 30px;
+.compani-right {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
 }
-.container-company-info{
-    padding-top: 70px;
-    width: 100%;
-    
+.container-company-info {
+  padding-top: 70px;
+  width: 25%;
 }
-.left-bar-companyinfo{
-    display: flex;
-    width: 100%;
-    gap: 50px;
+.left-bar-companyinfo {
+  display: flex;
+  width: 100%;
+  gap: 50px;
 }
-.choose-file{
-    width: 100%;
+.choose-file {
+  width: 100%;
 }
-/* /  PENDING  / */
+
+/*  PENDING  */
+
 .pending-box {
-    display: flex;
-    flex-direction: column;
-    width: fit-content;
-    border: 2px solid green;
-    border-radius: 8px;
-    background-color: white;
-    gap: 15px;
-    padding: 15px 20px;
-    width: 300px;
+  display: flex;
+  flex-direction: column;
+  width: fit-content;
+  border: 2px solid green;
+  border-radius: 8px;
+  background-color: white;
+  gap: 15px;
+  padding: 15px 20px;
 }
+
 .pending-img {
-    display: flex;
-    justify-content: center;
-    padding: 15px;
-    align-self: center;
+  display: flex;
+  justify-content: center;
+  padding: 15px;
+  align-self: center;
 }
+
 .pending-middle {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    align-content: center;
-    font-size: 18px;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  align-content: center;
+  font-size: 18px;
 }
+
 .pending-name {
-    font-size: 22px;
+  font-size: 22px;
+  font-family: "Comic Neue", sans-serif;
+  color: black;
+  font-weight: 700;
+  margin-bottom: 10px;
 }
+
 .pending-btn {
-    background-color: green;
-    color: white;
-    padding: 10px;
-    border-radius: 8px;
-    border: none;
+  background-color: grey;
+  color: white;
+  padding: 15px;
+  border-radius: 25px;
+  transition: 1s;
+  cursor: pointer;
+  font-family: "Comic Neue", sans-serif;
+  font-weight: 700;
+  border: 1px solid black;
 }
 .pending-btn:hover {
-    background-color: white;
-    color: green;
-    border: 1px solid green;
+  background-color: white;
+  color: green;
+  border: 1px solid green;
 }
+
+.pending-d-btn {
+  background-color: green;
+  color: white;
+  padding: 10px;
+  border-radius: 8px;
+  transition: 1s;
+  cursor: pointer;
+  font-family: "Comic Neue", sans-serif;
+}
+.pending-d-btn:hover {
+  background-color: white;
+  color: green;
+  border: 1px solid green;
+}
+
 .pending-buttons {
-    display: flex;
-    justify-content: space-between;
+  display: flex;
+  justify-content: space-between;
 }
+
 .team-box {
-    display: flex;
-    gap: 20px;
-    padding: 0px 20px;
-    flex-wrap:  wrap;
+  display: flex;
+  gap: 20px;
 }
 .img-size {
-    width: 100%;
-    height: 100%;
+  width: 100%;
+  height: 100%;
 }
+
 .import-pending-photo {
-    display: flex;
-    align-self: center;
-    border: 1px solid green;
-    border-radius: 5px;
-    padding: 5px;
-    margin-top: 10px;
-    width: 100%;
-    height: 100%;
+  display: flex;
+  align-self: center;
+  border: 1px solid green;
+  border-radius: 5px;
+  padding: 5px;
+  margin-top: 10px;
+  width: 100%;
+  height: 100%;
 }
-.team {
-    width: 100%;
-    display: flex;
-    
+
+.pending-name {
+  color: black;
 }
-.team-box-card{
-    width: 100%;
-    padding-left: 20px;
+
+.pending-date {
+  color: black;
+  font-size: 14px;
 }
-.box-info{
-    width: 400px;
-    padding: 0px 20px;
+
+.avatar2 {
+  width: 210px;
 }
-@media only screen and (max-width: 750px){
-    .box-info{
-        width: 300px;
-    }
-    .left-bar-companyinfo{
-        gap: 30px;
-    }
+
+@media only screen and (max-width: 750px) {
+  .box-info {
+    width: 300px;
+  }
+  .left-bar-companyinfo {
+    gap: 30px;
+  }
 }

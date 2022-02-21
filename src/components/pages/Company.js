@@ -1,22 +1,21 @@
 import React from 'react';
-import MyProfile from '../pages/MyProfile';
+import CompanyInfo from '../pages/CompanyInfo';
 import LeftBar from '../layout/LeftBar';
-import '../pages/Home.css';
+import '../Home.css';
 import HeaderLog from '../layout/HeaderLog';
 
-function Home() {
-
+function Company() {
   return (
     <div>
       <HeaderLog />
       <div className="container-home">
         <LeftBar />
         <div className="company-info">
-          <MyProfile />
+          <CompanyInfo />
         </div>
       </div>
     </div>
   )
 }
 
-export default Home
+export default Company

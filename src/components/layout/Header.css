@@ -38,6 +38,31 @@ a {
     background-color: green;
     border-radius: 10px;
 } 
+
+.page-link-btn{
+    border: 1px solid green;
+    background-color: white;
+    color: green;
+    padding: 20px 20px;
+    border-radius: 10px;
+    font-size: 20px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    align-content: center;
+    height: 50px;
+    width: 110px;
+    font-family: 'Comic Neue', sans-serif;
+    cursor: pointer;
+}
+
+.page-link-btn:hover{
+    color: white;
+    background-color: green;
+    border-radius: 10px;
+} 
+
 .page-links-header{
     display: flex;
     justify-content: space-around;
@@ -56,27 +81,9 @@ a {
     color: white;
     border: 3px solid white;
 }
-.page-link-btn{
-    border: 1px solid green;
-    background-color: white;
-    color: green;
-    padding: 20px 20px;
-    border-radius: 10px;
-    font-size: 20px;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    align-content: center;
-    /* height: 50px;
-    width: 110px; */
-    font-family: 'Comic Neue', sans-serif;
-}
-.page-link-btn:hover{
-    color: white;
-    background-color: green;
-    border-radius: 10px;
-} 
+
+
+
 
 @media only screen and (max-width: 640px){
     .page-link{

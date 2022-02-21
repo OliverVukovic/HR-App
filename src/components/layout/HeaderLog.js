@@ -11,24 +11,23 @@ function HeaderLog() {
     const navigate = useNavigate();
 
     const logOut = () => {
-        const token = localStorage.getItem('token')
+        const token = localStorage.getItem("token")
         localStorage.removeItem("token")
         dispatch(actionCreators.logoutUser())
         navigate("/")
-
     }
+
     return (
         <header>
             <div className="q-logo">
                 <img src={logo} alt="logo"/>
             </div>
             <div className="page-links">
-            
                 <Link className="page-link home" to="/home">Home</Link>
                 <Link className="page-link company" to="/company-info">Company</Link>
-                  <button className="page-link page-link-btn" onClick={logOut}>
+                <button className="page-link-btn" onClick={logOut}>
                     Logout
-                    </button>
+                </button>
             </div>
         </header>
     );
