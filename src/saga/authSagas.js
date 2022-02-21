@@ -190,15 +190,17 @@ export function* autoLogin(action) {
 
 
 
-// export function* logout() {
+export function* logout() {
 
-//     console.log('Uradi Logout!');
-//         localStorage.removeItem('token');
-//         // redirect
-// }
+    console.log('Uradi Logout!');
+        localStorage.removeItem('token');
+        localStorage.removeItem('id');
 
+        // redirect
+}
 
-// export function* uploadPhoto(payload) {     ---------------  zakomentarisi
+// ---------------  zakomentarisi
+// export function* uploadPhoto(payload) {    
 //     // console.log(action)
 
 //     try {
