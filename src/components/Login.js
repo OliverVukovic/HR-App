@@ -7,10 +7,10 @@ import * as actionCreators from "../redux/action/ActionCreators";
 import { useSelector } from "react-redux";
 
 
-const Login = ({onLoginUpdate}) => {
+const Login = (props) => {
 
     const user = useSelector((state) => state.user);
-    const error = useSelector((state) => state.error); 
+    const error = useSelector((state) => state.error);
 
     const [enteredEmail, setEnteredEmail] = useState('');
     const [enteredPassword, setEnteredPassword] = useState('');
@@ -38,7 +38,7 @@ const Login = ({onLoginUpdate}) => {
 
 
     const submitHandler = (event) => {
-        console.log(event.password)
+        // console.log(event.password)
         event.preventDefault();
         if (enteredEmail.trim().length === 0 || enteredPassword.trim().length < 5) {
             return;
@@ -68,8 +68,8 @@ const Login = ({onLoginUpdate}) => {
                     <form className="form" onSubmit={submitHandler}>
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
-                            <input 
-                                type='email' 
+                            <input
+                                type='email'
                                 placeholder="Email"
                                 required
                                 value={enteredEmail}
@@ -79,8 +79,8 @@ const Login = ({onLoginUpdate}) => {
 
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
-                            <input 
-                                type='password' 
+                            <input
+                                type='password'
                                 placeholder="Password"
                                 // required
                                 value={enteredPassword}
@@ -90,7 +90,7 @@ const Login = ({onLoginUpdate}) => {
 
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
-                            <button className="button" type="submit" 
+                            <button className="button" type="submit"
                             // onClick={() => {
                             //     onLoginUpdate(true);
                             //     navigate('/home');

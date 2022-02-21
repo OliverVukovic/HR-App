@@ -1,3 +1,4 @@
+
 const initState = {
     loading: false,
     user: {
@@ -8,8 +9,11 @@ const initState = {
         company: '',
         profilePhoto: '',
         id: '',
+        confirmed: false,
         isAutenticated: false
     },
+    profile: {},
+    registerFreshness: 0,
     error: {}
 }
 

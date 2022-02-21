@@ -5,10 +5,11 @@ import Header from "../layout/Header";
 function PageNotFound() {
 
     return (
-    <>
-    <Header />
-    <div className="not-found">Page not found!</div>
-    </>
+        <>
+            <Header />
+            {/* <div className="not-found">You must Login first!</div> */}
+            <div className="not-found">Page not found!</div>
+        </>
     )
 }
 

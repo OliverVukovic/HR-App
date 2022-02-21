@@ -4,24 +4,32 @@ import * as actions from "../action/ActionsTypes";
 function reducer(state = initState, action) {
     switch (action.type) {
 
+
         case actions.REGISTER_USER:
             return state;
         case actions.REGISTER_USER_SUCCESS:
-            return {...state, user: action.payload}
+            console.log("ovo je akcija", action)
+            console.log("ovo je state", state)
+            return { ...state, user: action.payload }
         case actions.REGISTER_USER_FAILURE:
-            return {...state, error: action.payload}
+            return { ...state, error: action.payload }
+
+
+        // case actions.AFTER_REGISTER_SUCCESS:
+        case 'AFTER_REGISTER_SUCCESS':
+            return { ...state, registerFreshness: state.registerFreshness + 1 }
 
 
 
         case actions.LOGIN_USER:
             return state
         case actions.LOGIN_USER_SUCCESS:
-            return {...state, user: action.payload}
+            return { ...state, user: action.payload }
         case actions.LOGIN_USER_FAILURE:
-            return {...state, error: action.payload}
-            
+            return { ...state, error: action.payload }
 
-        
+
+
         case actions.LOGOUT_USER:
             // console.log(action.type)
             const initUser = {
@@ -34,11 +42,11 @@ function reducer(state = initState, action) {
                 id: '',
                 isAutenticated: false
             }
-            return { ...state, user: initUser} ;
+            return { ...state, user: initUser };
         case actions.LOGOUT_USER_SUCCESS:
-            return {...state, user: action.payload}
+            return { ...state, user: action.payload }
         case actions.LOGOUT_USER_FAILURE:
-            return {...state, error: action.payload}
+            return { ...state, error: action.payload }
 
 
 
@@ -58,27 +66,29 @@ function reducer(state = initState, action) {
                 ...state,
                 isLoading: false,
                 // error: payload,
-            }   
+            }
 
 
 
         case actions.FETCH_PROFILE_RESPONSE:
             console.log("RESPONSE radi!");
-			return { 
-                ...state, 
-                ...action.payload 
+            return {
+                ...state,
+                profile: {
+                    ...action.payload
+                }
             };
 
         case action.CREATE_PROFILE:
-            console.log('REDUCER CREATE PROFILESSSS')
+            console.log('REDUCER CREATE PROFILESSSSSSSS')
             return {
                 ...state,
                 ...action.payload
             }
 
-        
-        default: 
-        return state;
+
+        default:
+            return state;
     }
 }
 

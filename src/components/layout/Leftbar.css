@@ -46,3 +46,34 @@
     padding: 3px;
 }
 
+
+.avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+}
+
+
+
+
+
+@media only screen and (max-width: 870px) {
+    .container-leftbar {
+        padding: 10px 15px;
+        min-width: 260px;
+        
+    }
+    .lb-links{
+        font-size: 18px;
+        padding: 10px 15px;
+    }
+    .lb-title{
+        padding-left: 15px;
+    }
+    .user-data{
+        font-size: 20px;
+        align-items: flex-start;
+        padding-left: 15px;
+        margin-top: 50px;
+    }
+}

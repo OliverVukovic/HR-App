@@ -14,32 +14,32 @@ const Register = () => {
     // const error = useSelector((state) => state.error); 
     // const [ newFile, setNewFile ] = useState("Choose File")
 
-    const [ username, setUsername ] = useState('Oliver');
-    const [ email, setEmail ] = useState('oliver02@yahoo.com');
-    const [ password, setPassword] = useState('qwe123');
-    const [ photo, setPhoto ] = useState(null);
-    const [ role, setRole ] = useState("company_user");
-    const [ company, setCompany ] = useState(null);
+    const [username, setUsername] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [photo, setPhoto] = useState(null);
+    const [role, setRole] = useState("company_user");
+    const [company, setCompany] = useState(null);
     // console.log("Ovde smo uneli novu kompaniju");
     // console.log(company);
 
     const [formIsValid, setFormIsValid] = useState(false);
     const [errorMessage, setErrorMessage] = useState(true);
-   
+
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     // const statusCode = props.state.registerReducer.response === undefined ? 0 : props.state.registerReducer.response.status;
 
-    
-    useEffect(()=> {
+
+    useEffect(() => {
         setFormIsValid(
             username.trim().length > 3
-            && email.includes('@') 
+            && email.includes('@')
             && password.trim().length > 5
         );
         // console.log(username, email, password)
-        }, [ username, email, password ]);
+    }, [username, email, password]);
 
     // useEffect(() => {
     //     if (newUser && newUser.id) {
@@ -71,29 +71,29 @@ const Register = () => {
 
 
 
-    const [ companies, setCompanies ] = useState(null);
+    const [companies, setCompanies] = useState(null);
 
     useEffect(() => {
         axios.get(
             "https://strapi-internship-hr-app.onrender.com/api/companies"
         ).then((response) => {
             console.log("sta nam kaze ova kompanija u RESPONSE?", response)
-           setCompanies(response.data.data)
+            setCompanies(response.data.data)
         })
     }, [setCompanies]);
 
-console.log('proba ispod koda...', companies)
+    // console.log('proba ispod koda...', companies)
 
 
 
 
 
-    const [ modal, setModal] = useState(false);
+    const [modal, setModal] = useState(false);
 
-    const probaFunkcija = (ev, isOpen) => {
-        console.log(ev);
-        ev.preventDefault();
-        setModal(isOpen)
+    const toggleModal = (event, modalIsOpen) => {
+        // console.log(event);
+        event.preventDefault();
+        setModal(modalIsOpen)
     }
     // const  [ id, setId ] = useState('');
 
@@ -110,7 +110,7 @@ console.log('proba ispod koda...', companies)
 
     // const handleCompany = (event) => {
     //     event.preventDefault();
-    
+
     //     const companyData = {
     //         company: enteredCompanyName,
     //         slug: enteredSlug
@@ -119,23 +119,23 @@ console.log('proba ispod koda...', companies)
     //     setEnteredCompanyName('');
     //     setEnteredSlug('');
     // }
-    
 
 
 
 
-        
+
+
     const [badFormat, setBadFormat] = useState(false);
 
-        // const [loading, setLoading] = useState(false);
+    // const [loading, setLoading] = useState(false);
     const handlePhoto = (event) => {
         const uploadPhoto = event.target.files[0];
-        console.log(uploadPhoto);
+        // console.log(uploadPhoto);
 
-        const photoType = [ "image/jpeg", "image/png", "image/gif" ];
+        const photoType = ["image/jpeg", "image/png", "image/gif"];
         if (!photoType.some((type) =>
-        uploadPhoto.type === type)
-        && uploadPhoto !== null) {
+            uploadPhoto.type === type)
+            && uploadPhoto !== null) {
             return setBadFormat(true);
         }
         setBadFormat(false);
@@ -144,28 +144,28 @@ console.log('proba ispod koda...', companies)
         photoData.append("files", uploadPhoto);
         setPhoto(photoData)
     }
-   
+
     const onRegister = (event) => {
         event.preventDefault()
         if (username.trim().length === 0 || !email.includes('@') || password.trim().length < 5) {
             console.log("Greska prilikom registrovanja")
             return errorMessage;
         } else {
-        dispatch(actionCreators.registerUser({
-            username,
-            email,
-            password,
-            photo,
-            company,
-            role
-        }))
-        // const token = localStorage.getItem("token");
+            dispatch(actionCreators.registerUser({
+                username,
+                email,
+                password,
+                photo,
+                company,
+                role
+            }))
+            // const token = localStorage.getItem("token");
 
-        navigate("/home");
-        setUsername('');
-        setEmail('');
-        setPassword('');
-        setCompany('')
+            navigate("/home");
+            setUsername('');
+            setEmail('');
+            setPassword('');
+            setCompany('')
         }
     };
 
@@ -179,23 +179,23 @@ console.log('proba ispod koda...', companies)
                         uTeam - Register
                     </h2>
 
-{/* USERNAME */}
+                    {/* USERNAME */}
                     <form className="form" method="POST">
                         <div className="login-page">
                             <label className="title-email-pass">Username</label>
-                            <input 
-                                type='text' 
+                            <input
+                                type='text'
                                 placeholder="Username"
                                 value={username}
                                 onChange={handleUsername}
                             />
                         </div>
 
-{/* EMAIL */}
+                        {/* EMAIL */}
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
-                            <input 
-                                type='email' 
+                            <input
+                                type='email'
                                 placeholder="Email"
                                 required
                                 value={email}
@@ -203,11 +203,11 @@ console.log('proba ispod koda...', companies)
                             />
                         </div>
 
-{/* PASSWORD */}
+                        {/* PASSWORD */}
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
-                            <input 
-                                type='password' 
+                            <input
+                                type='password'
                                 placeholder="Password"
                                 required
                                 value={password}
@@ -215,7 +215,7 @@ console.log('proba ispod koda...', companies)
                             />
                         </div>
 
-{/* PHOTO */}
+                        {/* PHOTO */}
                         <div className="login-page">
                             <label className="title-email-pass">Profile Photo</label>
                             <input className="choose-file"
@@ -228,58 +228,59 @@ console.log('proba ispod koda...', companies)
                         </div>
 
 
-{/* COMPANY */}
+                        {/* COMPANY */}
                         <div className="login-page">
                             <label className="title-email-pass">Company</label>
 
                             <div className="company-flex">
 
-                                <select 
+                                <select
                                     className="section-options"
-                                    onChange={(event) => 
-                                    setCompany(event.target.value)}
+                                    onChange={(event) =>
+                                        setCompany(event.target.value)}
+                                    defaultValue=""
                                 >
-                                   <option className="light-txt" value="" selected disabled>
+                                    <option className="light-txt" value="" disabled>
                                         Choose company
                                     </option>
-                                        {companies != undefined &&
+                                    {companies != undefined &&
                                         companies.map(company => {
                                             return (
-                                    <option key={company.id} value={company.id}>
-                                            {company.attributes.name}
-                                    </option>
+                                                <option key={company.id} value={company.id}>
+                                                    {company.attributes.name}
+                                                </option>
                                             )
                                         })
-                                        }
+                                    }
                                 </select>
 
-                                <button className="button-company" 
-                                onClick={(e) => probaFunkcija(e, true)}
+                                <button className="button-company"
+                                    onClick={(event) => toggleModal(event, true)}
                                 >
                                     Add company
                                 </button>
 
                             </div>
 
-                            <div className="company-modal" style={{display : modal ? "flex" : "none"}}>
+                            <div className="company-modal" style={{ display: modal ? "flex" : "none" }}>
                                 <label>Add new company name</label>
-                                <input 
-                                type="text"
-                                placeholder="Enter company name"
+                                <input
+                                    type="text"
+                                    placeholder="Enter company name"
                                 // value={enteredCompanyName}
                                 // onChange={companyChangeHandler}
                                 />
-                                
+
                                 <label>Add slug</label>
-                                <input 
-                                type="text"
-                                placeholder="Enter slug"
+                                <input
+                                    type="text"
+                                    placeholder="Enter slug"
                                 // value={enteredSlug}
                                 // onChange={slugChangeHandler}
                                 />
-                                <button className="button button-modal" 
-                                // type="submit"
-                                onClick={(e) => probaFunkcija(e, false)}
+                                <button className="button button-modal"
+                                    // type="submit"
+                                    onClick={(event) => toggleModal(event, false)}
                                 >
                                     Confirm
                                 </button>
@@ -289,39 +290,39 @@ console.log('proba ispod koda...', companies)
 
 
 
-{/* ROLE */}
+                        {/* ROLE */}
                         <div className="login-page">
                             <p className="select-role">Select your role:</p>
                             <div className="radio-btn">
                                 <div className="role">
-                                    <input 
-                                        type="radio" 
+                                    <input
+                                        type="radio"
                                         value={"company_user"}
                                         name="role"
-                                        onChange={e => handleRole(e)}
+                                        onChange={event => handleRole(event)}
                                         defaultChecked
                                     />
                                     <label className="admin-user">User</label>
                                 </div>
                                 <div className="role">
-                                    <input 
+                                    <input
                                         type="radio"
                                         value={"company_admin"}
                                         name="role"
-                                        onChange={e => handleRole(e)}
+                                        onChange={event => handleRole(event)}
                                     />
                                     <label className="admin-user">Admin</label>
                                 </div>
                             </div>
                         </div>
 
-                        <div className="login-page__actions">  
+                        <div className="login-page__actions">
                             <Link className="acc-text" to="/">
                                 Already have an account?
                             </Link>
-                            <button className="button" 
-                                    type="submit"
-                                    onClick={onRegister}
+                            <button className="button"
+                                type="submit"
+                                onClick={onRegister}
                             >
                                 Register
                             </button>

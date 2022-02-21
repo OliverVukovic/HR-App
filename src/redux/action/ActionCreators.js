@@ -27,19 +27,19 @@ export const registerUserFailure = (user) => {
 export const loginUser = (payload) => {
     return {
         type: ActionTypes.LOGIN_USER,
-        payload 
+        payload
     }
 }
 export const loginUserSuccess = (payload) => {
     return {
         type: ActionTypes.LOGIN_USER_SUCCESS,
-        payload 
+        payload
     }
 }
 export const loginUserFailure = (payload) => {
     return {
         type: ActionTypes.LOGIN_USER_FAILURE,
-        payload 
+        payload
     }
 }
 
@@ -87,21 +87,21 @@ export const createProfileFailure = (payload) => {
 
 
 export const fetchProfileRequest = (id = null) => {
-    console.log("Usao sam u AKCIJU!!!");
-    console.log(id)
-	return {
-		id,
-		type: ActionTypes.FETCH_PROFILE_REQUEST,
-	};
+    // console.log("Usao sam u AKCIJU!!!");
+    // console.log(id)
+    return {
+        id,
+        type: ActionTypes.FETCH_PROFILE_REQUEST,
+    };
 };
 
 export const fetchProfileResponse = (user) => {
-    console.log(user)
-    console.log("Izlazim iz AKCIJE!")
-	return {
-		type: ActionTypes.FETCH_PROFILE_RESPONSE,
-		payload: user,
-	};
+    // console.log(user)
+    // console.log("Izlazim iz AKCIJE!")
+    return {
+        type: ActionTypes.FETCH_PROFILE_RESPONSE,
+        payload: user,
+    };
 };
 
 
