@@ -9,9 +9,9 @@ const initState = {
         profilePhoto: '',
         id: '',
         confirmed: false,
-        isAutenticated: false
+        isAutenticated: false,
     },
-    profile: {},
+    profile: null,
     registerFreshness: 0,
     error: {}
 }

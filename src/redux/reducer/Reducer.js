@@ -15,7 +15,19 @@ function reducer(state = initState, action) {
             return { ...state, error: action.payload }
 
 
-        // case actions.AFTER_REGISTER_SUCCESS:
+            // {
+            //     username: action.payload.username,
+            //     email: action.payload.email,
+            //     role: '',
+            //     company: '',
+            //     profilePhoto: '',
+            //     id: '',
+            //     isAutenticated: true
+            // }
+
+
+        case actions.AFTER_REGISTER_SUCCESS:
+
         case 'AFTER_REGISTER_SUCCESS':
             return { ...state, registerFreshness: state.registerFreshness + 1 }
 
@@ -24,6 +36,7 @@ function reducer(state = initState, action) {
         case actions.LOGIN_USER:
             return state
         case actions.LOGIN_USER_SUCCESS:
+            console.log(state)
             return { ...state, user: action.payload }
         case actions.LOGIN_USER_FAILURE:
             return { ...state, error: action.payload }
@@ -42,6 +55,8 @@ function reducer(state = initState, action) {
                 id: '',
                 isAutenticated: false
             }
+            //Ocisti state
+            console.log(state);
             return { ...state, user: initUser };
         case actions.LOGOUT_USER_SUCCESS:
             return { ...state, user: action.payload }
@@ -68,10 +83,13 @@ function reducer(state = initState, action) {
                 // error: payload,
             }
 
+        case actions.SET_INITIAL_LOADING:
+            return { ...state, loading: action.value };
 
 
         case actions.FETCH_PROFILE_RESPONSE:
             console.log("RESPONSE radi!");
+            console.log(action)
             return {
                 ...state,
                 profile: {

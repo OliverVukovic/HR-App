@@ -97,27 +97,40 @@ const Register = () => {
     // const  [ id, setId ] = useState('');
 
 
-    // const [ enteredCompanyName, setEnteredCompanyName ] = useState('');
-    // const [ enteredSlug, setEnteredSlug ] = useState('');
+    const [enteredCompanyName, setEnteredCompanyName] = useState('');
+    const [enteredSlug, setEnteredSlug] = useState('');
 
-    // const companyChangeHandler = (event) => {
-    //     setEnteredCompanyName(event.target.value);
-    // }
-    // const slugChangeHandler = (event) => {
-    //     setEnteredSlug(event.target.value);
-    // }
+    const companyChangeHandler = (event) => {
+        setEnteredCompanyName(event.target.value);
+    }
+    const slugChangeHandler = (event) => {
+        setEnteredSlug(event.target.value);
+    }
 
-    // const handleCompany = (event) => {
-    //     event.preventDefault();
+    const handleCompany = (event) => {
+        event.preventDefault();
 
-    //     const companyData = {
-    //         company: enteredCompanyName,
-    //         slug: enteredSlug
-    //     }
-    //     props.onSaveCompanyData(companyData)
-    //     setEnteredCompanyName('');
-    //     setEnteredSlug('');
-    // }
+        // const companyData = {
+        //     company: enteredCompanyName,
+        //     slug: enteredSlug
+        // }
+        // props.onSaveCompanyData(companyData)
+        // setEnteredCompanyName('');
+        // setEnteredSlug('');
+
+        if (enteredCompanyName.trim().length === 0) {
+            return;
+        }
+        else {
+            dispatch(actionCreators.createCompany({
+                company: enteredCompanyName,
+                slug: enteredSlug
+            }))
+
+            setEnteredCompanyName('')
+            setEnteredSlug('')
+        }
+    }
 
 
 
@@ -159,6 +172,7 @@ const Register = () => {
             }))
             // const token = localStorage.getItem("token");
 
+
             navigate("/home");
             setUsername('');
             setEmail('');
@@ -167,7 +181,7 @@ const Register = () => {
         }
     };
 
-
+    const statusCode = useSelector(state => state)
     return (
         <div className="login-form">
             <Header />
@@ -261,24 +275,27 @@ const Register = () => {
                             </div>
 
                             <div className="company-modal" style={{ display: modal ? "flex" : "none" }}>
+                                    
                                 <label>Add new company name</label>
                                 <input
                                     type="text"
                                     placeholder="Enter company name"
-                                // value={enteredCompanyName}
-                                // onChange={companyChangeHandler}
+                                    value={enteredCompanyName}
+                                    onChange={companyChangeHandler}
                                 />
 
                                 <label>Add slug</label>
                                 <input
                                     type="text"
                                     placeholder="Enter slug"
-                                // value={enteredSlug}
-                                // onChange={slugChangeHandler}
+                                    value={enteredSlug}
+                                    onChange={slugChangeHandler}
                                 />
                                 <button className="button button-modal"
                                     // type="submit"
                                     onClick={(event) => toggleModal(event, false)}
+                                // onClick={handleCompany}
+
                                 >
                                     Confirm
                                 </button>

@@ -105,6 +105,14 @@ export const fetchProfileResponse = (user) => {
 };
 
 
+// LOADER 
+export const setInitalLoading = (value) => {
+	return {
+		type: ActionTypes.SET_INITIAL_LOADING,
+		value,
+	};
+};
+
 
 
 // CREATE COMPANY

@@ -1,157 +1,123 @@
-import {takeEvery, call, put, takeLatest} from "redux-saga/effects";
-import {fetchProfileResponse} from "../redux/action/ActionCreators";
+import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
+import { fetchProfileResponse, setInitalLoading } from "../redux/action/ActionCreators";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
 import * as authApi from "../services/api/authApi";
 
 
+
 export function* register(action) {
 
-        const {
+    const {
+        username,
+        email,
+        password,
+        photo,
+        company,
+        role
+    } = action.payload
+    try {
+        // console.log(photo)
+        const response = yield call(
+            authApi.register, {
             username,
             email,
-            password,
-            photo,
-            company,
-            role
-        } = action.payload
-        try {
-            const response = yield call(
-                authApi.register, {
-                    username,
-                    email,
-                    password
-                });
+            password
+        });
 
-            console.log('register saga response', response)
-
-            yield put({
-                type: 'AFTER_REGISTER_SUCCESS',
-            })
-
-
-            let photoId = null;
-            if (photo != null) {
-                const img = yield call(authApi.uploadPhoto, photo);
-                photoId = img.payload[0].id;
+        console.log('register saga response', response)
+        // zakomentarisao, jer necu da se sam loguje nakon registracije
+        
+        let token = response.jwt != null ? response.jwt : null;
+        // console.log(response)
+        let id = response.user.id;
+        localStorage.setItem("id", id);
+        localStorage.setItem('token', response.jwt)
+        yield put(
+            {
+                type: ActionsTypes.REGISTER_USER_SUCCESS,
+                payload: response.user
             }
-            yield call(authApi.createProfile, {
-                name: username,
-                user: response.user.id,
-                userRole: role,
-                company: Number(company),
-                profilePhoto: photoId,
-            })
-
-        } catch (error) {}
+        )
+        localStorage.setItem('token', response.jwt)
+        let photoId = null;
+        if (photo != null) {
+            const img = yield call(authApi.uploadPhoto, photo);
+            photoId = img.payload[0].id;
+        }
+        yield call(authApi.createProfile, {
+            name: username,
+            user: response.user.id,
+            userRole: role,
+            company: Number(company),
+            profilePhoto: photoId,
+        })
+        
+    } catch (error) {
+        console.log(error.message)
+    }
 };
 
 
-        export function* login(action) {
-            const {
-                email,
-                password
-            } = action.payload
-            try {
-                const response = yield call(
-                    authApi.login, {
-                        email,
-                        password
-                    }
-                )
-                let token = response.jwt != null ? response.jwt : null;
-                let id = response.user.id;
-                localStorage.setItem("id", id);
-                localStorage.setItem('token', response.jwt)
-                if (token) {
-                    yield put({
-                        type: ActionsTypes.LOGIN_USER_SUCCESS,
-                        payload: response.user
-                    })
-                }
-            } catch (error) {
-                yield put({
-                    type: ActionsTypes.LOGIN_USER_FAILURE,
-                    payload: {
-                        message: "Check Your email and password!"
-                    }
-                })
-            }
+export function* login(action) {
+    const {
+        email,
+        password
+    } = action.payload
+    try {
+        const response = yield call(
+            authApi.login, {
+            email,
+            password
         }
-
-
-        export function* fetchProfileSaga(action) {
-            try {
-                const response = yield call(
-                    authApi.fetchProfile,
-                    action.id
-                )
-                if (response && response.data && response.data.data && response.data.data[0]) {
-                    const payload = response.data.data[0];
-                    yield put(fetchProfileResponse(payload));
-                }
-            } catch (error) {
-                return error
-            }
+        )
+        let token = response.jwt != null ? response.jwt : null;
+        let id = response.user.id;
+        localStorage.setItem("id", id);
+        localStorage.setItem('token', response.jwt)
+        if (token) {
+            yield put({
+                type: ActionsTypes.LOGIN_USER_SUCCESS,
+                payload: response.user
+            })
         }
+    } catch (error) {
+        yield put({
+            type: ActionsTypes.LOGIN_USER_FAILURE,
+            payload: { message: "Check Your email and password!" }
+        })
+    }
+}
 
 
+export function* fetchProfileSaga(action) {
+    try {
+        console.log("Usao sam u SAGU i prosledio id");
+        console.log(action.id);
+        const {data} = yield call(
+            authApi.fetchProfile,
+            action.id
+        )
+        console.log('saga fetch my profile action', action) 
+        console.log('saga fetch my profile response', data)
+        const payload = data?.data?.[0];
+        yield put(setInitalLoading(false));
+        yield put(fetchProfileResponse(payload));
+    } catch (error) {
+        return error
+    }
+}
 
-
-
-
-
-        export function* autoLogin(action) {
-            const myId = localStorage.getItem("id");
-            try {
-                const response = yield call(authApi.fetchAutoLogin, myId)
-                console.log('saga autologin response', response);
-                if (response && response.data && response.data.confirmed) {
-                    yield put({
-                        type: ActionsTypes.LOGIN_USER_SUCCESS,
-                        payload: response.data
-                    })
-                }
-            } catch (error) {
-                yield put({
-                    type: ActionsTypes.LOGIN_USER_FAILURE,
-                    payload: {
-                        message: "Check Your email and password!"
-                    }
-                })
-            }
-        }
-
-
-
-
-        export function* logout() {
-            console.log('ovde uradi logout!')
-            localStorage.removeItem('token');
-            localStorage.removeItem('id');
-
-            // redirect
-        }
-
-
-
-        export default function* root() {
-            yield takeLatest(
-                ActionsTypes.REGISTER_USER,
-                register
-            );
-
-            yield takeEvery(
-                ActionsTypes.AUTO_LOGIN,
-                autoLogin
-            );
-
-            yield takeEvery(
-                ActionsTypes.LOGIN_USER,
-                login
-            );
-
-            yield takeLatest(
-                ActionsTypes.FETCH_PROFILE_REQUEST,
-                fetchProfileSaga
-            )
-        }
+export default function* root() {
+    yield takeLatest(
+        ActionsTypes.REGISTER_USER,
+        register
+    );
+    yield takeEvery(
+        ActionsTypes.LOGIN_USER,
+        login
+    );
+    yield takeLatest(
+        ActionsTypes.FETCH_PROFILE_REQUEST,
+        fetchProfileSaga
+    )
+}

@@ -13,6 +13,8 @@ function LeftBar() {
 
   const id = localStorage.getItem("id");
   const newUser = useSelector((state) => state.user); //copy iz MyProfile
+  console.log("provera usera", newUser)
+
   const newProfile = useSelector((state) => state.profile);
   const profile = {
     profilePhoto: '',
@@ -22,9 +24,10 @@ function LeftBar() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    setTimeout(() =>
-      dispatch(fetchProfileRequest(id)), 1000)
-  }, [dispatch, id]);
+    if(newUser.id) {
+      dispatch(fetchProfileRequest(newUser.id))
+    }
+  }, [newUser]);
 
   useEffect(() => {
     const profile = {
@@ -50,7 +53,9 @@ function LeftBar() {
   //     event.preventDefault()
   //     setPhoto(photo)
   // }
-
+  console.log("**********************")
+  console.log(user.profilePhoto)
+  console.log("**********************")
 
   return (
     <div>

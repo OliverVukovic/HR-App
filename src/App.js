@@ -48,7 +48,8 @@ function App() {
 
   useEffect(() => {
     if (registerFreshness > 0) {
-      navigate('/');
+      // redirekcija nakon registracije
+      navigate('/home');
     }
   }, [registerFreshness])
 
@@ -84,7 +85,7 @@ function App() {
       <>
         <Route exact path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
-        <Route path="*" element={<ReturnOnLoginPage />} />
+        {/* <Route path="*" element={<ReturnOnLoginPage />} /> */}
       </>
     )
   }
