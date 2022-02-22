@@ -1,6 +1,6 @@
 // import { Navigate, useNavigate } from "react-router-dom";
 import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
-import { fetchProfileResponse } from "../redux/action/ActionCreators";
+import { fetchProfileResponse, setInitalLoading } from "../redux/action/ActionCreators";
 // import { uploadPhotoFailure, uploadPhotoSuccess } from "../redux/action/ActionCreators";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
 import * as authApi from "../services/api/authApi";
@@ -28,13 +28,13 @@ export function* register(action) {
 
         console.log('register saga response', response)
         // zakomentarisao, jer necu da se sam loguje nakon registracije
-        /*
+        
         let token = response.jwt != null ? response.jwt : null;
         // console.log(response)
         let id = response.user.id;
         localStorage.setItem("id", id);
         localStorage.setItem('token', response.jwt)
-        */
+        
 
 
         // console.log(action)
@@ -46,19 +46,26 @@ export function* register(action) {
         // if (token) 
         // {
         // console.log("Usao sam u token");
-        /*
+        
         yield put(
             {
                 type: ActionsTypes.REGISTER_USER_SUCCESS,
                 payload: response.user
             }
         )
-        */
-        yield put(
-            {
-                type: 'AFTER_REGISTER_SUCCESS',
-            }
-        )
+        
+
+
+
+
+        // yield put(
+        //     {
+        //         type: 'AFTER_REGISTER_SUCCESS',
+        //     }
+        // )
+
+
+
 
         // if (isNaN(company)) {
         //     const slug = company.toLowerCase().replaceAll(" ", "-");
@@ -71,6 +78,7 @@ export function* register(action) {
         // }
 
 
+        localStorage.setItem('token', response.jwt)
         let photoId = null;
         if (photo != null) {
             const img = yield call(authApi.uploadPhoto, photo);
@@ -125,6 +133,7 @@ export function* login(action) {
         let id = response.user.id;
         localStorage.setItem("id", id);
         localStorage.setItem('token', response.jwt)
+        // debugger
         if (token) {
             yield put({
                 type: ActionsTypes.LOGIN_USER_SUCCESS,
@@ -143,18 +152,19 @@ export function* login(action) {
 
 export function* fetchProfileSaga(action) {
     try {
-        // console.log("Usao sam u SAGU i prosledio id");
-        // console.log(object);
-        const response = yield call(
+        console.log("Usao sam u SAGU i prosledio id");
+        console.log(action.id);
+        const {data} = yield call(
             authApi.fetchProfile,
             action.id
         )
         console.log('saga fetch my profile action', action) // PAZNJA -> action nema payload nego id
-        console.log('saga fetch my profile response', response)
-        if (response && response.data && response.data.data && response.data.data[0]) {
-            const payload = response.data.data[0];
-            yield put(fetchProfileResponse(payload));
-        }
+        console.log('saga fetch my profile response', data)
+        // if (response && response.data && response.data.data && response.data.data[0]) {
+        const payload = data?.data?.[0];
+        yield put(setInitalLoading(false));
+        yield put(fetchProfileResponse(payload));
+        // }
     } catch (error) {
         return error
     }
@@ -166,38 +176,38 @@ export function* fetchProfileSaga(action) {
 
 
 
-export function* autoLogin(action) {
-    // console.log(action)
-    const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
-    try {
-        const response = yield call(authApi.fetchAutoLogin, myId)
-        console.log('saga autologin response', response);
-        if (response && response.data && response.data.confirmed) {
-            yield put({
-                type: ActionsTypes.LOGIN_USER_SUCCESS,
-                payload: response.data
-            })
-        }
-    } catch (error) {
-        // console.log(error)
-        yield put({
-            type: ActionsTypes.LOGIN_USER_FAILURE,
-            payload: { message: "Check Your email and password!" }
-        })
-    }
-}
+// export function* autoLogin(action) {
+//     // console.log(action)
+//     const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
+//     try {
+//         const response = yield call(authApi.fetchAutoLogin, myId)
+//         console.log('saga autologin response', response);
+//         if (response && response.data && response.data.confirmed) {
+//             yield put({
+//                 type: ActionsTypes.LOGIN_USER_SUCCESS,
+//                 payload: response.data
+//             })
+//         }
+//     } catch (error) {
+//         // console.log(error)
+//         yield put({
+//             type: ActionsTypes.LOGIN_USER_FAILURE,
+//             payload: { message: "Check Your email and password!" }
+//         })
+//     }
+// }
 
 
 
 
-export function* logout() {
+// export function* logout() {
 
-    console.log('Uradi Logout!');
-        localStorage.removeItem('token');
-        localStorage.removeItem('id');
+//     console.log('Uradi Logout!');
+//         localStorage.removeItem('token');
+//         localStorage.removeItem('id');
 
-        // redirect
-}
+       // redirect
+// }
 
 // ---------------  zakomentarisi
 // export function* uploadPhoto(payload) {    
@@ -237,11 +247,11 @@ export default function* root() {
         register
     );
 
-    yield takeEvery(
-        ActionsTypes.AUTO_LOGIN,
-        // 'AUTOLOGIN',
-        autoLogin
-    );
+    // yield takeEvery(
+    //     ActionsTypes.AUTO_LOGIN,
+    //     // 'AUTOLOGIN',
+    //     autoLogin
+    // );
 
     yield takeEvery(
         ActionsTypes.LOGIN_USER,

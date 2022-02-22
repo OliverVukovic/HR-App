@@ -4,11 +4,10 @@ import LeftBar from '../layout/LeftBar'
 import './CompanyInfo.css';
 import { formatDate } from "../helpers/Date";
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProfileRequest } from '../../redux/action/ActionCreators';
+import { fetchProfileRequest, setInitalLoading } from '../../redux/action/ActionCreators';
 import { Link } from 'react-router-dom';
-import avatar from "../../assets/avatar2.png"
-
-
+import avatar from "../../assets/avatar2.png";
+import { Loader } from '../helpers/Loader';
 
 
 function Pending() {
@@ -17,6 +16,8 @@ function Pending() {
     const id = localStorage.getItem("id");
     const newUser = useSelector((state) => state.user);
     const newProfile = useSelector((state) => state.profile);
+    let isLoadedPage = useSelector(state => state.loading);
+
     const profile = {
         profilePhoto: '',
         name: '',
@@ -25,10 +26,13 @@ function Pending() {
     const [user, setUser] = useState(profile);
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        setTimeout(() =>
-            dispatch(fetchProfileRequest(id)), 1000)
-    }, [dispatch, id]);
+  useEffect(() => {
+    dispatch(setInitalLoading(true));
+
+    if(newUser.id) {
+      dispatch(fetchProfileRequest(newUser.id))
+    }
+  }, [newUser]);
 
 
 
@@ -44,6 +48,9 @@ function Pending() {
 
 
     return (
+        <>
+           {isLoadedPage  && <Loader/> ? <Loader /> : (
+
         <div className="header-leftbar-right">
             <HeaderLog />
             <div className="left-bar-companyinfo">
@@ -96,6 +103,8 @@ function Pending() {
                 </div>
             </div>
         </div>
+        )}
+        </>
     )
 }
 

@@ -9,9 +9,12 @@ function HeaderLog() {
    
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const token = localStorage.getItem("token")
+    const id = localStorage.getItem("id")
 
     const logOut = () => {
-        const token = localStorage.getItem("token")
+        
+        localStorage.removeItem("id")
         localStorage.removeItem("token")
         dispatch(actionCreators.logoutUser())
         navigate("/")

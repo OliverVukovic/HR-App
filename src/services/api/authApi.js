@@ -136,33 +136,35 @@ export const createProfile = async (payload) => {
 }
 
 
-export const fetchAutoLogin = async () => {
-    try {
-        const response = await axios(
-            {
-                method: 'GET',
-                url: `https://strapi-internship-hr-app.onrender.com/api/users/me`
-            }
-        )
-        return response;
-    } catch (error) {
-        return error;
-    }
-};
+// export const fetchAutoLogin = async () => {
+//     try {
+//         const response = await axios(
+//             {
+//                 method: 'GET',
+//                 url: `https://strapi-internship-hr-app.onrender.com/api/users/me`
+//             }
+//         )
+//         return response;
+//     } catch (error) {
+//         return error;
+//     }
+// };
 
 
 export const fetchProfile = async (id) => {
     try {
-        const response = await axios(
+        if(!id) {
+            return
+        }
+        return axios(
             {
                 method: 'GET',
-                url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*`
+                url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*&pagination[pageSize]=1000`
                 // url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*`
                 // url: `https://strapi-internship-hr-app.onrender.com/api/users/${id}?populate=*`
                 // url: `https://strapi-internship-hr-app.onrender.com/api/users/me`
             }
         )
-        return response;
     } catch (error) {
         return error;
     }

@@ -21,10 +21,11 @@ function Approve() {
     const [user, setUser] = useState(profile);
 
     const dispatch = useDispatch();
-    useEffect(() => {
-        setTimeout(() =>
-            dispatch(fetchProfileRequest(id)), 1000)
-    }, [dispatch, id]);
+  useEffect(() => {
+    if(newUser.id) {
+      dispatch(fetchProfileRequest(newUser.id))
+    }
+  }, [newUser]);
 
 
 

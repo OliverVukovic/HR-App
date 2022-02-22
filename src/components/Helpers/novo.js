@@ -164,6 +164,10 @@ export default MyProfile;
 
 
 
+
+
+
+
 // REDUCER
 
 import initState from "./InitState";
@@ -199,8 +203,6 @@ function reducer(state = initState, action) {
             return {...state, user: action.payload}
         case actions.LOGIN_USER_FAILURE:
             return {...state, error: action.payload}
-            
-
         
         case actions.LOGOUT_USER:
             // console.log(action.type)
@@ -220,8 +222,6 @@ function reducer(state = initState, action) {
         case actions.LOGOUT_USER_FAILURE:
             return {...state, error: action.payload}
 
-
-
         case actions.UPLOAD_PHOTO:
             return {
                 ...state,
@@ -239,8 +239,6 @@ function reducer(state = initState, action) {
                 isLoading: false,
                 // error: payload,
             }   
-
-
 
         case actions.FETCH_PROFILE_RESPONSE:
             console.log("RESPONSE radi!");
@@ -263,19 +261,6 @@ function reducer(state = initState, action) {
 }
 
 export default reducer;
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
@@ -328,10 +313,7 @@ function MyProfile() {
 
     useEffect(() => {
 		setUser(object);
-	}, [setUser, object]);
-
-    
-
+	}, [setUser, object]);  
 
 // UPLOAD PHOTO
     const [ photo, setPhoto ] = useState(null);
@@ -354,12 +336,10 @@ const handlePhoto = (event) => {
     setPhoto(photoData)
 }
 
-
 const onSave = (event) => {
     event.preventDefault()
     setPhoto(photo)
     }
-
 
   return (
     
@@ -457,8 +437,11 @@ const onSave = (event) => {
 
   )
 }
-
 export default MyProfile;
+
+
+
+
 
 
 
@@ -475,8 +458,6 @@ import { Link, Navigate, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
 import axios from "axios";
-
-
 
 const Register = () => {
 
@@ -541,9 +522,6 @@ const Register = () => {
         setRole(event.target.value)
     }
 
-
-
-
     const [ companies, setCompanies ] = useState(null);
 
     useEffect(() => {
@@ -556,10 +534,6 @@ const Register = () => {
     }, [setCompanies]);
 
 // console.log('proba ispod koda...', companies)
-
-
-
-
 
     const [ modal, setModal] = useState(false);
 
@@ -592,11 +566,6 @@ const Register = () => {
     //     setEnteredCompanyName('');
     //     setEnteredSlug('');
     // }
-    
-
-
-
-
         
     const [badFormat, setBadFormat] = useState(false);
 
@@ -824,3 +793,152 @@ if (userProfile) {
 }
 
 export default Register
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// APP
+
+import React, { useEffect, useState } from "react";
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Login from "./components/Login";
+import Register from "./components/Register";
+import './App.css';
+import { useDispatch, useSelector } from "react-redux";
+import CompanyInfo from './components/pages/CompanyInfo';
+import Home from './components//pages/Home';
+import { Questions } from './components/pages/Questions';
+import AddNewQuestions from './components/pages/AddNewQuestions';
+import Pending from "./components/pages/Pending";
+import Team from "./components/pages/Team";
+import PageNotFound from "./components/helpers/PageNotFound";
+import ApprovePage from "./components/pages/ApprovePage";
+import EditMember from "./components/pages/EditMember";
+import EditQuestions from "./components/pages/EditQuestions";
+import { QueryClient, QueryClientProvider } from "react-query";
+import { Loader } from "./components/helpers/Loader";
+import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
+
+function App() {
+
+  const [isDone, setIsDone] = useState(false) 
+  const navigate = useNavigate()
+  const dispatch = useDispatch()
+
+  // const registerFreshness = useSelector(state => state.registerFreshness)
+  const myUserId = useSelector(state => state.user.id)
+  const isAutenticated = useSelector(state => state.user.confirmed)
+
+  const token = localStorage.getItem("token");
+  console.log(isAutenticated)
+
+  // const [ isLoggedIn, setIsLoggedIn ] = useState(false);
+  const isLoggedIn = isAutenticated;
+
+  // useEffect(() => {
+  //   dispatch({
+  //     type: 'AUTO_LOGIN'
+  //   })
+  // }, [])
+
+  useEffect(() => {
+    if(isDone) return;
+    const id = parseInt(myUserId)
+    if (isAutenticated && id > 0) {
+      dispatch({
+        type: 'FETCH_PROFILE_REQUEST',
+        payload: id
+      })
+    }
+    setIsDone(true)
+  }, [isAutenticated, myUserId])
+
+  // useEffect(() => {
+  //   if (registerFreshness > 0) {
+  //     // redirekcija nakon registracije
+  //     navigate('/home');
+  //   }
+  // }, [registerFreshness])
+
+  const queryClient = new QueryClient(
+    // {
+    //   defaultOptions: {
+    //     queries: {
+    //       refetchOnWindowFocus: false,
+    //     },
+    //   },
+    // }
+  )
+
+
+
+
+  let loggedInRoutes = null;
+
+  // if (isAutenticated) {
+    if(token) {
+    console.log("JESAM U LOGOVOANSS")
+    loggedInRoutes = (
+      <>
+        <Route path="/" element={<Home isLoggedIn={isLoggedIn} />} />
+        <Route path="/home" element={<Home isLoggedIn={isLoggedIn} />} />
+        <Route path="/team" element={<Team />} />
+        <Route path="/company-info" element={<CompanyInfo />} />
+        <Route path="/questions" element={<Questions />} />
+        <Route path="/addquestions" element={<AddNewQuestions />} />
+        <Route path='questions/:questionsId/edit' element={<EditQuestions />} />
+        <Route path="/pending-for-approval" element={<Pending />} />
+        <Route path="/approve" element={<ApprovePage />} />
+        <Route path="/edit" element={<EditMember />} />
+        <Route path="*" element={<PageNotFound />} />
+      </>
+    )
+  }
+
+  let loggedOutRoutes = null;
+
+  // if (!isAutenticated) {
+    if(!token) {
+      const token = localStorage.getItem("token"); // Kad imam token radi posle refessh, bez njega ne mogu da prepoznam
+
+    console.log("NISAM ULOGOVAN")
+    loggedOutRoutes = (
+      <>
+        <Route exact path="/" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        {/* <Route path="*" element={<ReturnOnLoginPage />} /> */}
+      </>
+    )
+  }
+
+  return (
+    <QueryClientProvider client={queryClient}>
+
+      <div className="App">
+        <Routes>
+          {loggedInRoutes}
+          {loggedOutRoutes}
+
+          {/* <Route path="*" element={<PageNotFound />} /> */}
+          <Route path="ss" element={<Loader />} />
+
+        </Routes>
+      </div>
+
+    </QueryClientProvider>
+  );
+}
+
+export default App;
