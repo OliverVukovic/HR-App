@@ -99,7 +99,7 @@ const Login = (props) => {
                                 Login
                             </button>
                         </div>
-                        {error.message && <div className="error-message">{error.message}</div>}
+                        {error?.message && <div className="error-message">{error.message}</div>}
                     </form>
                 </section>
             </main>

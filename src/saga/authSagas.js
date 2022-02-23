@@ -1,4 +1,5 @@
 // import { Navigate, useNavigate } from "react-router-dom";
+import { type } from "@testing-library/user-event/dist/type";
 import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
 import { fetchProfileResponse, setInitalLoading } from "../redux/action/ActionCreators";
 // import { uploadPhotoFailure, uploadPhotoSuccess } from "../redux/action/ActionCreators";
@@ -87,14 +88,20 @@ export function* register(action) {
             // console.log(photoId)
         }
         // console.log(response.user)
-        yield call(authApi.createProfile, {
+        
+        const profileResponse = yield call(authApi.createProfile, {
             name: username,
             user: response.user.id,
             userRole: role,
             company: Number(company),
             profilePhoto: photoId,
         })
-
+        // debugger
+        // console.log()
+        yield put({
+            type: ActionsTypes.FETCH_PROFILE_RESPONSE,
+            payload: profileResponse.data
+        })
 
         // }
 
@@ -135,10 +142,14 @@ export function* login(action) {
         localStorage.setItem('token', response.jwt)
         // debugger
         if (token) {
-            yield put({
-                type: ActionsTypes.LOGIN_USER_SUCCESS,
-                payload: response.user
-            })
+            const response = yield call(authApi.fetchProfile, id)
+            if (response) {
+                yield put(fetchProfileResponse(response.data.data[0].attributes));
+            }
+            // yield put({
+            //     type: ActionsTypes.LOGIN_USER_SUCCESS,
+            //     payload: response.user
+            // })
         }
     } catch (error) {
         // console.log(error)
@@ -176,26 +187,27 @@ export function* fetchProfileSaga(action) {
 
 
 
-// export function* autoLogin(action) {
-//     // console.log(action)
-//     const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
-//     try {
-//         const response = yield call(authApi.fetchAutoLogin, myId)
-//         console.log('saga autologin response', response);
-//         if (response && response.data && response.data.confirmed) {
-//             yield put({
-//                 type: ActionsTypes.LOGIN_USER_SUCCESS,
-//                 payload: response.data
-//             })
-//         }
-//     } catch (error) {
-//         // console.log(error)
-//         yield put({
-//             type: ActionsTypes.LOGIN_USER_FAILURE,
-//             payload: { message: "Check Your email and password!" }
-//         })
-//     }
-// }
+export function* autoLogin(action) {
+    // console.log(action)
+    const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
+    try {
+        const response = yield call(authApi.fetchProfile, myId)
+        console.log('saga autologin response', response);
+        if (response) {
+            // yield put({
+            //     type: ActionsTypes.LOGIN_USER_SUCCESS,
+            //     payload: response.data
+            // })
+            yield put(fetchProfileResponse(response.data.data[0].attributes));
+        }
+    } catch (error) {
+        // console.log(error)
+        yield put({
+            type: ActionsTypes.LOGIN_USER_FAILURE,
+            payload: { message: "Check Your email and password!" }
+        })
+    }
+}
 
 
 
@@ -247,11 +259,11 @@ export default function* root() {
         register
     );
 
-    // yield takeEvery(
-    //     ActionsTypes.AUTO_LOGIN,
-    //     // 'AUTOLOGIN',
-    //     autoLogin
-    // );
+    yield takeEvery(
+        ActionsTypes.AUTO_LOGIN,
+        // 'AUTOLOGIN',
+        autoLogin
+    );
 
     yield takeEvery(
         ActionsTypes.LOGIN_USER,

@@ -17,6 +17,7 @@ function HeaderLog() {
         localStorage.removeItem("id")
         localStorage.removeItem("token")
         dispatch(actionCreators.logoutUser())
+        dispatch(actionCreators.clearStore())
         navigate("/")
     }
 

@@ -10,25 +10,40 @@ import { Loader } from '../helpers/Loader';
 function CompanyInfo() {
 
 
-  const id = localStorage.getItem("id");
-    const newUser = useSelector((state) => state.user);
-    const newProfile = useSelector((state) => state.profile);
-    let isLoadedPage = useSelector(state => state.loading);
 
-    const profile = {
-        company: ''
-    }
-    const [user, setUser] = useState(profile);
+
+  // UPLOAD NEW PHOTO
+  const [newPhoto, setNewPhoto] = useState(null);
+  // const [badFormat, setBadFormat] = useState(false);
+
+  const handlePhoto = (event) => {
+      const uploadPhoto = event.target.files[0];
+      console.log("ovde ide upload fotografije", uploadPhoto);
+
+      const photoData = new FormData();
+      photoData.append("files", uploadPhoto);
+      setNewPhoto(photoData)
+  }
+
+
+
+
+
+  const id = localStorage.getItem("id");
+    // const newUser = useSelector((state) => state.user);
+    const newProfile = useSelector((state) => state.reducer.profile);
+    let isLoadedPage = useSelector(state => state.reducer.loading);
+
+    const [user, setUser] = useState(null);
 
     const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setInitalLoading(true));
 
-    if(newUser.id) {
-      dispatch(fetchProfileRequest(newUser.id))
+    if(id) {
+      dispatch(fetchProfileRequest(id))
     }
-  }, [newUser]);
-
+  }, []);
 
 
     useEffect(() => {
@@ -39,6 +54,19 @@ function CompanyInfo() {
     }, [setUser, newProfile]);
 
 
+
+
+
+// SAVE BUTTON
+    const onSave = (event) => {
+      event.preventDefault()
+        return
+     {
+          dispatch({
+              newPhoto,
+          })
+      }
+  };
 
 
   return (
@@ -54,20 +82,37 @@ function CompanyInfo() {
           <p className="company-name">Company Name</p>
           <input className='choose-company-file' 
                 type="text" 
-                value={user !== undefined ? user.company : ""}
+                value={user !== undefined ? user?.company : ""}
           />
           <p className="company-name">Company Logo</p>
-          <input className='choose-file' type="file" />
+          <input className='choose-file' 
+                type="file"
+                name="file" 
+                // placeholder="Upload photo"
+                onChange={event => handlePhoto(event)}
+          />
           <div className="div-but">
-            <button className="button">Save</button>
+            <button className="button"
+                    onClick={onSave}
+            >
+              Save
+            </button>
           </div>
             <p className='logo-txt'>No logo!</p>
         </div>
       </div>
     </div>
+
     )}
     </>
   )
 }
 
 export default CompanyInfo
+
+
+
+
+
+
+ 

@@ -1,18 +1,34 @@
-// import { createStore, applyMiddleware } from "redux";
 import reducer from "../reducer/Reducer";
 import createSagaMiddleware from 'redux-saga';
 import rootSaga from "../../saga/rootSaga";
-import { createStore, applyMiddleware, compose } from "redux"
+import { createStore, applyMiddleware, compose, combineReducers } from "redux"
 
 
 
 const sagaMiddleware = createSagaMiddleware()
 
+const appReducer = combineReducers({
+	reducer,
+  });
+
+  const rootReducer = (state, action) => {
+	  
+	console.log("-----------")
+	console.log(action)
+	console.log("-----------")
+
+
+	if (action.type === 'CLEAR_STORE') {
+	  state = undefined;
+	}
+	return appReducer(state, action);
+  };
+
 // const store = createStore(reducer, applyMiddleware(sagaMiddleware));
 const withDevTools = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
-	reducer,
+	rootReducer,
 	withDevTools(applyMiddleware(...[sagaMiddleware]))
 )
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate, Navigate } from 'react-router-dom';
 import Login from "./components/Login";
 import Register from "./components/Register";
 import './App.css';
@@ -24,9 +24,17 @@ function App() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const registerFreshness = useSelector(state => state.registerFreshness)
-  const myUserId = useSelector(state => state.user.id)
-  const isAutenticated = useSelector(state => state.user.confirmed)
+  const registerFreshness = useSelector(state => state.reducer.registerFreshness)
+  const myUserId = useSelector(state => { 
+    console.log(state)
+   return state.reducer.user.id})
+
+  // const isAutenticated = useSelector(state => state.reducer.user.confirmed)
+  const isAutenticated = useSelector(state => state.reducer.profile)
+
+  // const token = localStorage.getItem("token");
+
+
   console.log(isAutenticated)
 
   // const [ isLoggedIn, setIsLoggedIn ] = useState(false);
@@ -38,15 +46,15 @@ function App() {
     })
   }, [])
 
-  useEffect(() => {
-    const id = parseInt(myUserId)
-    if (isAutenticated && id > 0) {
-      dispatch({
-        type: 'FETCH_PROFILE_REQUEST',
-        payload: id
-      })
-    }
-  }, [isAutenticated, myUserId])
+  // useEffect(() => {
+  //   const id = parseInt(myUserId)
+  //   if (isAutenticated && id > 0) {
+  //     dispatch({
+  //       type: 'FETCH_PROFILE_REQUEST',
+  //       payload: id
+  //     })
+  //   }
+  // }, [isAutenticated, myUserId])
 
   useEffect(() => {
     if (registerFreshness > 0) {
@@ -69,6 +77,8 @@ function App() {
 
 
   let loggedInRoutes = null;
+      console.log(isLoggedIn)
+      console.log(isAutenticated)
 
   if (isAutenticated) {
     loggedInRoutes = (
@@ -96,6 +106,8 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<ReturnOnLoginPage />} /> */}
+        <Route path="*" element={<Navigate to="/" />} />
+
       </>
     )
   }

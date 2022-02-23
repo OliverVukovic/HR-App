@@ -15,7 +15,8 @@ function LeftBar() {
   const newUser = useSelector((state) => state.user); //copy iz MyProfile
   console.log("provera usera", newUser)
 
-  const newProfile = useSelector((state) => state.profile);
+  const newProfile = useSelector((state) => state.reducer.profile);
+
   const profile = {
     profilePhoto: '',
     name: ''
@@ -24,7 +25,7 @@ function LeftBar() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if(newUser.id) {
+    if(newUser?.id) {
       dispatch(fetchProfileRequest(newUser.id))
     }
   }, [newUser]);

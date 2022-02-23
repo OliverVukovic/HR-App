@@ -9,21 +9,21 @@ import { Loader } from '../helpers/Loader';
 
 function Home() {
 
-  // const id = localStorage.getItem("id");
-  // let isLoadedPage = useSelector(state => state.loading);
+  const id = localStorage.getItem("id");
+  let isLoadedPage = useSelector(state => state.reducer.loading);
 
-  // const dispatch = useDispatch();
-  //   useEffect(() => {
-  //       dispatch(setInitalLoading(true));
+  const dispatch = useDispatch();
+    useEffect(() => {
+        dispatch(setInitalLoading(true));
   //       // prebaciti LOADER u home page
-  //       setTimeout(() => {
-  //           dispatch(fetchProfileRequest(id), 1000)
-  //       });
-  //   }, [dispatch, id])
+        if(id) {
+          dispatch(fetchProfileRequest(id))
+        }
+    }, [])
 
   return (
-    // <>
-    // {isLoadedPage  && <Loader/> ? <Loader /> : (
+    <>
+    {isLoadedPage  && <Loader/> ? <Loader /> : (
     <div>
       <HeaderLog />
       <div className="container-home">
@@ -33,8 +33,8 @@ function Home() {
         </div>
       </div>
     </div>
-    // )}
-    // </>
+    )}
+    </>
   )
 }
 
