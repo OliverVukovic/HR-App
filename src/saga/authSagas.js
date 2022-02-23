@@ -1,5 +1,5 @@
 // import { Navigate, useNavigate } from "react-router-dom";
-import { type } from "@testing-library/user-event/dist/type";
+// import { type } from "@testing-library/user-event/dist/type";
 import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
 import { fetchProfileResponse, setInitalLoading } from "../redux/action/ActionCreators";
 // import { uploadPhotoFailure, uploadPhotoSuccess } from "../redux/action/ActionCreators";
@@ -30,7 +30,7 @@ export function* register(action) {
         console.log('register saga response', response)
         // zakomentarisao, jer necu da se sam loguje nakon registracije
         
-        let token = response.jwt != null ? response.jwt : null;
+        // let token = response.jwt != null ? response.jwt : null;
         // console.log(response)
         let id = response.user.id;
         localStorage.setItem("id", id);
@@ -192,7 +192,6 @@ export function* autoLogin(action) {
     const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
     try {
         const response = yield call(authApi.fetchProfile, myId)
-        console.log('saga autologin response', response);
         if (response) {
             // yield put({
             //     type: ActionsTypes.LOGIN_USER_SUCCESS,

@@ -61,11 +61,11 @@ function CompanyInfo() {
     const onSave = (event) => {
       event.preventDefault()
         return
-     {
-          dispatch({
-              newPhoto,
-          })
-      }
+    //  {
+    //       dispatch({
+    //           newPhoto,
+    //       })
+    //   }
   };
 
 

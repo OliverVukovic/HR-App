@@ -174,17 +174,18 @@ const Register = () => {
             }))
             // const token = localStorage.getItem("token");
 
-            navigate("/home");
+
             setUsername('');
             setEmail('');
             setPassword('');
             setCompany('')
+            navigate("/home");
         }
     };
 
-    const statusCode = useSelector(state => state.reducer)
+    // const statusCode = useSelector(state => state.reducer)
 
-    
+
     return (
         <div className="login-form">
             <Header />
@@ -278,7 +279,7 @@ const Register = () => {
                             </div>
 
                             <div className="company-modal" style={{ display: modal ? "flex" : "none" }}>
-                                    
+
                                 <label>Add new company name</label>
                                 <input
                                     type="text"

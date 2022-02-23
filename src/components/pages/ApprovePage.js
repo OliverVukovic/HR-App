@@ -12,7 +12,7 @@ function Approve() {
 
 
     const id = localStorage.getItem("id");
-    const newUser = useSelector((state) => state.user);
+    // const newUser = useSelector((state) => state.user);
     const newProfile = useSelector((state) => state.reducer.profile);
     // const profile = {
     //     profilePhoto: '',

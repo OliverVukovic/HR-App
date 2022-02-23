@@ -1,13 +1,12 @@
 import React from "react";
 import "../helpers/Helpers.css";
-import Header from "../layout/Header";
+import HeaderLog from "../layout/HeaderLog";
 
 function PageNotFound() {
 
     return (
         <>
-            <Header />
-            {/* <div className="not-found">You must Login first!</div> */}
+            <HeaderLog />
             <div className="not-found">Page not found!</div>
         </>
     )

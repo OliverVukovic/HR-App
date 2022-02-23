@@ -12,9 +12,8 @@ import { Loader } from '../helpers/Loader';
 
 function Pending() {
 
-
     const id = localStorage.getItem("id");
-    const newUser = useSelector((state) => state.user);
+    // const newUser = useSelector((state) => state.user);
     const newProfile = useSelector((state) => state.reducer.profile);
     let isLoadedPage = useSelector(state => state.reducer.loading);
 
@@ -76,8 +75,6 @@ function Pending() {
         //     console.log("izvrsi proveru")
         // }
     }
-
-
 
     return (
         <>

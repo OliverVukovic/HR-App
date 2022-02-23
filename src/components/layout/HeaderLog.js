@@ -9,8 +9,8 @@ function HeaderLog() {
    
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const token = localStorage.getItem("token")
-    const id = localStorage.getItem("id")
+    // const token = localStorage.getItem("token")
+    // const id = localStorage.getItem("id")
 
     const logOut = () => {
         

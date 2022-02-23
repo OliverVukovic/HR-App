@@ -18,6 +18,7 @@ import EditQuestions from "./components/pages/EditQuestions";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Loader } from "./components/helpers/Loader";
 import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
+import TestTim from "./components/pages/TestTim";
 
 function App() {
 
@@ -26,7 +27,7 @@ function App() {
 
   const registerFreshness = useSelector(state => state.reducer.registerFreshness)
   const myUserId = useSelector(state => { 
-    console.log(state)
+    // console.log(state)
    return state.reducer.user.id})
 
   // const isAutenticated = useSelector(state => state.reducer.user.confirmed)
@@ -35,7 +36,7 @@ function App() {
   // const token = localStorage.getItem("token");
 
 
-  console.log(isAutenticated)
+  // console.log(isAutenticated)
 
   // const [ isLoggedIn, setIsLoggedIn ] = useState(false);
   const isLoggedIn = isAutenticated;
@@ -77,8 +78,6 @@ function App() {
 
 
   let loggedInRoutes = null;
-      console.log(isLoggedIn)
-      console.log(isAutenticated)
 
   if (isAutenticated) {
     loggedInRoutes = (
@@ -94,6 +93,8 @@ function App() {
         <Route path="/approve" element={<ApprovePage />} />
         <Route path="/edit" element={<EditMember />} />
         <Route path="*" element={<PageNotFound />} />
+        <Route path="tt" element={<TestTim />} />
+
       </>
     )
   }
@@ -106,8 +107,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<ReturnOnLoginPage />} /> */}
-        <Route path="*" element={<Navigate to="/" />} />
-
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </>
     )
   }

@@ -1,4 +1,4 @@
-import { useMutation, useQuery, useQueryClient } from "react-query";
+import { useQuery } from "react-query";
 import axios from "axios";
 
 const fetchQuestionsData = (questionsId) => {
@@ -6,7 +6,7 @@ const fetchQuestionsData = (questionsId) => {
 }
 
 export const useQuestionsData = (questionsId) => {
-    const queryClient = useQueryClient()
+    // const queryClient = useQueryClient()
     return useQuery(['questions', questionsId], () =>
         fetchQuestionsData(questionsId))
 }
