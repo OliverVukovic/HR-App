@@ -1,5 +1,5 @@
 import React from 'react'
-import './MyProfile.css';
+import '../pages/MyProfile.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProfileRequest, setInitalLoading } from '../../redux/action/ActionCreators';
@@ -8,33 +8,7 @@ import { Loader } from '../helpers/Loader';
 
 function MyProfile() {
 
-    // // const id = useSelector(state => state.user.id);  
-    // const id = localStorage.getItem("id"); 
-    // const object = useSelector((state) => state.data?.data[0]?.attributes); //data?.data[0]?.attributes
-    // const object = useSelector((state) => state.data?.data[0]?.attributes); //data?.data[0]?.attributes
-    // // const userId = useSelector((state) => state.data?.data[0]?.id); //data?.data[0]?.attributes
-
-    // const [user, setUser] = useState(object);
-
-    // // dohvata id osobe koja se loguje
-    // // console.log(id);
-
-    // const dispatch = useDispatch();
-    // useEffect(() => {
-    //     setTimeout(() => 
-    // dispatch(fetchProfileRequest(id)), 1000 )}, [dispatch,id]);
-
-    // useEffect(() => {
-    // 	setUser(object);
-    // }, [setUser, object]);
-
-
-
-    // const [ newName, setNewName ] = useState('')
-
-
     const id = localStorage.getItem("id");
-    // const object = useSelector((state) => state.data?.data[0]?.attributes); //copy iz MyProfile
     const newUser = useSelector((state) => state.user); // copy my user data
     const newProfile = useSelector((state) => state.profile); // copy iz MyProfile
     let isLoadedPage = useSelector(state => state.loading);
@@ -42,12 +16,6 @@ function MyProfile() {
 
     const test= useSelector(state => state);
     console.log(test)
-
-    // const profile = {
-    //     profilePhoto: '',
-    //     name: '',
-    //     email: ''
-    // }
     
     const dispatch = useDispatch();
     useEffect(() => {
@@ -72,15 +40,6 @@ function MyProfile() {
 
     }, [setUser, newProfile]);
 
-
-
-
-
-    // const handleName = (event) => {
-    //     const newValue = event.target.value;
-    //     setNewName(newValue)
-    // }
-
     const [photo, setPhoto] = useState(null);
 
     const handlePhoto = (event) => {
@@ -96,13 +55,7 @@ function MyProfile() {
     const onSave = (event) => {
         event.preventDefault()
         setPhoto(photo)
-        // dispatch()
-        // if (newName) {
-        //     console.log("izvrsi proveru")
-        // }
     }
-
-
         return (
             <>
                {isLoadedPage  && <Loader/> ? <Loader /> : (
@@ -163,11 +116,6 @@ function MyProfile() {
                                         alt={'user photo'}
                                         className="user-img"
                                         width={200} />}
-
-
-
-
-
                                 <div className="but-div">
                                     <button className="button"
                                         onClick={onSave}
@@ -178,12 +126,10 @@ function MyProfile() {
 
                             </div>
                         </div>
-
                         <div className="right">
                             <div className="header-right">
                                 <p className="header-title">Security</p>
                             </div>
-
                             {/* EMAIL */}
                             <div className="right-main">
                                 <p className="p-name-profile">

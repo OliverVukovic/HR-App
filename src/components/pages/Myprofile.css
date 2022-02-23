@@ -6,10 +6,7 @@
   height: 100%;
 }
 .my-profile {
-  /* display: flex; */
-  /* flex-direction: column; */
   width: 80%;
-  /* justify-content: center; */
 }
 .title-my-profile {
   color: white;

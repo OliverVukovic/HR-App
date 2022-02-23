@@ -12,15 +12,14 @@ function HeaderLog() {
     const token = localStorage.getItem("token")
     const id = localStorage.getItem("id")
 
-    const token = localStorage.getItem("token")
-    const id = localStorage.getItem("id")
+   
 
 
     const logOut = () => {
         
         localStorage.removeItem("id")
         localStorage.removeItem("token")
-        localStorage.removeItem("id")
+
 
         dispatch(actionCreators.logoutUser())
         navigate("/")

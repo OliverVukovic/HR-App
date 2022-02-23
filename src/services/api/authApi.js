@@ -33,7 +33,6 @@ export const login = async (payload) => {
         return response.data
 
     } catch (error) {
-        // console.log(error)
     }
 }
 
@@ -50,51 +49,13 @@ export const register = async (payload) => {
                 "password": payload.password,
             }
         })
-        /*
-          if (response.data.jwt) {
-            const token = response.data.jwt
-            localStorage.setItem("token", token) 
-          }
-          */
         return response.data
 
     } catch (error) {
-        // console.log(error)
     }
 }
-
-
-
-// export const logout = async(payload) => {
-//     try {
-//         const response = await axios({
-//                 method: "POST",
-//                 url: "https://strapi-internship-hr-app.onrender.com/api/auth/local/home",
-//                 data: {
-//                     // "username": payload.username,
-//                     // "email": payload.email,
-//                     // "password": payload.password,
-//                 }
-//             })
-//               if (response.data.jwt) {
-//                 const token = response.data.jwt
-//                 localStorage.removeItem("token", token) 
-//               }
-//         return response.data
-
-//     } catch(error) {
-//         console.log(error)
-//     }
-
-// }
-
-
-
-
 export const uploadPhoto = async (image) => {
     try {
-        // console.log(image)
-
         const response = await axios({
             method: "POST",
             url: "https://strapi-internship-hr-app.onrender.com/api/upload",
@@ -105,10 +66,8 @@ export const uploadPhoto = async (image) => {
         })
         return { payload: response.data }
     } catch (error) {
-        // console.log(error)
     }
 }
-
 
 export const createProfile = async (payload) => {
     try {
@@ -123,34 +82,12 @@ export const createProfile = async (payload) => {
                 }
             }
         )
-
-        // const response = await axios.post("https://strapi-internship-hr-app.onrender.com/api/profiles", {data: payload});
-        // console.log(response)
         return response.data
 
     } catch (error) {
-        // console.log("ERRORRR createNewProfile")
-        // console.log(error)
         return error;
     }
 }
-
-
-// export const fetchAutoLogin = async () => {
-//     try {
-//         const response = await axios(
-//             {
-//                 method: 'GET',
-//                 url: `https://strapi-internship-hr-app.onrender.com/api/users/me`
-//             }
-//         )
-//         return response;
-//     } catch (error) {
-//         return error;
-//     }
-// };
-
-
 export const fetchProfile = async (id) => {
     try {
         if(!id) {
@@ -160,9 +97,6 @@ export const fetchProfile = async (id) => {
             {
                 method: 'GET',
                 url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*&pagination[pageSize]=1000`
-                // url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*`
-                // url: `https://strapi-internship-hr-app.onrender.com/api/users/${id}?populate=*`
-                // url: `https://strapi-internship-hr-app.onrender.com/api/users/me`
             }
         )
     } catch (error) {
@@ -172,8 +106,6 @@ export const fetchProfile = async (id) => {
 
 export const createNewCompany = async (payload) => {
     try {
-        // console.log("Usao sam u createNewCompany");
-        // console.log(payload);
         const response = await axios(
             {
                 method: 'POST',
@@ -181,11 +113,9 @@ export const createNewCompany = async (payload) => {
                 data: payload
             }
         )
-        // console.log(response);
         return response.data;
     }
     catch (error) {
-        // console.log(error);
         return error;
     }
 }

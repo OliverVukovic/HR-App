@@ -1,5 +1,5 @@
 import React from 'react';
-import './MyProfile.css';
+import '../pages/MyProfile.css';
 import HeaderLog from '../layout/HeaderLog';
 import LeftBar from '../layout/LeftBar'
 import { useSelector, useDispatch } from 'react-redux';
