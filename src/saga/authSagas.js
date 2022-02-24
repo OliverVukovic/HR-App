@@ -112,7 +112,6 @@ export function* register(action) {
         // ako imamo i usera i company i img onda se kreira profil (yield call)
         // prekinuti loading... (koristiti PUT)
         // redirekcija korisnika (uz pomoc react routera)
-        /* throw 'There is an error I want to make' */
     } catch (error) {
         // yield put({
         //     type: ActionsTypes.REGISTER_USER_FAILURE,

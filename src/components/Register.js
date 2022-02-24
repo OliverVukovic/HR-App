@@ -127,7 +127,6 @@ const Register = () => {
                 company: enteredCompanyName,
                 slug: enteredSlug
             }))
-
             setEnteredCompanyName('')
             setEnteredSlug('')
         }

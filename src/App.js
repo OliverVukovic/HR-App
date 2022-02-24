@@ -18,7 +18,7 @@ import EditQuestions from "./components/pages/EditQuestions";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Loader } from "./components/helpers/Loader";
 import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
-import TestTim from "./components/pages/TestTim";
+import PendingForApproval from "./components/pages/PendingForApproval";
 
 function App() {
 
@@ -89,11 +89,11 @@ function App() {
         <Route path="/questions" element={<Questions />} />
         <Route path="/addquestions" element={<AddNewQuestions />} />
         <Route path='questions/:questionsId/edit' element={<EditQuestions />} />
-        <Route path="/pending-for-approval" element={<Pending />} />
+        <Route path="/pending-for-approval" element={<PendingForApproval />} />
         <Route path="/approve" element={<ApprovePage />} />
         <Route path="/edit" element={<EditMember />} />
         <Route path="*" element={<PageNotFound />} />
-        <Route path="tt" element={<TestTim />} />
+        {/* <Route path="tt" element={<PendingForApproval />} /> */}
 
       </>
     )

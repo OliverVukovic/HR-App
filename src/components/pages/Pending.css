@@ -6,8 +6,8 @@
     display: flex;
     flex-wrap: wrap;
     gap: 20px;
-    width: 70%;
-    justify-content: center;
+    /* width: 70%; */
+    /* justify-content: center; */
     margin-top: 20px;
 }
 /* .pending-box{

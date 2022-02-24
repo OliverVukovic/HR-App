@@ -77,7 +77,7 @@ function CompanyInfo() {
       <HeaderLog />
       <div className="left-bar-companyinfo">
         <LeftBar />
-        <div className="container-company-info">
+        <div className="container-company-info-page">
           <h2 className="company-title">Company Info</h2>
           <p className="company-name">Company Name</p>
           <input className='choose-company-file' 

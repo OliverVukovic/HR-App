@@ -26,7 +26,10 @@
 }
 .container-company-info {
   padding-top: 70px;
-  width: 25%;
+  width: 100%;
+}
+.container-company-info-page {
+  padding-top: 70px;
 }
 .left-bar-companyinfo {
   display: flex;
@@ -153,6 +156,10 @@
 
 .avatar2 {
   width: 210px;
+}
+
+.two-of-three {
+  height: 65%;
 }
 
 

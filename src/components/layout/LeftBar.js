@@ -63,7 +63,7 @@ function LeftBar() {
         <Link to="/questions" className="lb-links"> &#8827; Questions</Link>
         <Link to="/company-info" className="lb-links"> &#8827; Company Info</Link>
         <Link to="/home" className="lb-links"> &#8827; My Profile</Link>
-        <Link to="/tt" className="lb-links"> &#8827; TT</Link>
+        {/* <Link to="/tt" className="lb-links"> &#8827; TT</Link> */}
 
         <div className='user-data'>
           <div className='user-photo'>
