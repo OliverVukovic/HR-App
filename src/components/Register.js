@@ -107,6 +107,8 @@ const Register = () => {
                 company,
                 role
             }))
+            // const token = localStorage.getItem("token");
+
             navigate("/home");
             setUsername('');
             setEmail('');
@@ -114,7 +116,10 @@ const Register = () => {
             setCompany('')
         }
     };
-    const statusCode = useSelector(state => state)
+
+    const statusCode = useSelector(state => state.reducer)
+
+    
     return (
         <div className="login-form">
             <Header />

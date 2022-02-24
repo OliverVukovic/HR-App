@@ -178,3 +178,14 @@ export const uploadPhotoFailure = (payload) => {
 }
 
 
+
+// CLEAR STORE
+
+export const clearStore = () => {
+    return {
+        type: ActionTypes.CLEAR_STORE,
+        
+    }
+}
+
+

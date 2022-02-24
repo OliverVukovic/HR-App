@@ -95,7 +95,7 @@ function Team() {
                         <div className='spinner-questions'>
                             <Loader />
                         </div>}
-                    {posts.data?.map((quest) => (
+                    {posts?.data?.map((quest) => (
 
                         <div className='team-box' key={quest.id}>
                             <div className='pending-box'>

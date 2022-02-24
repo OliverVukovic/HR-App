@@ -7,7 +7,7 @@ function ReturnOnLoginPage() {
     return (
         <>
             <Header />
-            <div className="not-found">You are Login!</div>
+            <div className="not-found">You must Login first!</div>
             {/* <div className="not-found">Page not found!</div> */}
         </>
     )

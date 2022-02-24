@@ -13,19 +13,19 @@ function Approve() {
 
     const id = localStorage.getItem("id");
     const newUser = useSelector((state) => state.user);
-    const newProfile = useSelector((state) => state.profile);
-    const profile = {
-        profilePhoto: '',
-        name: ''
-    }
-    const [user, setUser] = useState(profile);
+    const newProfile = useSelector((state) => state.reducer.profile);
+    // const profile = {
+    //     profilePhoto: '',
+    //     name: ''
+    // }
+    const [user, setUser] = useState(null);
 
     const dispatch = useDispatch();
   useEffect(() => {
-    if(newUser.id) {
-      dispatch(fetchProfileRequest(newUser.id))
+    if(id) {
+      dispatch(fetchProfileRequest(id))
     }
-  }, [newUser]);
+  }, []);
 
 
 
@@ -41,7 +41,7 @@ function Approve() {
     const [photo, setPhoto] = useState(null);
     const handlePhoto = (event) => {
         const uploadPhoto = event.target.files[0];
-        console.log("ovde ide upload fotografije", uploadPhoto);
+        // console.log("ovde ide upload fotografije", uploadPhoto);
 
         const photoData = new FormData();
         photoData.append("files", uploadPhoto);
@@ -88,10 +88,10 @@ function Approve() {
                                 <input className="input-name"
                                     type="text"
                                     placeholder="Name"
-                                    value={user !== undefined ? user.name : ""}
-                                    onChange={(e) => setUser({
+                                    value={user !== undefined ? user?.name : ""}
+                                    onChange={(event) => setUser({
                                         ...user,
-                                        name: e.target.value
+                                        name: event.target.value
                                     })}
                                 />
 
@@ -103,9 +103,9 @@ function Approve() {
                                     placeholder="Upload photo"
                                     onChange={event => handlePhoto(event)}
                                 />
-                                {user.profilePhoto === null || user.profilePhoto === undefined ?
+                                {user?.profilePhoto === null || user?.profilePhoto === undefined ?
                                     <p className='no-img-txt'>User don't have a photo!</p> :
-                                    <img src={user.profilePhoto}
+                                    <img src={user?.profilePhoto}
                                         alt={'user photo'}
                                         className="user-img"
                                         width={200} />}

@@ -97,6 +97,8 @@ export const fetchProfile = async (id) => {
             {
                 method: 'GET',
                 url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*&pagination[pageSize]=1000`
+                // url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*`
+                
             }
         )
     } catch (error) {

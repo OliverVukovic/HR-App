@@ -2,44 +2,88 @@ import React from 'react'
 import '../pages/MyProfile.css'
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchProfileRequest, setInitalLoading } from '../../redux/action/ActionCreators';
-import { Loader } from '../helpers/Loader';
+import { fetchProfileRequest } from '../../redux/action/ActionCreators';
+// import { Loader } from '../helpers/Loader';
 
 
 function MyProfile() {
 
+    // // const id = useSelector(state => state.reducer.user.id);  
+    // const id = localStorage.getItem("id"); 
+    // const object = useSelector((state) => state.data?.data[0]?.attributes); //data?.data[0]?.attributes
+    // const object = useSelector((state) => state.data?.data[0]?.attributes); //data?.data[0]?.attributes
+    // // const userId = useSelector((state) => state.data?.data[0]?.id); //data?.data[0]?.attributes
+
+    // const [user, setUser] = useState(object);
+
+    // // dohvata id osobe koja se loguje
+    // // console.log(id);
+
+    // const dispatch = useDispatch();
+    // useEffect(() => {
+    //     setTimeout(() => 
+    // dispatch(fetchProfileRequest(id)), 1000 )}, [dispatch,id]);
+
+    // useEffect(() => {
+    // 	setUser(object);
+    // }, [setUser, object]);
+
+
+    // const [ newName, setNewName ] = useState('')
+
+
     const id = localStorage.getItem("id");
-    const newUser = useSelector((state) => state.user); // copy my user data
-    const newProfile = useSelector((state) => state.profile); // copy iz MyProfile
-    let isLoadedPage = useSelector(state => state.loading);
+    // const object = useSelector((state) => state.data?.data[0]?.attributes); //copy iz MyProfile
+    // --- const newUser = useSelector((state) => state.user); // copy my user data
+    const newProfile = useSelector((state) => state.reducer.profile); // copy iz MyProfile
+    // let isLoadedPage = useSelector(state => state.reducer.loading);
 
+    // const test= useSelector(state => state.reducer);
+    // console.log(test)
 
-    const test= useSelector(state => state);
-    console.log(test)
+    // const profile = {
+    //     profilePhoto: '',
+    //     name: '',
+    //     email: ''
+    // }
     
     const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setInitalLoading(true));
+        // dispatch(setInitalLoading(true));
         // prebaciti LOADER u home page
-        setTimeout(() => {
-            dispatch(fetchProfileRequest(id), 1000)
-        });
-    }, [dispatch, id])
-
-    
-    const profile = {
-        profilePhoto: newProfile?.attributes?.profilePhoto?.data?.attributes?.url,
-        name: newProfile?.attributes?.name,
-        email: newProfile?.attributes?.user?.data?.attributes?.email
+        // setTimeout(() => {
+        //     dispatch(fetchProfileRequest(id), 1000)
+        // });
+        if(id) {
+            dispatch(fetchProfileRequest(id))
     }
+    }, [dispatch, id])
     
-    const [user, setUser] = useState(profile);
+    
+    const [user, setUser] = useState(null);
     useEffect(() => {
+        const profile = {
+            profilePhoto: newProfile?.attributes?.profilePhoto?.data?.attributes?.url,
+            name: newProfile?.attributes?.name,
+            email: newProfile?.attributes?.user?.data?.attributes?.email
+        }
         // if (newProfile) {
         setUser(profile);
+        // debugger
 
     }, [setUser, newProfile]);
 
+
+
+
+    // const handleName = (event) => {
+    //     const newValue = event.target.value;
+    //     setNewName(newValue)
+    // }
+
+
+
+    // UPLOAD PHOTO
     const [photo, setPhoto] = useState(null);
 
     const handlePhoto = (event) => {
@@ -57,8 +101,8 @@ function MyProfile() {
         setPhoto(photo)
     }
         return (
-            <>
-               {isLoadedPage  && <Loader/> ? <Loader /> : (
+            // <>
+            //    {isLoadedPage  && <Loader/> ? <Loader /> : (
 
             <div className="header-leftbar-right">
                 <div className="my-profile">
@@ -89,10 +133,10 @@ function MyProfile() {
                                 <input className="input-name"
                                     type="text"
                                     placeholder="Name"
-                                    value={user !== undefined ? user.name : ""}
-                                    onChange={(e) => setUser({
+                                    value={newProfile !== undefined ? newProfile?.attributes?.name : ""}
+                                    onChange={(event) => setUser({
                                         ...user,
-                                        name: e.target.value
+                                        name: event.target.value
                                     })}
                                 />
 
@@ -107,15 +151,16 @@ function MyProfile() {
                                 <input className="choose-file"
                                     type="file"
                                     placeholder="Upload photo"
-                                    // value={user?.profilePhoto.data.attributes.name}   ---- ZASTO NECE !?
                                     onChange={event => handlePhoto(event)}
                                 />
-                                {user.profilePhoto === null || user.profilePhoto === undefined ?
+                                {user?.profilePhoto === null || user?.profilePhoto === undefined ?
                                     <p className='no-img-txt'>User don't have a photo!</p> :
-                                    <img src={user.profilePhoto}
-                                        alt={'user photo'}
+                                    <img src={user?.profilePhoto}
+                                        alt={'user-img'}
                                         className="user-img"
                                         width={200} />}
+
+
                                 <div className="but-div">
                                     <button className="button"
                                         onClick={onSave}
@@ -138,7 +183,7 @@ function MyProfile() {
                                 <p className="email">
                                     {/* {user?.user?.data?.attributes.email} */}
                                     {/* {user !== undefined ? "true" : "false"} */}
-                                    {profile?.email}
+                                    {user?.email}
                                 </p>
 
                                 {/* PASSWORD */}
@@ -169,8 +214,8 @@ function MyProfile() {
                     </div>
                 </div>
             </div>
-               )}
-            </>
+            //    )}
+            // </>
 
         )
 }

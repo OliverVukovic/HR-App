@@ -9,7 +9,7 @@ import { fetchProfileRequest } from '../../redux/action/ActionCreators'
 
 function MyProfile() {
 
-    // const id = useSelector(state => state.user.id);  
+    // const id = useSelector(state => state.reducer.user.id);  
     const id = localStorage.getItem("id"); 
     const user = useSelector((state) => state.user); //data?.data[0]?.attributes
     console.log("kako izgleda state?", user)
@@ -295,7 +295,7 @@ import { fetchProfileRequest } from '../../redux/action/ActionCreators'
 
 function MyProfile() {
 
-    // const id = useSelector(state => state.user.id);  
+    // const id = useSelector(state => state.reducer.user.id);  
     const id = localStorage.getItem("id"); 
     const object = useSelector((state) => state.data?.data[0]?.attributes); //data?.data[0]?.attributes
     const userId = useSelector((state) => state.data?.data[0]?.id); //data?.data[0]?.attributes
@@ -837,9 +837,9 @@ function App() {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  // const registerFreshness = useSelector(state => state.registerFreshness)
-  const myUserId = useSelector(state => state.user.id)
-  const isAutenticated = useSelector(state => state.user.confirmed)
+  // const registerFreshness = useSelector(state => state.reducer.registerFreshness)
+  const myUserId = useSelector(state => state.reducer.user.id)
+  const isAutenticated = useSelector(state => state.reducer.user.confirmed)
 
   const token = localStorage.getItem("token");
   console.log(isAutenticated)

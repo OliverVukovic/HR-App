@@ -15,26 +15,26 @@ function Pending() {
 
     const id = localStorage.getItem("id");
     const newUser = useSelector((state) => state.user);
-    const newProfile = useSelector((state) => state.profile);
-    let isLoadedPage = useSelector(state => state.loading);
+    const newProfile = useSelector((state) => state.reducer.profile);
+    let isLoadedPage = useSelector(state => state.reducer.loading);
 
-    const profile = {
-        profilePhoto: '',
-        name: '',
-        createdAt: ''
-    }
-    const [user, setUser] = useState(profile);
+    // const profile = {
+    //     profilePhoto: '',
+    //     name: '',
+    //     createdAt: ''
+    // }
+    // const [user, setUser] = useState(profile);
 
     const dispatch = useDispatch();
   useEffect(() => {
     dispatch(setInitalLoading(true));
 
-    if(newUser.id) {
-      dispatch(fetchProfileRequest(newUser.id))
+    if(id) {
+      dispatch(fetchProfileRequest(id))
     }
-  }, [newUser]);
+  }, []);
 
-
+    const [user, setUser] = useState(null);
 
     useEffect(() => {
         const profile = {
@@ -44,6 +44,38 @@ function Pending() {
         }
         setUser(profile);
     }, [setUser, newProfile]);
+
+
+    // UPLOAD PHOTO
+    const [photo, setPhoto] = useState(null);
+    // const [ badFormat, setBadFormat ] = useState(false);
+    // const [loading, setLoading] = useState(false);
+    const handlePhoto = (event) => {
+        const uploadPhoto = event.target.files[0];
+        console.log("ovde ide upload fotografije", uploadPhoto);
+
+        // const photoType = [ "image/jpeg", "image/png", "image/gif" ];
+        //     if (!photoType.some((type) =>
+        //     uploadPhoto.type === type)
+        //     && uploadPhoto !== null) {
+        //         return setBadFormat(true);
+        //     }
+        // setBadFormat(false);
+
+        const photoData = new FormData();
+        photoData.append("files", uploadPhoto);
+        setPhoto(photoData)
+    }
+
+
+    const onSave = (event) => {
+        event.preventDefault()
+        setPhoto(photo)
+        // dispatch()
+        // if (newName) {
+        //     console.log("izvrsi proveru")
+        // }
+    }
 
 
 
@@ -61,11 +93,11 @@ function Pending() {
                     <div className='pending-box'>
 
                         <div className='pending-img'>
-                            {user.profilePhoto === null || user.profilePhoto === undefined ?
+                            {user?.profilePhoto === null || user?.profilePhoto === undefined ?
                                 <img className='avatar2'
                                     src={avatar}
                                     alt="User don't have a photo!" /> :
-                                <img src={user.profilePhoto}
+                                <img src={user?.profilePhoto}
                                     alt={'user photo'}
                                     className="import-pending-photo"
                                     width={200} />}
@@ -75,12 +107,12 @@ function Pending() {
                             <div className='pending-data'>
                                 <div className='pending-name'>
                                     {/* {user !== undefined ? user.name : "Unknown user"} */}
-                                    {user.name === null || user.name === undefined ?
+                                    {user?.name === null || user?.name === undefined ?
                                         <p className='no-img-txt'>Unknown user</p> :
-                                        <p>{user.name}</p>}
+                                        <p>{user?.name}</p>}
                                 </div>
                                 <div className='pending-date'>
-                                    Joined {formatDate(user.createdAt)}
+                                    Joined {formatDate(user?.createdAt)}
                                 </div>
                             </div>
                             <button className='pending-btn'>

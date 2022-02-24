@@ -15,7 +15,8 @@ function LeftBar() {
   const newUser = useSelector((state) => state.user); //copy iz MyProfile
   console.log("provera usera", newUser)
 
-  const newProfile = useSelector((state) => state.profile);
+  const newProfile = useSelector((state) => state.reducer.profile);
+
   const profile = {
     profilePhoto: '',
     name: ''
@@ -24,7 +25,7 @@ function LeftBar() {
 
   const dispatch = useDispatch();
   useEffect(() => {
-    if(newUser.id) {
+    if(newUser?.id) {
       dispatch(fetchProfileRequest(newUser.id))
     }
   }, [newUser]);
@@ -66,6 +67,7 @@ function LeftBar() {
         <Link to="/questions" className="lb-links"> &#8827; Questions</Link>
         <Link to="/company-info" className="lb-links"> &#8827; Company Info</Link>
         <Link to="/home" className="lb-links"> &#8827; My Profile</Link>
+        <Link to="/tt" className="lb-links"> &#8827; tt</Link>
 
         <div className='user-data'>
           <div className='user-photo'>

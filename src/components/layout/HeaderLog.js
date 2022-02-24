@@ -22,6 +22,7 @@ function HeaderLog() {
 
 
         dispatch(actionCreators.logoutUser())
+        dispatch(actionCreators.clearStore())
         navigate("/")
     }
 

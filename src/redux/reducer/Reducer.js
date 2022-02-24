@@ -43,21 +43,21 @@ function reducer(state = initState, action) {
 
 
 
-        case actions.LOGOUT_USER:
-            // console.log(action.type)
-            const initUser = {
-                username: '',
-                email: '',
-                password: '',
-                role: '',
-                company: '',
-                profilePhoto: '',
-                id: '',
-                isAutenticated: false
-            }
-            //Ocisti state
-            console.log(state);
-            return { ...state, user: initUser };
+        // case actions.LOGOUT_USER:
+        //     // console.log(action.type)
+        //     const initUser = {
+        //         username: '',
+        //         email: '',
+        //         // password: '',
+        //         role: '',
+        //         company: '',
+        //         profilePhoto: '',
+        //         id: '',
+        //         isAutenticated: false
+        //     }
+        //     //Ocisti state
+        //     console.log(state);
+        //     return { ...state, user: initUser };
         case actions.LOGOUT_USER_SUCCESS:
             return { ...state, user: action.payload }
         case actions.LOGOUT_USER_FAILURE:
