@@ -5,6 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
 import axios from "axios";
+import HeaderLog from "./layout/HeaderLog";
 
 
 
@@ -75,7 +76,7 @@ const Register = () => {
 
     useEffect(() => {
         axios.get(
-            "https://strapi-internship-hr-app.onrender.com/api/companies"
+            "https://strapi-internship-hr-app.onrender.com/api/companies?pagination[pageSize]=1000"
         ).then((response) => {
             console.log("sta nam kaze ova kompanija u RESPONSE?", response)
             setCompanies(response.data.data)
@@ -94,23 +95,28 @@ const Register = () => {
         // console.log(event);
         event.preventDefault();
         setModal(modalIsOpen)
+        setNewCompany('')
     }
     // const  [ id, setId ] = useState('');
 
 
-    const [enteredCompanyName, setEnteredCompanyName] = useState('');
-    const [enteredSlug, setEnteredSlug] = useState('');
+    const [slug, setSlug] = useState('');
+    const [newCompany, setNewCompany] = useState('');
+    console.log(newCompany)
 
     const companyChangeHandler = (event) => {
-        setEnteredCompanyName(event.target.value);
+        // setNewCompany({newCompany:event.target.value});
+        setNewCompany(event.target.value);
+        console.log(event.target.value)
     }
+
+
     const slugChangeHandler = (event) => {
-        setEnteredSlug(event.target.value);
+        setSlug(event.target.value);
     }
 
     const handleCompany = (event) => {
-        event.preventDefault();
-
+        console.log("usli smo u HL.........................")
         // const companyData = {
         //     company: enteredCompanyName,
         //     slug: enteredSlug
@@ -119,17 +125,17 @@ const Register = () => {
         // setEnteredCompanyName('');
         // setEnteredSlug('');
 
-        if (enteredCompanyName.trim().length === 0) {
+        if (newCompany.trim().length === 0) {
             return;
         }
-        else {
-            dispatch(actionCreators.createCompany({
-                company: enteredCompanyName,
-                slug: enteredSlug
-            }))
-            setEnteredCompanyName('')
-            setEnteredSlug('')
-        }
+        // else {
+        //     dispatch(actionCreators.createCompany({
+        //         company: newCompany,
+        //         slug: enteredSlug
+        //     }))
+        //     setEnteredCompanyName('')
+        //     setEnteredSlug('')
+        // }
     }
 
 
@@ -157,6 +163,9 @@ const Register = () => {
         setPhoto(photoData)
     }
 
+
+
+
     const onRegister = (event) => {
         event.preventDefault()
         if (username.trim().length === 0 || !email.includes('@') || password.trim().length < 5) {
@@ -168,7 +177,7 @@ const Register = () => {
                 email,
                 password,
                 photo,
-                company,
+                newCompany,
                 role
             }))
             // const token = localStorage.getItem("token");
@@ -251,8 +260,11 @@ const Register = () => {
 
                                 <select
                                     className="section-options"
-                                    onChange={(event) =>
-                                        setCompany(event.target.value)}
+                                    // onChange={(event) =>
+                                        // setNewCompany(event.target.value)}
+                                        onChange={(event) => {
+                                            companyChangeHandler(event)
+                                        }}
                                     defaultValue=""
                                 >
                                     <option className="light-txt" value="" disabled>
@@ -261,8 +273,9 @@ const Register = () => {
                                     {companies != undefined &&
                                         companies.map(company => {
                                             return (
-                                                <option key={company.id} value={company.id}>
-                                                    {company.attributes.name}
+                                                <option key={company.id} 
+                                                        value={company.id}>
+                                                        {company.attributes.name}
                                                 </option>
                                             )
                                         })
@@ -283,24 +296,25 @@ const Register = () => {
                                 <input
                                     type="text"
                                     placeholder="Enter company name"
-                                    value={enteredCompanyName}
+                                    value={newCompany}
                                     onChange={companyChangeHandler}
                                 />
 
-                                <label>Add slug</label>
+                                {/* <label>Add slug</label>
                                 <input
                                     type="text"
                                     placeholder="Enter slug"
-                                    value={enteredSlug}
+                                    value={slug}
                                     onChange={slugChangeHandler}
-                                />
+                                /> */}
                                 <button className="button button-modal"
                                     // type="submit"
-                                    onClick={(event) => toggleModal(event, false)}
-                                // onClick={handleCompany}
-
+                                    onClick={(event) => {
+                                        toggleModal(event, false)
+                                        // handleCompany()
+                                    }}
                                 >
-                                    Confirm
+                                    Close
                                 </button>
                             </div>
 

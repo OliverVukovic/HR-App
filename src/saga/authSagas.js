@@ -15,11 +15,10 @@ export function* register(action) {
         email,
         password,
         photo,
-        company,
+        newCompany,
         role
     } = action.payload
     try {
-        // console.log(photo)
         const response = yield call(
             authApi.register, {
             username,
@@ -28,80 +27,51 @@ export function* register(action) {
         });
 
         console.log('register saga response', response)
-        // zakomentarisao, jer necu da se sam loguje nakon registracije
-        
-        // let token = response.jwt != null ? response.jwt : null;
-        // console.log(response)
-        let id = response.user.id;
-        localStorage.setItem("id", id);
-        localStorage.setItem('token', response.jwt)
-        
+
+        if (response) {
+            let id = response.user.id;
+            let companyId = newCompany;
+            localStorage.setItem("id", id);
+            localStorage.setItem('token', response.jwt)
 
 
-        // console.log(action)
-
-        // let token = response.jwt != null ? response.jwt : null;
-        // ovde staviti localStorage(id)
-
-        // console.log("Ovo je pro if(TOKEN)")
-        // if (token) 
-        // {
-        // console.log("Usao sam u token");
-        
-        yield put(
-            {
-                type: ActionsTypes.REGISTER_USER_SUCCESS,
-                payload: response.user
+            if (isNaN(newCompany)) {
+                const slug = newCompany.toLowerCase().replaceAll(' ','-')
+                const responseCompany = yield call(authApi.createNewCompany, { name: newCompany, slug: slug })
+                console.log(responseCompany)
+                companyId = responseCompany.payload.data.id
+                yield put({ type: ActionsTypes.CREATE_COMPANY, response: responseCompany })
             }
-        )
-        
 
+            let photoId = null;
+            if (photo != null) {
+                const img = yield call(authApi.uploadPhoto, photo);
+                // console.log(img)
+                photoId = img.payload[0].id;
+                // console.log(photoId)
+            }
+            // console.log(response.user)
 
+            yield put(
+                {
+                    type: ActionsTypes.REGISTER_USER_SUCCESS,
+                    payload: response.user
+                }
+            )
 
-
-        // yield put(
-        //     {
-        //         type: 'AFTER_REGISTER_SUCCESS',
-        //     }
-        // )
-
-
-
-
-        // if (isNaN(company)) {
-        //     const slug = company.toLowerCase().replaceAll(" ", "-");
-        //     const companyResponse = yield call(authApi.createNewCompany, {name: company, slug: slug})
-        //     console.log(companyResponse);
-        //     if (companyResponse.status >= 400) {
-        //         throw companyResponse;
-        //     }                        
-        //     yield put({ type: ActionsTypes.CREATE_COMPANY, payload: companyResponse });
-        // }
-
-
-        localStorage.setItem('token', response.jwt)
-        let photoId = null;
-        if (photo != null) {
-            const img = yield call(authApi.uploadPhoto, photo);
-            // console.log(img)
-            photoId = img.payload[0].id;
-            // console.log(photoId)
+            const profileResponse = yield call(authApi.createProfile, {
+                name: username,
+                user: response.user.id,
+                userRole: role,
+                company: Number(companyId),
+                profilePhoto: photoId,
+            })
+            yield put({
+                type: ActionsTypes.FETCH_PROFILE_RESPONSE,
+                payload: profileResponse.data
+            })
         }
-        // console.log(response.user)
-        
-        const profileResponse = yield call(authApi.createProfile, {
-            name: username,
-            user: response.user.id,
-            userRole: role,
-            company: Number(company),
-            profilePhoto: photoId,
-        })
-        // debugger
-        // console.log()
-        yield put({
-            type: ActionsTypes.FETCH_PROFILE_RESPONSE,
-            payload: profileResponse.data
-        })
+
 
         // }
 
@@ -134,16 +104,19 @@ export function* login(action) {
             password
         }
         )
-        let token = response.jwt != null ? response.jwt : null;
-        // console.log(response)
-        let id = response.user.id;
-        localStorage.setItem("id", id);
-        localStorage.setItem('token', response.jwt)
-        // debugger
-        if (token) {
-            const response = yield call(authApi.fetchProfile, id)
-            if (response) {
-                yield put(fetchProfileResponse(response.data.data[0].attributes));
+
+        if (response) {
+            let token = response.jwt != null ? response.jwt : null;
+            // console.log(response)
+            let id = response.user.id;
+            localStorage.setItem("id", id);
+            localStorage.setItem('token', response.jwt)
+            // debugger
+            if (token) {
+                const response = yield call(authApi.fetchProfile, id)
+                if (response) {
+                    yield put(fetchProfileResponse(response.data.data[0].attributes));
+                }
             }
             // yield put({
             //     type: ActionsTypes.LOGIN_USER_SUCCESS,
@@ -164,7 +137,7 @@ export function* fetchProfileSaga(action) {
     try {
         console.log("Usao sam u SAGU i prosledio id");
         console.log(action.id);
-        const {data} = yield call(
+        const { data } = yield call(
             authApi.fetchProfile,
             action.id
         )
@@ -183,12 +156,11 @@ export function* fetchProfileSaga(action) {
 
 
 
-
-
-
 export function* autoLogin(action) {
     // console.log(action)
     const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
+
+    console.log("in auto login")
     try {
         const response = yield call(authApi.fetchProfile, myId)
         if (response) {
@@ -216,7 +188,7 @@ export function* autoLogin(action) {
 //         localStorage.removeItem('token');
 //         localStorage.removeItem('id');
 
-       // redirect
+// redirect
 // }
 
 // ---------------  zakomentarisi

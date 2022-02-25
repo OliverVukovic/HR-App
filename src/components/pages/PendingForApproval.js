@@ -19,7 +19,7 @@ function PendingForApproval() {
     // const newUser = useSelector((state) => state.user);
     const newProfile = useSelector((state) => state.reducer.profile);
     let isLoadedPage = useSelector(state => state.reducer.loading);
-    console.log("---------------------", newProfile)
+    // console.log("---------------------", newProfile)
 
 
     const dispatch = useDispatch();
@@ -35,11 +35,13 @@ function PendingForApproval() {
     const [profile, setProfile] = useState(null);
     const [profiles, setProfiles] = useState(null);
     useEffect(() => {
+        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", newProfile)
+
         if (newProfile) {
             axios.get(
-                `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[company][id][$eq]=${newProfile.attributes.company.data.id}&populate=*`
+                `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[company][id][$eq]=${newProfile.attributes.company.data?.id}&populate=*`
             ).then((response) => {
-                console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", response)
+                // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", response)
                 setProfiles(response?.data?.data)
             })
         }

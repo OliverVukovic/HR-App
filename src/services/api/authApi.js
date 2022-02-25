@@ -173,15 +173,18 @@ export const createNewCompany = async (payload) => {
     try {
         // console.log("Usao sam u createNewCompany");
         // console.log(payload);
-        const response = await axios(
-            {
-                method: 'POST',
-                url: `https://strapi-internship-hr-app.onrender.com/api/companies`,
-                data: payload
-            }
-        )
+            // const response = await axios(
+            //     {
+            //         method: 'POST',
+            //         url: `https://strapi-internship-hr-app.onrender.com/api/companies`,
+            //         data: {payload}
+            //     }
+            // )
+        const response = await axios.post('https://strapi-internship-hr-app.onrender.com/api/companies', {
+            data:payload
+        })
         // console.log(response);
-        return response.data;
+        return {payload: response.data };
     }
     catch (error) {
         // console.log(error);

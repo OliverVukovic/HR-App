@@ -3,7 +3,7 @@ import * as ActionTypes from "./ActionsTypes"
 
 // REGISTER
 export const registerUser = (user) => {
-    // console.log(user)
+    console.log(user)
     return {
         type: ActionTypes.REGISTER_USER,
         payload: user

@@ -83,6 +83,7 @@ function CompanyInfo() {
           <input className='choose-company-file' 
                 type="text" 
                 value={user !== undefined ? user?.company : ""}
+                // onChange={}
           />
           <p className="company-name">Company Logo</p>
           <input className='choose-file' 
