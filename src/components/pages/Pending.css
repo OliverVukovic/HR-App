@@ -13,3 +13,16 @@
 /* .pending-box{
     width: 20%;
 } */
+
+.add-team {
+    max-width: 205px;
+    border: none;
+    padding: 15px;
+    font-family: "Comic Neue", sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    height: 100%;
+    background-color: green;
+    color: white;
+    border-radius: 5px;
+}

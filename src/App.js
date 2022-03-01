@@ -88,9 +88,10 @@ function App() {
         <Route path="/company-info" element={<CompanyInfo />} />
         <Route path="/questions" element={<Questions />} />
         <Route path="/addquestions" element={<AddNewQuestions />} />
-        <Route path='questions/:questionsId/edit' element={<EditQuestions />} />
+        <Route path="questions/:questionsId/edit" element={<EditQuestions />} />
         <Route path="/pending-for-approval" element={<PendingForApproval />} />
-        <Route path="/approve" element={<ApprovePage />} />
+        {/* <Route path="/approve" element={<ApprovePage />} /> */}
+        <Route path="/pending-for-aproval/:profileId/approve" element={<ApprovePage />} />
         <Route path="/edit" element={<EditMember />} />
         <Route path="*" element={<PageNotFound />} />
         {/* <Route path="tt" element={<PendingForApproval />} /> */}

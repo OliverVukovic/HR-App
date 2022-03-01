@@ -11,9 +11,6 @@ import HeaderLog from "./layout/HeaderLog";
 
 const Register = () => {
 
-    // const newUser = useSelector((state) => state.newUser);
-    // const error = useSelector((state) => state.error); 
-    // const [ newFile, setNewFile ] = useState("Choose File")
 
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
@@ -72,6 +69,10 @@ const Register = () => {
 
 
 
+
+
+    // COMPANY
+
     const [companies, setCompanies] = useState(null);
 
     useEffect(() => {
@@ -82,10 +83,7 @@ const Register = () => {
             setCompanies(response.data.data)
         })
     }, [setCompanies]);
-
     // console.log('proba ispod koda...', companies)
-
-
 
 
 
@@ -99,10 +97,9 @@ const Register = () => {
     }
     // const  [ id, setId ] = useState('');
 
-
     const [slug, setSlug] = useState('');
     const [newCompany, setNewCompany] = useState('');
-    console.log(newCompany)
+    // console.log(newCompany)
 
     const companyChangeHandler = (event) => {
         // setNewCompany({newCompany:event.target.value});
@@ -116,32 +113,16 @@ const Register = () => {
     }
 
     const handleCompany = (event) => {
-        console.log("usli smo u HL.........................")
-        // const companyData = {
-        //     company: enteredCompanyName,
-        //     slug: enteredSlug
-        // }
-        // props.onSaveCompanyData(companyData)
-        // setEnteredCompanyName('');
-        // setEnteredSlug('');
-
         if (newCompany.trim().length === 0) {
             return;
         }
-        // else {
-        //     dispatch(actionCreators.createCompany({
-        //         company: newCompany,
-        //         slug: enteredSlug
-        //     }))
-        //     setEnteredCompanyName('')
-        //     setEnteredSlug('')
-        // }
     }
 
 
 
 
-
+    
+    // UPLOAD PHOTO
 
     const [badFormat, setBadFormat] = useState(false);
 
@@ -166,6 +147,8 @@ const Register = () => {
 
 
 
+    // REGISTER BUTTON
+
     const onRegister = (event) => {
         event.preventDefault()
         if (username.trim().length === 0 || !email.includes('@') || password.trim().length < 5) {
@@ -181,8 +164,6 @@ const Register = () => {
                 role
             }))
             // const token = localStorage.getItem("token");
-
-
             setUsername('');
             setEmail('');
             setPassword('');
@@ -190,8 +171,6 @@ const Register = () => {
             navigate("/home");
         }
     };
-
-    // const statusCode = useSelector(state => state.reducer)
 
 
     return (

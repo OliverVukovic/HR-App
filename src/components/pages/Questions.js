@@ -9,11 +9,13 @@ import { useMutation, useQuery} from "react-query";
 
 
 const fetchPostman = () => {
-    return axios.get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*&pagination[pageSize]=1000')
+    return axios
+            .get('https://strapi-internship-hr-app.onrender.com/api/questions?populate=*&pagination[pageSize]=1000')
 }
 
 const deleteQuestions = async(id) => {
-    await axios.delete(`https://strapi-internship-hr-app.onrender.com/api/questions/${id}`)    
+    await axios
+            .delete(`https://strapi-internship-hr-app.onrender.com/api/questions/${id}`)    
 }
 
     export const Questions = () => {
@@ -27,7 +29,7 @@ const deleteQuestions = async(id) => {
             refetchOnWindowFocus: true
             })
 
-            const { mutateAsync:deletequestions} = useMutation(async(id) => { 
+            const { mutateAsync:deletequestions } = useMutation(async(id) => { 
                 await deleteQuestions(id)},
                 {
                     onSuccess:(data) => {
@@ -42,8 +44,8 @@ const deleteQuestions = async(id) => {
             } 
             if (error) {
                 return <div>
-                        <PageNotFound />
-                    </div>
+                          <PageNotFound />
+                       </div>
             }
 
             return (
@@ -56,7 +58,7 @@ const deleteQuestions = async(id) => {
                             <div className="title-btn">
                                 <h2 className="questions-title-big">Questions</h2>
                                 <Link  to="/addquestions">
-                                    <button className="add-questions button">
+                                    <button className="add-team">
                                          + Add new questions
                                     </button>
                                 </Link>

@@ -6,9 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { fetchProfileRequest } from '../../redux/action/ActionCreators';
 import { Link } from 'react-router-dom';
+import { useParams } from 'react-router-dom';
 
 
 function Approve() {
+
+    const {profileId} = useParams()
+    console.log(profileId)
 
 
     const id = localStorage.getItem("id");

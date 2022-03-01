@@ -176,13 +176,13 @@ function MyProfile() {
                                         width={200} />}
 
 
-                                <div className="but-div">
+                                {/* <div className="but-div">
                                     <button className="button"
                                         onClick={onSave}
                                     >
                                         Save
                                     </button>
-                                </div>
+                                </div> */}
 
                             </div>
                         </div>

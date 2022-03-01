@@ -14,7 +14,6 @@ function CompanyInfo() {
 
   // UPLOAD NEW PHOTO
   const [newPhoto, setNewPhoto] = useState(null);
-  // const [badFormat, setBadFormat] = useState(false);
 
   const handlePhoto = (event) => {
       const uploadPhoto = event.target.files[0];
@@ -24,6 +23,7 @@ function CompanyInfo() {
       photoData.append("files", uploadPhoto);
       setNewPhoto(photoData)
   }
+
 
 
 
@@ -60,12 +60,10 @@ function CompanyInfo() {
 // SAVE BUTTON
     const onSave = (event) => {
       event.preventDefault()
-        return
-    //  {
-    //       dispatch({
-    //           newPhoto,
-    //       })
-    //   }
+      dispatch({
+        newPhoto
+    })
+        // return
   };
 
 
@@ -91,7 +89,7 @@ function CompanyInfo() {
                 name="file" 
                 // placeholder="Upload photo"
                 onChange={event => handlePhoto(event)}
-          />
+                />
           <div className="div-but">
             <button className="button"
                     onClick={onSave}

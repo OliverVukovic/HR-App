@@ -35,11 +35,11 @@ function PendingForApproval() {
     const [profile, setProfile] = useState(null);
     const [profiles, setProfiles] = useState(null);
     useEffect(() => {
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", newProfile)
+        // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", newProfile)
 
         if (newProfile) {
             axios.get(
-                `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[company][id][$eq]=${newProfile.attributes.company.data?.id}&populate=*`
+                `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[company][id][$eq]=${newProfile.attributes?.company.data?.id}&populate=*&filters[status][$eq]=pending`
             ).then((response) => {
                 // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", response)
                 setProfiles(response?.data?.data)
@@ -94,13 +94,29 @@ function PendingForApproval() {
                                                     </div>
                                                 </div>
 
+
+
+
+
                                                 <div className='pending-buttons'>
-                                                    <Link to="/approve">
-                                                        <button className='pending-d-btn'>
+                                                    <Link to={`/approve/${profile.id}/`}>
+                                                        <button id={profile.id} className='pending-d-btn'>
                                                             Details
                                                         </button>
                                                     </Link>
-                                                    <button className='pending-d-btn'>
+
+                                                    {/* <Link to={`/pending-for-approval/${profile.id}/approve`}>
+                                                        <button className="pending-d-btn">
+                                                            Edit
+                                                        </button>
+                                                    </Link> */}
+
+
+
+
+
+
+                                                    <button id={profile.id} className='pending-d-btn'>
                                                         Delete
                                                     </button>
                                                 </div>

@@ -27,6 +27,7 @@
 .container-company-info {
   padding-top: 70px;
   width: 100%;
+  overflow-y: scroll;
 }
 .container-company-info-page {
   padding-top: 70px;
@@ -111,6 +112,7 @@
   transition: 1s;
   cursor: pointer;
   font-family: "Comic Neue", sans-serif;
+  width: 70px;
 }
 .pending-d-btn:hover {
   background-color: white;
