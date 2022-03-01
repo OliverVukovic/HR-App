@@ -74,7 +74,6 @@ const Register = () => {
                 company: enteredCompanyName,
                 slug: enteredSlug
             }))
-
             setEnteredCompanyName('')
             setEnteredSlug('')
         }
@@ -109,17 +108,18 @@ const Register = () => {
             }))
             // const token = localStorage.getItem("token");
 
-            navigate("/home");
+
             setUsername('');
             setEmail('');
             setPassword('');
             setCompany('')
+            navigate("/home");
         }
     };
 
-    const statusCode = useSelector(state => state.reducer)
+    // const statusCode = useSelector(state => state.reducer)
 
-    
+
     return (
         <div className="login-form">
             <Header />
@@ -201,24 +201,30 @@ const Register = () => {
                                 </button>
                             </div>
                             <div className="company-modal" style={{ display: modal ? "flex" : "none" }}>
-                                    <label>Add new company name</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter company name"
-                                        value={enteredCompanyName}
-                                        onChange={(e) => setEnteredCompanyName(e.target.value)}
-                                    />
-                                    <label>Add slug</label>
-                                    <input
-                                        type="text"
-                                        placeholder="Enter slug"
-                                        value={enteredSlug}
-                                        onChange={(e) => setEnteredSlug(e.target.value)}
-                                    />
-                                    <button className="button button-modal"
-                                        onClick={(event) => toggleModal()} >
-                                        Confirm
-                                    </button>  
+
+                                <label>Add new company name</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter company name"
+                                    value={enteredCompanyName}
+                                    // onChange={companyChangeHandler}
+                                />
+
+                                <label>Add slug</label>
+                                <input
+                                    type="text"
+                                    placeholder="Enter slug"
+                                    value={enteredSlug}
+                                    // onChange={slugChangeHandler}
+                                />
+                                <button className="button button-modal"
+                                    // type="submit"
+                                    onClick={(event) => toggleModal(event, false)}
+                                // onClick={handleCompany}
+
+                                >
+                                    Confirm
+                                </button>
                             </div>
                             
                         </div>

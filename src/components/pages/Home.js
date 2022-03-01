@@ -11,7 +11,7 @@ function Home() {
 
   const id = localStorage.getItem("id");
   let isLoadedPage = useSelector(state => state.reducer.loading);
-
+  console.log('adasdasdsa')
   const dispatch = useDispatch();
     useEffect(() => {
         dispatch(setInitalLoading(true));

@@ -12,12 +12,6 @@ const appReducer = combineReducers({
   });
 
   const rootReducer = (state, action) => {
-	  
-	console.log("-----------")
-	console.log(action)
-	console.log("-----------")
-
-
 	if (action.type === 'CLEAR_STORE') {
 	  state = undefined;
 	}

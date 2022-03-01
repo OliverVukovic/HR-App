@@ -8,8 +8,6 @@ function reducer(state = initState, action) {
         case actions.REGISTER_USER:
             return state;
         case actions.REGISTER_USER_SUCCESS:
-            console.log("ovo je akcija", action)
-            console.log("ovo je state", state)
             return { ...state, user: action.payload }
         case actions.REGISTER_USER_FAILURE:
             return { ...state, error: action.payload }
@@ -27,8 +25,7 @@ function reducer(state = initState, action) {
 
 
         case actions.AFTER_REGISTER_SUCCESS:
-
-        case 'AFTER_REGISTER_SUCCESS':
+        // case 'AFTER_REGISTER_SUCCESS':
             return { ...state, registerFreshness: state.registerFreshness + 1 }
 
 
@@ -36,7 +33,6 @@ function reducer(state = initState, action) {
         case actions.LOGIN_USER:
             return state
         case actions.LOGIN_USER_SUCCESS:
-            console.log(state)
             return { ...state, user: action.payload }
         case actions.LOGIN_USER_FAILURE:
             return { ...state, error: action.payload }
@@ -88,8 +84,8 @@ function reducer(state = initState, action) {
 
 
         case actions.FETCH_PROFILE_RESPONSE:
-            console.log("RESPONSE radi!");
-            console.log(action)
+            // console.log("RESPONSE radi!");
+            // console.log(action)
             return {
                 ...state,
                 profile: {
@@ -98,7 +94,7 @@ function reducer(state = initState, action) {
             };
 
         case action.CREATE_PROFILE:
-            console.log('REDUCER CREATE PROFILESSSSSSSS')
+            
             return {
                 ...state,
                 ...action.payload

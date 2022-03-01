@@ -17,6 +17,7 @@ import EditQuestions from "./components/pages/EditQuestions";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Loader } from "./components/helpers/Loader";
 import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
+import PendingForApproval from "./components/pages/PendingForApproval";
 import TestTeam from "./components/pages/TestTeam";
 
 function App() {
@@ -26,7 +27,7 @@ function App() {
 
   const registerFreshness = useSelector(state => state.reducer.registerFreshness)
   const myUserId = useSelector(state => { 
-    console.log(state)
+    // console.log(state)
    return state.reducer.user.id})
 
   // const isAutenticated = useSelector(state => state.reducer.user.confirmed)
@@ -35,7 +36,7 @@ function App() {
   // const token = localStorage.getItem("token");
 
 
-  console.log(isAutenticated)
+  // console.log(isAutenticated)
 
   const isLoggedIn = isAutenticated;
 
@@ -68,8 +69,6 @@ function App() {
 
 
   let loggedInRoutes = null;
-      console.log(isLoggedIn)
-      console.log(isAutenticated)
 
   if (isAutenticated) {
     loggedInRoutes = (
@@ -81,12 +80,12 @@ function App() {
         <Route path="/questions" element={<Questions />} />
         <Route path="/addquestions" element={<AddNewQuestions />} />
         <Route path='questions/:questionsId/edit' element={<EditQuestions />} />
-        <Route path="/pending-for-approval" element={<Pending />} />
+        <Route path="/pending-for-approval" element={<PendingForApproval />} />
         <Route path="/approve" element={<ApprovePage />} />
         <Route path="/edit" element={<EditMember />} />
         <Route path="*" element={<PageNotFound />} />
         <Route path="/tt" element={<TestTeam />} />
-        
+
       </>
     )
   }
@@ -99,8 +98,7 @@ function App() {
         <Route exact path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
         {/* <Route path="*" element={<ReturnOnLoginPage />} /> */}
-        <Route path="*" element={<Navigate to="/" />} />
-
+        {/* <Route path="*" element={<Navigate to="/" />} /> */}
       </>
     )
   }
@@ -121,5 +119,4 @@ function App() {
     </QueryClientProvider>
   );
 }
-
 export default App;

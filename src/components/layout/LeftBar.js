@@ -11,9 +11,8 @@ import avatar from "../../assets/avatar.png"
 function LeftBar() {
 
 
-  const id = localStorage.getItem("id");
+  // const id = localStorage.getItem("id");
   const newUser = useSelector((state) => state.user); //copy iz MyProfile
-  console.log("provera usera", newUser)
 
   const newProfile = useSelector((state) => state.reducer.profile);
 
@@ -42,7 +41,7 @@ function LeftBar() {
   const [photo, setPhoto] = useState(null);
   const handlePhoto = (event) => {
     const uploadPhoto = event.target.files[0];
-    console.log("ovde ide upload fotografije", uploadPhoto);
+    // console.log("ovde ide upload fotografije", uploadPhoto);
 
     const photoData = new FormData();
     photoData.append("files", uploadPhoto);
@@ -54,9 +53,6 @@ function LeftBar() {
   //     event.preventDefault()
   //     setPhoto(photo)
   // }
-  console.log("**********************")
-  console.log(user.profilePhoto)
-  console.log("**********************")
 
   return (
     <div>
@@ -67,7 +63,7 @@ function LeftBar() {
         <Link to="/questions" className="lb-links"> &#8827; Questions</Link>
         <Link to="/company-info" className="lb-links"> &#8827; Company Info</Link>
         <Link to="/home" className="lb-links"> &#8827; My Profile</Link>
-        <Link to="/tt" className="lb-links"> &#8827; tt</Link>
+        <Link to="/tt" className="lb-links"> &#8827; TT</Link>
 
         <div className='user-data'>
           <div className='user-photo'>

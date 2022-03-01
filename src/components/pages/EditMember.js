@@ -24,7 +24,6 @@ function EditMember() {
                                 >
                                     <option value='Published'>Published</option>
                                     <option value='Pending'>Pending</option>
-                                    <option value='Delete'>Delete</option>
                                 </select>
                             </div>
 

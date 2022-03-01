@@ -1,0 +1,15 @@
+.left-right-container {
+    display: flex;
+    width: 100%;
+}
+.right-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    /* width: 70%; */
+    /* justify-content: center; */
+    margin-top: 20px;
+}
+/* .pending-box{
+    width: 20%;
+} */

@@ -107,10 +107,10 @@ export const fetchProfileResponse = (user) => {
 
 // LOADER 
 export const setInitalLoading = (value) => {
-	return {
-		type: ActionTypes.SET_INITIAL_LOADING,
-		value,
-	};
+    return {
+        type: ActionTypes.SET_INITIAL_LOADING,
+        value,
+    };
 };
 
 
@@ -184,7 +184,7 @@ export const uploadPhotoFailure = (payload) => {
 export const clearStore = () => {
     return {
         type: ActionTypes.CLEAR_STORE,
-        
+
     }
 }
 

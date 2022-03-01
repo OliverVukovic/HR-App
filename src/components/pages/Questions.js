@@ -27,7 +27,7 @@ const deleteQuestions = async(id) => {
             refetchOnWindowFocus: true
             })
 
-            const {data, isLoading:loading, mutateAsync:deletequestions} = useMutation(async(id) => { 
+            const { mutateAsync:deletequestions} = useMutation(async(id) => { 
                 await deleteQuestions(id)},
                 {
                     onSuccess:(data) => {
