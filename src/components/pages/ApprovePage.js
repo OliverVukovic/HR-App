@@ -15,7 +15,7 @@ function Approve() {
     console.log(profileId)
 
 
-    const id = localStorage.getItem("id");
+    // const id = localStorage.getItem("id");
     // const newUser = useSelector((state) => state.user);
     const newProfile = useSelector((state) => state.reducer.profile);
     // const profile = {
@@ -25,11 +25,11 @@ function Approve() {
     const [user, setUser] = useState(null);
 
     const dispatch = useDispatch();
-  useEffect(() => {
-    if(id) {
-      dispatch(fetchProfileRequest(id))
-    }
-  }, []);
+//   useEffect(() => {
+//     if(profileId) {
+//       dispatch(fetchProfileRequest(profileId))
+//     }
+//   }, []);
 
 
 

@@ -105,6 +105,28 @@ export const fetchProfileResponse = (user) => {
 };
 
 
+
+
+// 
+export const fetchProfileByIdRequest = (user) => {
+    return {
+        type: ActionTypes.FETCH_PROFILE_RESPONSE,
+        payload: user,
+    };
+};
+
+export const fetchProfileByIdResponse = (user) => {
+    return {
+        type: ActionTypes.FETCH_PROFILE_RESPONSE,
+        payload: user,
+    };
+};
+
+
+
+
+
+
 // LOADER 
 export const setInitalLoading = (value) => {
     return {
@@ -151,6 +173,29 @@ export const fetchCompanySuccess = (payload) => {
 export const fetchCompanyFailure = (payload) => {
     return {
         type: ActionTypes.FETCH_COMPANY_FAILURE,
+        payload
+    }
+}
+
+
+
+
+// FETCH COMPANY BY ID
+export const fetchCompanyById = (payload) => {
+    return {
+        type: ActionTypes.FETCH_COMPANY_BY_USER_ID,
+        payload
+    }
+}
+export const fetchCompanyByIdSuccess = (payload) => {
+    return {
+        type: ActionTypes.FETCH_COMPANY_SUCCESS_BY_USER_ID,
+        payload
+    }
+}
+export const fetchCompanyByIdFailure = (payload) => {
+    return {
+        type: ActionTypes.FETCH_COMPANY_FAILURE_BY_USER_ID,
         payload
     }
 }

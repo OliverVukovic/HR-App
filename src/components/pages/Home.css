@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.width-max {
+  width: 100%;
+}
+
 
 
 
@@ -24,3 +28,11 @@
 .home{
     flex: 1;
 } */
+
+@media only screen and (max-width: 440px) {
+  .company-info {
+    padding: 0px;
+    padding-top: 50px;
+  }
+}
+

@@ -13,6 +13,7 @@ const initState = {
         isAutenticated: false,
     },
     profile: null,
+    userCompany:null,
     registerFreshness: 0,
     error: {}
 }

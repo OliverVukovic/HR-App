@@ -9,7 +9,7 @@ const Header = () => {
     return (
         <header>
             <div className="q-logo">
-                <img src={logo} alt="logo"/>
+                <img className="logo" src={logo} alt="logo"/>
             </div>
             <div className="page-links-header">
                 <Link className="link-header" to="/">Login</Link>

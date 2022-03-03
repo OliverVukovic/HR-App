@@ -1,13 +1,13 @@
 // import { Navigate, useNavigate } from "react-router-dom";
 // import { type } from "@testing-library/user-event/dist/type";
 import { takeEvery, call, put, takeLatest } from "redux-saga/effects";
-import { fetchProfileResponse, setInitalLoading } from "../redux/action/ActionCreators";
+import { fetchProfileResponse, setInitalLoading, fetchCompanyByIdSuccess, fetchCompanyByIdFailure } from "../redux/action/ActionCreators";
 // import { uploadPhotoFailure, uploadPhotoSuccess } from "../redux/action/ActionCreators";
 import * as ActionsTypes from "../redux/action/ActionsTypes";
 import * as authApi from "../services/api/authApi";
 
 
-
+// REGISTER
 export function* register(action) {
 
     const {
@@ -33,6 +33,11 @@ export function* register(action) {
             let companyId = newCompany;
             localStorage.setItem("id", id);
             localStorage.setItem('token', response.jwt)
+
+
+            if (id) {
+                yield call(fetchProfileSaga, id)                
+            }
 
 
             if (isNaN(newCompany)) {
@@ -83,14 +88,15 @@ export function* register(action) {
         // prekinuti loading... (koristiti PUT)
         // redirekcija korisnika (uz pomoc react routera)
     } catch (error) {
-        // yield put({
-        //     type: ActionsTypes.REGISTER_USER_FAILURE,
-        //     payload: {message: "Check Your data!"}
-        // })
+        yield put({
+            type: ActionsTypes.REGISTER_USER_FAILURE,
+            payload: {message: "Check Your data!"}
+        })
     }
 };
 
 
+// LOGIN
 export function* login(action) {
     // console.log(action)
     const {
@@ -113,10 +119,12 @@ export function* login(action) {
             localStorage.setItem('token', response.jwt)
             // debugger
             if (token) {
-                const response = yield call(authApi.fetchProfile, id)
-                if (response) {
-                    yield put(fetchProfileResponse(response.data.data[0].attributes));
-                }
+                // const response = yield call(authApi.fetchProfile, id)
+                // if (response) {
+                //     yield put(fetchProfileResponse(response.data.data[0].attributes));
+
+                yield call(fetchProfileSaga, id)
+                
             }
             // yield put({
             //     type: ActionsTypes.LOGIN_USER_SUCCESS,
@@ -133,15 +141,15 @@ export function* login(action) {
 }
 
 
-export function* fetchProfileSaga(action) {
+export function* fetchProfileSaga(id) {
     try {
         console.log("Usao sam u SAGU i prosledio id");
-        console.log(action.id);
+        console.log(id);
         const { data } = yield call(
             authApi.fetchProfile,
-            action.id
+            id
         )
-        console.log('saga fetch my profile action', action) // PAZNJA -> action nema payload nego id
+        // console.log('saga fetch my profile action', action) // PAZNJA -> action nema payload nego id
         console.log('saga fetch my profile response', data)
         // if (response && response.data && response.data.data && response.data.data[0]) {
         const payload = data?.data?.[0];
@@ -155,20 +163,59 @@ export function* fetchProfileSaga(action) {
 
 
 
+// export function* fetchSagaCompanyId(action) {
+//     try {
+//         const response = yield call(
+//             authApi.fetchCompanyByProfileId,
+//             action.payload.id
+//         )
+//         yield put(setInitalLoading(false));
+//         // yield put(fetchCompanyByIdSuccess(response?.data?.data?.[0]))
+//     } catch (error) {
+//         // yield put(fetchCompanyByIdFailure(error.message))
+//         return error
+//     }
+// }
 
+
+
+export function* fetchSagaCompanyByProfileId(action) {
+    try {
+        const response = yield call(
+            authApi.fetchCompanyByProfileId,
+            action.payload.id
+        )
+        yield put(setInitalLoading(false));
+
+        yield put(fetchCompanyByIdSuccess(response?.data?.data?.[0]))
+    } catch (error) {
+        yield put(fetchCompanyByIdFailure(error.message))
+        return error
+    }
+}
+
+//  za izmenu uploada slike napraviti action EditCompany, napraviti sagu koja dohvata akciju editCompany, koja ce dalje da pozove sliku (tj. upload slike) i nakon toga PUT(api/companyId)koji cemo pronaci na Postmanu  
+
+
+
+
+// AUTOLOGIN
 export function* autoLogin(action) {
     // console.log(action)
     const myId = localStorage.getItem("id"); // id mu ne treba, ali neka ga za svaki slucaj
 
     console.log("in auto login")
     try {
-        const response = yield call(authApi.fetchProfile, myId)
-        if (response) {
-            // yield put({
-            //     type: ActionsTypes.LOGIN_USER_SUCCESS,
-            //     payload: response.data
-            // })
-            yield put(fetchProfileResponse(response.data.data[0].attributes));
+        // const response = yield call(authApi.fetchProfile, myId)
+        // if (response) {
+        //     // yield put({
+        //     //     type: ActionsTypes.LOGIN_USER_SUCCESS,
+        //     //     payload: response.data
+        //     // })
+        //     yield put(fetchProfileResponse(response.data.data[0].attributes));
+        // }
+        if (myId) {
+            yield call(fetchProfileSaga, myId)
         }
     } catch (error) {
         // console.log(error)
@@ -223,6 +270,10 @@ export function* autoLogin(action) {
 
 
 
+
+
+
+// WATCHERS
 export default function* root() {
     yield takeLatest(
         ActionsTypes.REGISTER_USER,
@@ -244,9 +295,16 @@ export default function* root() {
     //     ActionsTypes.UPLOAD_PHOTO,
     //     uploadPhoto
     // );
+    // yield takeLatest(
+    //     ActionsTypes.FETCH_PROFILE_REQUEST,
+    //     fetchProfileSaga
+    // );
+
+
     yield takeLatest(
-        ActionsTypes.FETCH_PROFILE_REQUEST,
-        fetchProfileSaga
-    )
+        ActionsTypes.FETCH_COMPANY_BY_USER_ID,
+        fetchSagaCompanyByProfileId
+    );
+
 }
 

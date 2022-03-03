@@ -22,16 +22,19 @@ const deleteQuestions = async(id) => {
 
         let i = 1;
 
-        const {isLoading, data:questions, error, refetch } = useQuery(
-            'questions', 
-            fetchPostman, 
-            {
-            refetchOnWindowFocus: true
-            })
+        const {isLoading, 
+                data:questions, 
+                error, 
+                refetch } = useQuery(
+                                        'questions', 
+                                        fetchPostman, 
+                                            {
+                                                refetchOnWindowFocus: true
+                                            })
 
             const { mutateAsync:deletequestions } = useMutation(async(id) => { 
                 await deleteQuestions(id)},
-                {
+                    {
                     onSuccess:(data) => {
                         // console.log(data)
                         refetch()
@@ -41,12 +44,12 @@ const deleteQuestions = async(id) => {
 
             if (isLoading) {
                 return <Loader />
-            } 
+                } 
             if (error) {
                 return <div>
                           <PageNotFound />
                        </div>
-            }
+                }
 
             return (
                 <div>

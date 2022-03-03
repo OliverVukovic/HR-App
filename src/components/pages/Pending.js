@@ -25,13 +25,13 @@ function Pending() {
     // const [user, setUser] = useState(profile);
 
     const dispatch = useDispatch();
-  useEffect(() => {
-    dispatch(setInitalLoading(true));
+//   useEffect(() => {
+//     dispatch(setInitalLoading(true));
 
-    if(id) {
-      dispatch(fetchProfileRequest(id))
-    }
-  }, []);
+//     if(id) {
+//       dispatch(fetchProfileRequest(id))
+//     }
+//   }, []);
 
     const [user, setUser] = useState(null);
 

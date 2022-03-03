@@ -14,17 +14,20 @@ function Home() {
 
   const dispatch = useDispatch();
     useEffect(() => {
-        dispatch(setInitalLoading(true));
+        // dispatch(setInitalLoading(true));
   //       // prebaciti LOADER u home page
-        if(id) {
-          dispatch(fetchProfileRequest(id))
-        }
+        // if(id) {
+          // dispatch(fetchProfileRequest(id))
+        // }
     }, [])
+
+  
+
 
   return (
     <>
-    {isLoadedPage  && <Loader/> ? <Loader /> : (
-    <div>
+    {isLoadedPage ? <Loader /> : (
+    <div className='width-max'>
       <HeaderLog />
       <div className="container-home">
         <LeftBar />

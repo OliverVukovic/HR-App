@@ -1,5 +1,6 @@
 import React from 'react'
 import logo from "../../assets/quantox-logo.png"
+import burger from "../../assets/burger menu black.png"
 import './Header.css';
 import { Link, useNavigate} from "react-router-dom";
 import { useDispatch } from 'react-redux';
@@ -32,6 +33,9 @@ function HeaderLog() {
                 <button className="page-link-btn" onClick={logOut}>
                     Logout
                 </button>
+            </div>
+            <div className="burger-logo">
+                <img className='burger' src={burger} alt="logo"/>
             </div>
         </header>
     );

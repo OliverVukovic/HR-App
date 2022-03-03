@@ -3,8 +3,8 @@ import './Leftbar.css';
 import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
-import { fetchProfileRequest } from '../../redux/action/ActionCreators';
-import avatar from "../../assets/avatar.png"
+// import { fetchProfileRequest } from '../../redux/action/ActionCreators';
+import avatar from "../../assets/avatar.png";
 
 
 
@@ -25,7 +25,7 @@ function LeftBar() {
   const dispatch = useDispatch();
   useEffect(() => {
     if(newUser?.id) {
-      dispatch(fetchProfileRequest(newUser.id))
+      // dispatch(fetchProfileRequest(newUser.id))
     }
   }, [newUser]);
 
@@ -55,7 +55,7 @@ function LeftBar() {
   // }
 
   return (
-    <div>
+    <div className='response-none'>
       <div className="container-leftbar">
         <h2 className="lb-title">Menu</h2>
         <Link to="/pending-for-approval" className="lb-links"> &#8827; Pending for approval</Link>

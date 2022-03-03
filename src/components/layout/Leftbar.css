@@ -60,7 +60,7 @@
 @media only screen and (max-width: 870px) {
     .container-leftbar {
         padding: 10px 15px;
-        min-width: 260px;
+        min-width: 250px;
         
     }
     .lb-links{
@@ -75,5 +75,34 @@
         align-items: flex-start;
         padding-left: 15px;
         margin-top: 50px;
+    }
+}
+
+
+@media only screen and (max-width: 870px) {
+    .response-none {
+        display: none;
+    }
+
+    .company-info {
+        display: flex;
+        align-items: center;
+        padding: 0px;
+        padding-top: 50px;
+        padding-bottom: 20px;
+    }
+
+    .header-leftbar-right {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+
+
+@media only screen and (max-width: 440px) {
+    .header-leftbar-right {
+        flex-direction: column;
+        align-items: center;
     }
 }

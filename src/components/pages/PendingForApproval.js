@@ -26,23 +26,22 @@ function PendingForApproval() {
     useEffect(() => {
         dispatch(setInitalLoading(true));
 
-        if (id) {
-            dispatch(fetchProfileRequest(id))
-        }
+        // if (id) {
+        //     dispatch(fetchProfileRequest(id))
+        // }
     }, []);
 
     let index;
     const [profile, setProfile] = useState(null);
     const [profiles, setProfiles] = useState(null);
     useEffect(() => {
-        // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", newProfile)
 
         if (newProfile) {
             axios.get(
                 `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[company][id][$eq]=${newProfile.attributes?.company.data?.id}&populate=*&filters[status][$eq]=pending`
             ).then((response) => {
-                // console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", response)
                 setProfiles(response?.data?.data)
+                dispatch(setInitalLoading(false));
             })
         }
     }, [newProfile]);
@@ -64,7 +63,7 @@ function PendingForApproval() {
                             <div className='right-bar'>
 
                                 {profiles != undefined &&
-                                    profiles.map(profile => {
+                                    profiles.map((profile, index) => {
                                         return (
                                             <div key={index} className='pending-box'>
                                                 <div className='two-of-three'>
@@ -99,7 +98,8 @@ function PendingForApproval() {
 
 
                                                 <div className='pending-buttons'>
-                                                    <Link to={`/approve/${profile.id}/`}>
+                                                    {/* <Link to={`/approve/${profile.id}`}> */}
+                                                    <Link to={`/pending-for-approval/${profile.id}/approve`}>
                                                         <button id={profile.id} className='pending-d-btn'>
                                                             Details
                                                         </button>

@@ -48,16 +48,17 @@ function MyProfile() {
     // }
     
     const dispatch = useDispatch();
-    useEffect(() => {
+    
+    // useEffect(() => {
         // dispatch(setInitalLoading(true));
         // prebaciti LOADER u home page
         // setTimeout(() => {
         //     dispatch(fetchProfileRequest(id), 1000)
         // });
-        if(id) {
-            dispatch(fetchProfileRequest(id))
-    }
-    }, [dispatch, id])
+        // if(id) {
+            // dispatch(fetchProfileRequest(id))
+    // }
+    // }, [])
     
     
     const [user, setUser] = useState(null);

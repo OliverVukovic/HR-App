@@ -13,19 +13,19 @@ function reducer(state = initState, action) {
             return { ...state, error: action.payload }
 
 
-            // {
-            //     username: action.payload.username,
-            //     email: action.payload.email,
-            //     role: '',
-            //     company: '',
-            //     profilePhoto: '',
-            //     id: '',
-            //     isAutenticated: true
-            // }
+        // {
+        //     username: action.payload.username,
+        //     email: action.payload.email,
+        //     role: '',
+        //     company: '',
+        //     profilePhoto: '',
+        //     id: '',
+        //     isAutenticated: true
+        // }
 
 
         case actions.AFTER_REGISTER_SUCCESS:
-        // case 'AFTER_REGISTER_SUCCESS':
+            // case 'AFTER_REGISTER_SUCCESS':
             return { ...state, registerFreshness: state.registerFreshness + 1 }
 
 
@@ -94,11 +94,19 @@ function reducer(state = initState, action) {
             };
 
         case action.CREATE_PROFILE:
-            
+
             return {
                 ...state,
                 ...action.payload
             }
+
+        case actions.FETCH_COMPANY_SUCCESS_BY_USER_ID:
+            return {
+                ...state,
+                userCompany: {
+                    ...action.payload
+                }
+            };
 
 
         default:

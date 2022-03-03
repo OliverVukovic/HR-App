@@ -169,6 +169,25 @@ export const fetchProfile = async (id) => {
     }
 };
 
+
+export const fetchProfileById = async (profileId) => {
+    try {
+        if(!profileId) {
+            return
+        }
+        return axios(
+            {
+                method: 'GET',
+                url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[profile][id][$eq]=${profileId}&populate=*&pagination[pageSize]=1000`
+                
+            }
+        )
+    } catch (error) {
+        return error;
+    }
+};
+
+
 export const createNewCompany = async (payload) => {
     try {
         // console.log("Usao sam u createNewCompany");
@@ -191,3 +210,22 @@ export const createNewCompany = async (payload) => {
         return error;
     }
 }
+
+
+
+export const fetchCompanyByProfileId = async (profileId) => {
+    try {
+        if(!profileId) {
+            return
+        }
+        return axios(
+            {
+                method: 'GET',
+                url: `https://strapi-internship-hr-app.onrender.com/api/companies?filters[profiles][id][$eq]=${profileId}&populate=*`
+                
+            }
+        )
+    } catch (error) {
+        return error;
+    }
+};

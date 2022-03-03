@@ -54,7 +54,7 @@
 .title-btn {
   display: flex;
   justify-content: space-between;
-  width: 80%;
+  width: 90%;
 }
 .add-questions {
   max-width: 100%;
@@ -148,5 +148,20 @@
   .add-questions {
     width: 130px;
     padding: 8px;
+  }
+}
+
+
+
+
+
+
+@media only screen and (max-width: 440px) {
+  .questions-right-side {
+    align-items: center;
+  }
+
+  .questions-place {
+    width: 90%;
   }
 }

@@ -26,25 +26,35 @@ function Team() {
     useEffect(() => {
         dispatch(setInitalLoading(true));
 
-        if (id) {
-            dispatch(fetchProfileRequest(id))
-        }
+    //     if (id) {
+    //         dispatch(fetchProfileRequest(id))
+    //     }
     }, []);
 
     let index;
     const [profile, setProfile] = useState(null);
     const [profiles, setProfiles] = useState(null);
     useEffect(() => {
-        console.log("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA", newProfile)
 
         if (newProfile) {
             axios.get(
                 `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[company][id][$eq]=${newProfile.attributes?.company.data?.id}&populate=*&filters[status][$eq]=published`
             ).then((response) => {
                 setProfiles(response?.data?.data)
+                dispatch(setInitalLoading(false));
             })
         }
     }, [newProfile]);
+
+
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = (event, modalIsOpen) => {
+        // console.log(event);
+        event.preventDefault();
+        setModal(modalIsOpen)
+        // setNewCompany('')
+    }
 
 
 
@@ -63,7 +73,9 @@ function Team() {
                                 <h2 className="company-title">Team</h2>
 
                                 {/* <Link to='/edit'> */}
-                                    <button className='add-team'>
+                                    <button className='add-team'
+                                        onClick={(event) => toggleModal(event, true)}
+                                    >
                                         + Add new team member
                                     </button>
                                 {/* </Link> */}
@@ -72,7 +84,7 @@ function Team() {
                             <div className='right-bar'>
 
                                 {profiles != undefined &&
-                                    profiles.map(profile => {
+                                    profiles.map((profile, index) => {
                                         return (
                                             <div key={index} className='pending-box'>
                                                 <div className='two-of-three'>
@@ -120,7 +132,43 @@ function Team() {
                             </div>
 
                         </div>
+
+
+
                     </div>
+
+                    <div className='modal-mail' style={{ display: modal ? "flex" : "none" }}>
+                        <div className='modal-box'>
+                            <div className='x-modal'
+                                onClick={(event) => {
+                                    toggleModal(event, false)
+                                }}
+                            >
+                                X
+                            </div>
+
+                            <label className='label-modal'>Add new member</label>
+
+                            <input className='input-modal'
+                                type='email'
+                                placeholder="Email"
+                                required
+                                className='input-modal' 
+                            />
+
+                            <div className="login-page__actions">
+                                <button className="button" 
+                                        type="submit"
+                                        onClick={(event) => {
+                                            toggleModal(event, false)
+                                        }}
+                                >
+                                    Send Email
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             )}
         </>

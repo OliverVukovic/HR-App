@@ -181,3 +181,44 @@ label {
 .light-text {
   color: gray;
 }
+
+
+
+
+
+@media only screen and (max-width: 770px){
+  section {
+    margin-top: 120px;
+  }
+
+  .sec-reg {
+    margin-top: 50px;
+  }
+}
+
+
+
+
+@media only screen and (max-width: 420px){
+  main {
+    width: 100%;
+  }
+
+  section {
+    align-items: center;
+    width: 85%;
+  }
+
+  .form {
+    width: 100%;
+    gap: 18px;
+  }
+
+  .acc-text {
+    font-size: 16px;
+  }
+
+  .sec-reg {
+    margin-top: 0px;
+  }
+}

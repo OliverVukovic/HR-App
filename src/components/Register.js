@@ -177,7 +177,7 @@ const Register = () => {
         <div className="login-form">
             <Header />
             <main>
-                <section>
+                <section className="sec-reg">
                     <h2>
                         uTeam - Register
                     </h2>
@@ -279,13 +279,6 @@ const Register = () => {
                                     onChange={companyChangeHandler}
                                 />
 
-                                {/* <label>Add slug</label>
-                                <input
-                                    type="text"
-                                    placeholder="Enter slug"
-                                    value={slug}
-                                    onChange={slugChangeHandler}
-                                /> */}
                                 <button className="button button-modal"
                                     // type="submit"
                                     onClick={(event) => {

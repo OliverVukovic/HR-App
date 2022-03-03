@@ -60,3 +60,16 @@
   display: flex;
   justify-content: end;
 }
+
+
+
+@media only screen and (max-width: 440px) {
+  .create {
+    align-items: center;
+  }
+
+  .form-add-new {
+    max-width: 90%;
+  }
+}
+
