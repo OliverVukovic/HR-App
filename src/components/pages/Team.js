@@ -130,11 +130,7 @@ function Team() {
                                     })
                                 }
                             </div>
-
                         </div>
-
-
-
                     </div>
 
                     <div className='modal-mail' style={{ display: modal ? "flex" : "none" }}>

@@ -8,7 +8,7 @@ import CompanyInfo from './components/pages/CompanyInfo';
 import Home from './components//pages/Home';
 import { Questions } from './components/pages/Questions';
 import AddNewQuestions from './components/pages/AddNewQuestions';
-import Pending from "./components/pages/Pending";
+// import Pending from "./components/pages/Pending";
 import Team from "./components/pages/Team";
 // import ProtectedRoute from "./components/helpers/ProtectedRoute";
 import PageNotFound from "./components/helpers/PageNotFound";
@@ -17,8 +17,12 @@ import EditMember from "./components/pages/EditMember";
 import EditQuestions from "./components/pages/EditQuestions";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { Loader } from "./components/helpers/Loader";
-import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
+// import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
 import PendingForApproval from "./components/pages/PendingForApproval";
+// import MobileMenu from "./components/layout/MobileMenu";
+import { ReactQueryDevtools } from 'react-query/devtools' 
+import { Provera } from "./components/pages/Provera";
+import { Team222 } from "./components/pages/Team222";
 
 function App() {
 
@@ -94,7 +98,9 @@ function App() {
         <Route path="/pending-for-approval/:profileId/approve" element={<ApprovePage />} />
         <Route path="/edit" element={<EditMember />} />
         <Route path="*" element={<PageNotFound />} />
-        {/* <Route path="tt" element={<PendingForApproval />} /> */}
+        {/* <Route path="/menu" element={<MobileMenu />} /> */}
+        <Route path="/provera" element={<Provera />} />
+        <Route path="/t222" element={<Team222 />} />
 
       </>
     )
@@ -126,7 +132,7 @@ function App() {
 
         </Routes>
       </div>
-
+      <ReactQueryDevtools initialIsOpen={false} position='bottom-right'/>
     </QueryClientProvider>
   );
 }
