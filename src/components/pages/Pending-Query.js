@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import HeaderLog from '../layout/HeaderLog';
 import LeftBar from '../layout/LeftBar';
-import '../pages/Pending'
+import './Pending'
 import { Loader } from '../helpers/Loader';
 import { useQuery } from "react-query";
 import PageNotFound from '../helpers/PageNotFound';
@@ -11,9 +11,10 @@ import avatar from "../../assets/avatar2.png";
 import { formatDate } from '../helpers/Date';
 
 
-export const Provera = () => {
+export const PendingQuery = () => {
 
     const companyId = useSelector((state) => state.reducer.profile.attributes?.company?.data.id)
+    localStorage.setItem('companyId', companyId)
     // console.log(companyId)
 
     const fetchPostmanProfiles = (companyId) => {
@@ -46,7 +47,6 @@ export const Provera = () => {
 
     return (
         <div>
-
             <div className="header-leftbar-right">
                 <HeaderLog />
                 <div className="left-bar-companyinfo">
@@ -89,7 +89,8 @@ export const Provera = () => {
 
                                             <div className='pending-buttons'>
                                                 {/* <Link to={`/approve/${profile.id}`}> */}
-                                                <Link to={`/pending-for-approval/${profile.id}/approve`}>
+
+                                                <Link to={`/pending-query/${profile.id}`}>
                                                     <button id={profile.id} className='pending-d-btn'>
                                                         Details
                                                     </button>

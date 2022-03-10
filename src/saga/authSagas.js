@@ -132,7 +132,7 @@ export function* login(action) {
             // })
         }
     } catch (error) {
-        // console.log(error)
+        console.log(error)
         yield put({
             type: ActionsTypes.LOGIN_USER_FAILURE,
             payload: { message: "Check Your email and password!" }

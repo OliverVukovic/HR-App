@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Link } from 'react-router-dom';
 import HeaderLog from '../layout/HeaderLog';
 import LeftBar from '../layout/LeftBar';
-import '../pages/Pending'
+import './Pending'
 import { Loader } from '../helpers/Loader';
 import { useQuery } from "react-query";
 import PageNotFound from '../helpers/PageNotFound';
@@ -12,9 +12,17 @@ import { formatDate } from '../helpers/Date';
 import { useState } from 'react';
 
 
-export const Team222 = () => {
+export const TeamQuery = () => {
+
+    const [modal, setModal] = useState(false);
+
+    const toggleModal = (event, modalIsOpen) => {
+        event.preventDefault();
+        setModal(modalIsOpen)
+    }
 
     const companyId = useSelector((state) => state.reducer.profile.attributes?.company?.data.id)
+    localStorage.setItem('companyId', companyId)
 
     const fetchPostmanProfiles = (companyId) => {
         return axios
@@ -22,8 +30,7 @@ export const Team222 = () => {
     }
 
     const {
-        modal, 
-        setModal,
+
         isLoading,
         data: profiles,
         isError,
@@ -33,7 +40,6 @@ export const Team222 = () => {
                 companyId],
             () => fetchPostmanProfiles(companyId),
             { refetchOnWindowFocus: true },
-            // { onCompleted: setModal }
         )
     // console.log({isLoading, isFetching})
 
@@ -46,17 +52,8 @@ export const Team222 = () => {
         </div>
     }
 
-    // const [modal, setModal] = useState(false);
-
-    const toggleModal = (event, modalIsOpen) => {
-        event.preventDefault();
-        setModal(modalIsOpen)
-    }
-
-
     return (
         <>
-
             <div className="header-leftbar-right">
                 <HeaderLog />
                 <div className="left-bar-companyinfo">
@@ -109,9 +106,9 @@ export const Team222 = () => {
 
 
                                             <div className='pending-buttons'>
-                                                {/* <Link to={`/approve/${profile.id}`}> */}
-                                                <Link to="/edit">
-                                                    <button className='pending-d-btn'>
+                                                
+                                                <Link to={`/team-query/${profile.id}`}>
+                                                    <button id={profile.id} className='pending-d-btn'>
                                                         Edit
                                                     </button>
                                                 </Link>
@@ -167,3 +164,4 @@ export const Team222 = () => {
         </>
     )
 }
+

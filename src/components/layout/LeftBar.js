@@ -58,14 +58,14 @@ function LeftBar() {
     <div className='response-none'>
       <div className="container-leftbar">
         <h2 className="lb-title">Menu</h2>
-        <Link to="/pending-for-approval" className="lb-links"> &#8827; Pending for approval</Link>
-        <Link to="/team" className="lb-links"> &#8827; Team</Link>
+        {/* <Link to="/pending-for-approval" className="lb-links"> &#8827; Pending for approval</Link> */}
+        {/* <Link to="/team" className="lb-links"> &#8827; Team</Link> */}
+        <Link to="/pending-query" className="lb-links"> &#8827; Pending for approval</Link>
+        <Link to="/team-query" className="lb-links"> &#8827; Team</Link>
         <Link to="/questions" className="lb-links"> &#8827; Questions</Link>
         <Link to="/company-info" className="lb-links"> &#8827; Company Info</Link>
         <Link to="/home" className="lb-links"> &#8827; My Profile</Link>
-        <Link to="/provera" className="lb-links"> &#8827; Pending QUERY</Link>
-        <Link to="/t222" className="lb-links"> &#8827; Team QUERY</Link>
-
+        
 
         <div className='user-data'>
           <div className='user-photo'>

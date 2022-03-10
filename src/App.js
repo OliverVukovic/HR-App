@@ -21,8 +21,11 @@ import { Loader } from "./components/helpers/Loader";
 import PendingForApproval from "./components/pages/PendingForApproval";
 // import MobileMenu from "./components/layout/MobileMenu";
 import { ReactQueryDevtools } from 'react-query/devtools' 
-import { Provera } from "./components/pages/Provera";
-import { Team222 } from "./components/pages/Team222";
+import { PendingQuery } from "./components/pages/Pending-Query";
+import { TeamQuery } from "./components/pages/Team-Query";
+import { AproveQuery } from "./components/pages/Aprove-Query";
+import { EditMemberQuery } from "./components/pages/EditMemberQuery";
+
 
 function App() {
 
@@ -99,9 +102,15 @@ function App() {
         <Route path="/edit" element={<EditMember />} />
         <Route path="*" element={<PageNotFound />} />
         {/* <Route path="/menu" element={<MobileMenu />} /> */}
-        <Route path="/provera" element={<Provera />} />
-        <Route path="/t222" element={<Team222 />} />
 
+
+
+        <Route path="/pending-query" element={<PendingQuery />} />
+        <Route path="/team-query" element={<TeamQuery />} />
+        <Route path="/pending-query/:profilId" element={<AproveQuery />} />
+        <Route path="/team-query/:profilId" element={<EditMemberQuery />} />
+
+        
       </>
     )
   }

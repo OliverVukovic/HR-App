@@ -4,7 +4,7 @@ import LeftBar from '../layout/LeftBar';
 import '../pages/Home.css';
 import HeaderLog from '../layout/HeaderLog';
 import { useDispatch, useSelector } from 'react-redux';
-import { fetchProfileRequest, setInitalLoading } from '../../redux/action/ActionCreators';
+// import { fetchProfileRequest, setInitalLoading } from '../../redux/action/ActionCreators';
 import { Loader } from '../helpers/Loader';
 
 function Home() {
@@ -15,6 +15,7 @@ function Home() {
   const dispatch = useDispatch();
     useEffect(() => {
         // dispatch(setInitalLoading(true));
+
   //       // prebaciti LOADER u home page
         // if(id) {
           // dispatch(fetchProfileRequest(id))
