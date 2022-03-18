@@ -12,7 +12,6 @@ function CompanyInfo() {
 
 
 
-
   // UPLOAD NEW PHOTO
   const [newPhoto, setNewPhoto] = useState(null);
   const [newPhotoUrl, setNewPhotoUrl] = useState(null);
@@ -20,7 +19,7 @@ function CompanyInfo() {
 
   const handlePhoto = (event) => {
     const uploadPhoto = event.target.files[0];
-    console.log("ovde ide upload fotografije", uploadPhoto);
+    // console.log("ovde ide upload fotografije", uploadPhoto);
     setNewPhotoUrl(URL.createObjectURL(uploadPhoto))
 
     const photoData = new FormData();
@@ -31,10 +30,7 @@ function CompanyInfo() {
 
   const usernameChangeHandler = (event) => {
     setUsername(event.target.value);
-};
-
-
-
+  };
 
 
 
@@ -50,10 +46,10 @@ function CompanyInfo() {
   useEffect(() => {
     dispatch(setInitalLoading(true));
 
-    if (id) {
+    // if (id) {
       // dispatch(fetchProfileRequest(id))
-      dispatch(fetchCompanyById({id:556}))
-    }
+      dispatch(fetchCompanyById({ id: newProfile.id }))
+    // }
   }, []);
 
 
@@ -63,6 +59,7 @@ function CompanyInfo() {
     }
     setUser(profile);
   }, [setUser, newProfile]);
+
 
 
   // SAVE BUTTON
@@ -109,8 +106,11 @@ function CompanyInfo() {
                   Save
                 </button>
               </div>
+              {/* {console.log({newPhoto})} */}
+              {/* {console.log({userCompany})} */}
+
               {
-                newPhoto ? <img className='img-preview' src={newPhotoUrl} alt="Company logo"/> : <img className='img-preview' src={userCompany?.attributes?.logo?.data?.attributes?.url} alt="Company logo"/>
+                newPhoto ? <img className='img-preview' src={newPhotoUrl} alt="Company logo" /> : <img className='img-preview' src={userCompany?.attributes?.logo?.data?.attributes?.url} alt="Company logo" />
               }
               {/* <p className='logo-txt'>No logo!</p> */}
               {/* {newPhotoUrl && <img className='img-preview' src={newPhotoUrl} alt="new photo"/>}

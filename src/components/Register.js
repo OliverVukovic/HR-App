@@ -5,8 +5,7 @@ import { Link, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
 import axios from "axios";
-import HeaderLog from "./layout/HeaderLog";
-
+// import HeaderLog from "./layout/HeaderLog";
 
 
 const Register = () => {
@@ -68,9 +67,6 @@ const Register = () => {
 
 
 
-
-
-
     // COMPANY
 
     const [companies, setCompanies] = useState(null);
@@ -79,7 +75,7 @@ const Register = () => {
         axios.get(
             "https://strapi-internship-hr-app.onrender.com/api/companies?pagination[pageSize]=1000"
         ).then((response) => {
-            console.log("sta nam kaze ova kompanija u RESPONSE?", response)
+            // console.log("sta nam kaze ova kompanija u RESPONSE?", response)
             setCompanies(response.data.data)
         })
     }, [setCompanies]);
@@ -104,7 +100,7 @@ const Register = () => {
     const companyChangeHandler = (event) => {
         // setNewCompany({newCompany:event.target.value});
         setNewCompany(event.target.value);
-        console.log(event.target.value)
+        // console.log(event.target.value)
     }
 
 
@@ -117,8 +113,6 @@ const Register = () => {
             return;
         }
     }
-
-
 
 
     
@@ -143,7 +137,6 @@ const Register = () => {
         photoData.append("files", uploadPhoto);
         setPhoto(photoData)
     }
-
 
 
 

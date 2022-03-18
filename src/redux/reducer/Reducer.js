@@ -8,56 +8,45 @@ function reducer(state = initState, action) {
         case actions.REGISTER_USER:
             return state;
         case actions.REGISTER_USER_SUCCESS:
-            return { ...state, user: action.payload }
+            return { ...state, 
+                user: action.payload 
+            }
         case actions.REGISTER_USER_FAILURE:
-            return { ...state, error: action.payload }
+            return { ...state, 
+                error: action.payload 
+            }
 
-
-        // {
-        //     username: action.payload.username,
-        //     email: action.payload.email,
-        //     role: '',
-        //     company: '',
-        //     profilePhoto: '',
-        //     id: '',
-        //     isAutenticated: true
-        // }
 
 
         case actions.AFTER_REGISTER_SUCCESS:
-            // case 'AFTER_REGISTER_SUCCESS':
-            return { ...state, registerFreshness: state.registerFreshness + 1 }
+            return { ...state, 
+                registerFreshness: state.registerFreshness + 1 
+            }
 
 
 
         case actions.LOGIN_USER:
-            return state
+            return {...state}
         case actions.LOGIN_USER_SUCCESS:
-            return { ...state, user: action.payload }
+            return { ...state, 
+                user: action.payload 
+            }
         case actions.LOGIN_USER_FAILURE:
-            return { ...state, error: action.payload }
+            return { ...state, 
+                error: action.payload 
+            }
 
 
 
-        // case actions.LOGOUT_USER:
-        //     // console.log(action.type)
-        //     const initUser = {
-        //         username: '',
-        //         email: '',
-        //         // password: '',
-        //         role: '',
-        //         company: '',
-        //         profilePhoto: '',
-        //         id: '',
-        //         isAutenticated: false
-        //     }
-        //     //Ocisti state
-        //     console.log(state);
-        //     return { ...state, user: initUser };
         case actions.LOGOUT_USER_SUCCESS:
-            return { ...state, user: action.payload }
+            return { ...state, 
+                user: action.payload 
+            }
         case actions.LOGOUT_USER_FAILURE:
-            return { ...state, error: action.payload }
+            return { ...state, 
+                error: action.payload 
+            }
+
 
 
 
@@ -70,17 +59,17 @@ function reducer(state = initState, action) {
             return {
                 ...state,
                 isLoading: false,
-                // image: payload
             }
         case actions.UPLOAD_PHOTO_FAILURE:
             return {
                 ...state,
                 isLoading: false,
-                // error: payload,
             }
 
         case actions.SET_INITIAL_LOADING:
-            return { ...state, loading: action.value };
+            return { ...state, 
+                loading: action.value 
+            };
 
 
         case actions.FETCH_PROFILE_RESPONSE:
@@ -94,7 +83,6 @@ function reducer(state = initState, action) {
             };
 
         case action.CREATE_PROFILE:
-
             return {
                 ...state,
                 ...action.payload

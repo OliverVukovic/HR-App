@@ -90,7 +90,7 @@ function MyProfile() {
     // const [loading, setLoading] = useState(false);
     const handlePhoto = (event) => {
         const uploadPhoto = event.target.files[0];
-        console.log("ovde ide upload fotografije", uploadPhoto);
+        // console.log("ovde ide upload fotografije", uploadPhoto);
 
         // const photoType = [ "image/jpeg", "image/png", "image/gif" ];
         //     if (!photoType.some((type) =>
@@ -136,16 +136,6 @@ function MyProfile() {
                                 <p className="p-name-profile">
                                     Name
                                 </p>
-                                {/* <input className="input-name"
-                                type="text"
-                                placeholder="Name"
-                                value={newProfile ? newProfile.name : ""}
-                                // onChange={(event) => setUser({
-                                //     ...user,
-                                //     name: event.target.value
-                                // })}
-                                onChange={handleName} 
-                                /> */}
                                 <input className="input-name"
                                     type="text"
                                     placeholder="Name"
@@ -199,8 +189,6 @@ function MyProfile() {
                                     Email:
                                 </p>
                                 <p className="email">
-                                    {/* {user?.user?.data?.attributes.email} */}
-                                    {/* {user !== undefined ? "true" : "false"} */}
                                     {user?.email}
                                 </p>
 
@@ -211,9 +199,6 @@ function MyProfile() {
                                 <input className="input-name"
                                     type="password"
                                     placeholder="Curent password"
-                                // value={user.user?.data?.attributes.password} 
-                                // ------ ZASTO NECE !?
-                                // value={user !== undefined ? "true" : "false"}
                                 />
                                 <p className="p-name-profile">
                                     New Password
@@ -221,7 +206,6 @@ function MyProfile() {
                                 <input className="input-name" type="password" placeholder="Enter new password" />
                                 <div className="but-div">
                                     <button className="button"
-                                        // type="submit"
                                         onClick={onSave}
                                     >
                                         Save

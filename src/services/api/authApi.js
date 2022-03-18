@@ -5,9 +5,7 @@ axios.interceptors.request.use(
     (config) => {
         const token = localStorage.getItem("token");
         // console.log(token)
-
         if (token) {
-            // console.log("usao u sesnaesterac!")
             config.headers.Authorization = `Bearer ${token}`;
         }
         return config;
@@ -36,6 +34,7 @@ export const login = async (payload) => {
         // console.log(error)
     }
 }
+
 
 // REGISTER
 export const register = async (payload) => {
@@ -90,11 +89,10 @@ export const register = async (payload) => {
 
 
 
-
+// UPLOAD PHOTO
 export const uploadPhoto = async (image) => {
     try {
         // console.log(image)
-
         const response = await axios({
             method: "POST",
             url: "https://strapi-internship-hr-app.onrender.com/api/upload",
@@ -110,10 +108,11 @@ export const uploadPhoto = async (image) => {
 }
 
 
+
+// CREATE PROFILE
 export const createProfile = async (payload) => {
     try {
-        console.log("USLI SMO U CREATE NEW PROFILE", payload);
-
+        // console.log("USLI SMO U CREATE NEW PROFILE", payload);
         const response = await axios(
             {
                 method: "POST",
@@ -123,11 +122,9 @@ export const createProfile = async (payload) => {
                 }
             }
         )
-
         // const response = await axios.post("https://strapi-internship-hr-app.onrender.com/api/profiles", {data: payload});
         // console.log(response)
         return response.data
-
     } catch (error) {
         // console.log("ERRORRR createNewProfile")
         // console.log(error)
@@ -136,21 +133,8 @@ export const createProfile = async (payload) => {
 }
 
 
-// export const fetchAutoLogin = async () => {
-//     try {
-//         const response = await axios(
-//             {
-//                 method: 'GET',
-//                 url: `https://strapi-internship-hr-app.onrender.com/api/users/me`
-//             }
-//         )
-//         return response;
-//     } catch (error) {
-//         return error;
-//     }
-// };
 
-
+// FETCH PROFILE
 export const fetchProfile = async (id) => {
     try {
         if(!id) {
@@ -159,9 +143,7 @@ export const fetchProfile = async (id) => {
         return axios(
             {
                 method: 'GET',
-                url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*&pagination[pageSize]=1000`
-                // url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*`
-                
+                url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[user][id][$eq]=${id}&populate=*&pagination[pageSize]=1000`                
             }
         )
     } catch (error) {
@@ -179,7 +161,6 @@ export const fetchProfileById = async (profileId) => {
             {
                 method: 'GET',
                 url: `https://strapi-internship-hr-app.onrender.com/api/profiles?filters[profile][id][$eq]=${profileId}&populate=*&pagination[pageSize]=1000`
-                
             }
         )
     } catch (error) {
@@ -188,17 +169,11 @@ export const fetchProfileById = async (profileId) => {
 };
 
 
+
+// CREATE COMPANY
 export const createNewCompany = async (payload) => {
     try {
-        // console.log("Usao sam u createNewCompany");
         // console.log(payload);
-            // const response = await axios(
-            //     {
-            //         method: 'POST',
-            //         url: `https://strapi-internship-hr-app.onrender.com/api/companies`,
-            //         data: {payload}
-            //     }
-            // )
         const response = await axios.post('https://strapi-internship-hr-app.onrender.com/api/companies', {
             data:payload
         })
@@ -212,7 +187,7 @@ export const createNewCompany = async (payload) => {
 }
 
 
-
+// FETCH COMPANY
 export const fetchCompanyByProfileId = async (profileId) => {
     try {
         if(!profileId) {
@@ -222,7 +197,6 @@ export const fetchCompanyByProfileId = async (profileId) => {
             {
                 method: 'GET',
                 url: `https://strapi-internship-hr-app.onrender.com/api/companies?filters[profiles][id][$eq]=${profileId}&populate=*`
-                
             }
         )
     } catch (error) {
