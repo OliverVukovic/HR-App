@@ -1,6 +1,6 @@
 import React from "react";
 import './Header.css';
-import logo from "../assets/quantox-logo.png"
+import logo from "../../assets/quantox-logo.png"
 import { Link } from "react-router-dom";
 
 
@@ -9,8 +9,7 @@ const Header = () => {
     return (
         <header>
             <div className="q-logo">
-                {/* Logo */}
-                <img src={logo} alt="logo"/>
+                <img className="logo" src={logo} alt="logo"/>
             </div>
             <div className="page-links-header">
                 <Link className="link-header" to="/">Login</Link>

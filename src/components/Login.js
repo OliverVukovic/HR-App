@@ -1,96 +1,63 @@
 import React, { useState, useEffect } from "react";
 import './Login.css';
-import Header from "./Header";
+import Header from "./layout/Header";
 import { Link, useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import * as actionCreators from "../redux/action/ActionCreators";
-
-const Login = () => {
-
-
-    // const [error, setError] = useState('');
+import { useSelector } from "react-redux";
 
 
+const Login = (props) => {
+
+    const user = useSelector((state) => state.user);
+    const error = useSelector((state) => state.error);
 
     const [enteredEmail, setEnteredEmail] = useState('');
-    // const [emailIsValid, setEmailIsValid] = useState();
     const [enteredPassword, setEnteredPassword] = useState('');
-    // const [passwordIsValid, setPasswordIsValid] = useState();
-    const [formIsValid, setFormIsValid] = useState(false);
 
     const dispatch = useDispatch();
-    
     const navigate = useNavigate(true);
 
     useEffect(() => {
-        setFormIsValid(
-            enteredEmail.includes('@') && enteredPassword.trim().length > 6
-        );
-    }, [enteredEmail, enteredPassword]);
+        if (user && user.id) {
+            navigate('/home');
+            setEnteredEmail('');
+            setEnteredPassword('')
+        }
+    }, [user]);
 
 
     const emailChangeHandler = (event) => {
         setEnteredEmail(event.target.value);
-
-        setFormIsValid(
-            event.target.value.includes('@') && enteredPassword.trim().length > 6
-        );
     };
 
     const passwordChangeHandler = (event) => {
         setEnteredPassword(event.target.value);
-
-        setFormIsValid(
-            enteredEmail.includes('@') && event.target.value.trim().length > 6
-        );
+        //     enteredEmail.includes('@') && event.target.value.trim().length > 4
     };
-
-    // const validateEmailHandler = () => {
-    //     setEmailIsValid(enteredEmail.includes('@'));
-    // };
-
-    // const validatePasswordHandler = () => {
-    //     setPasswordIsValid(enteredPassword.trim().length > 6);
-    // };
-
-    // const submitHandler = (event) => {
-    //     event.preventDefault();
-    //     props.onLogin(enteredEmail, enteredPassword);
-    // };
 
 
     const submitHandler = (event) => {
-        console.log(event.password)
+        // console.log(event.password)
         event.preventDefault();
-        if (enteredEmail.trim().length === 0 || enteredPassword.trim().length === 0) {
-            
+        if (enteredEmail.trim().length === 0 || enteredPassword.trim().length < 5) {
             return;
         }
-        // if(event.password == ""){
-        //     setError("Nisu ispravni podaci")
-        //     return;
-        // }
-        
-
-        console.log(enteredEmail, enteredPassword);
-            dispatch(actionCreators.loginUser({
-                email: enteredEmail,
-                password: enteredPassword
-            }))
-        navigate("/home")
-        {}
-        setEnteredEmail('');
-        setEnteredPassword('');
+        // console.log(enteredEmail, enteredPassword);
+        dispatch(actionCreators.loginUser({
+            email: enteredEmail,
+            password: enteredPassword
+        }))
+        const token = localStorage.getItem("token");
+        // console.log({token})
+        // navigate("/home")
+        // setEnteredEmail('');
+        // setEnteredPassword('');
     };
 
-    // const onLogin = (event) => {
-    //     event.preventDefault()
-    //     dispatch(actionCreators.registerUser({
-    //         enteredEmail,
-    //         enteredPassword
-    //     }));
 
     return (
+        
         <div className="login-form">
             <Header />
             <main>
@@ -99,11 +66,11 @@ const Login = () => {
                         uTeam - Login
                     </h2>
 
-                    <form onSubmit={submitHandler}>
+                    <form className="form" onSubmit={submitHandler}>
                         <div className="login-page">
                             <label className="title-email-pass">Email</label>
-                            <input 
-                                type='email' 
+                            <input
+                                type='email'
                                 placeholder="Email"
                                 required
                                 value={enteredEmail}
@@ -113,8 +80,8 @@ const Login = () => {
 
                         <div className="login-page">
                             <label className="title-email-pass">Password</label>
-                            <input 
-                                type='password' 
+                            <input
+                                type='password'
                                 placeholder="Password"
                                 // required
                                 value={enteredPassword}
@@ -124,13 +91,17 @@ const Login = () => {
 
                         <div className="login-page__actions">
                             <Link className="acc-text" to="/register">Don't have an account?</Link>
-                            <button type="submit"
-                                    // onClick={onLogin}
+                            <button className="button" type="submit"
+                            // onClick={() => {
+                            //     onLoginUpdate(true);
+                            //     navigate('/home');
+                            // }}
                             >
                                 Login
                             </button>
-                            {/* {error && <div style={'color:red'}>{error}</div>} */}
                         </div>
+                        {error?.message && <div className="error-message">{error.message}</div>}
+                        
                     </form>
                 </section>
             </main>
