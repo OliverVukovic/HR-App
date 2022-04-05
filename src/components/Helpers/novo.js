@@ -772,13 +772,13 @@ import { Questions } from './components/pages/Questions';
 import AddNewQuestions from './components/pages/AddNewQuestions';
 import Pending from "./components/pages/Pending";
 import Team from "./components/pages/Team";
-import PageNotFound from "./components/helpers/PageNotFound";
+import PageNotFound from "./components/Helpers/PageNotFound";
 import ApprovePage from "./components/pages/ApprovePage";
 import EditMember from "./components/pages/EditMember";
 import EditQuestions from "./components/pages/EditQuestions";
 import { QueryClient, QueryClientProvider } from "react-query";
-import { Loader } from "./components/helpers/Loader";
-import ReturnOnLoginPage from "./components/helpers/ReturnOnLogin";
+import { Loader } from "./components/Helpers/Loader";
+import ReturnOnLoginPage from "./components/Helpers/ReturnOnLogin";
 
 function App() {
 
